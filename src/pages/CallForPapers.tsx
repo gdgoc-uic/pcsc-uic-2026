@@ -1,4 +1,4 @@
-export default function CallForPapers() {
+export default function CallforPapers() {
   return (
     <div className="bg-black text-black font-sans min-h-screen">
       <div className="bg-white max-w-screen-2xl mx-auto min-h-screen">
