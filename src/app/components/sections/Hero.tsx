@@ -20,10 +20,15 @@ export const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const zoomTweenRef = useRef<gsap.core.Tween | null>(null);
   const transitionTweenRef = useRef<gsap.core.Tween | null>(null);
+  const registerBtnRef = useRef<HTMLAnchorElement>(null);
+  const programBtnRef = useRef<HTMLAnchorElement>(null);
+  const registerIconRef = useRef<SVGSVGElement>(null);
+  const programIconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,12 +42,46 @@ export const Hero = () => {
       );
 
 
-      // Title animation
-      if (titleRef.current?.children) {
-        gsap.fromTo(titleRef.current.children,
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.2, stagger: 0.3, delay: 0.8, ease: "power2.out" }
-        );
+      // Headline text animation (per-word professional fade & rise, left-to-right across lines)
+      if (titleRef.current) {
+        const lineSpans = Array.from(titleRef.current.querySelectorAll("span.block"));
+        const createdWords: HTMLElement[] = [];
+
+        const splitTextToWords = (el: HTMLElement) => {
+          const original = el.textContent ?? "";
+          el.setAttribute("aria-label", original);
+          el.textContent = "";
+          const words = original.split(" ");
+          words.forEach((word, wIdx) => {
+            const wordSpan = document.createElement("span");
+            wordSpan.textContent = word;
+            wordSpan.setAttribute("aria-hidden", "true");
+            wordSpan.style.display = "inline-block";
+            wordSpan.style.willChange = "transform, opacity, filter";
+            el.appendChild(wordSpan);
+            createdWords.push(wordSpan);
+            // add a non-breaking space after each word except the last
+            if (wIdx < words.length - 1) el.appendChild(document.createTextNode("\u00A0"));
+          });
+        };
+
+        // build words in visual reading order: first line then second line
+        lineSpans.forEach((line) => splitTextToWords(line as HTMLElement));
+
+        if (createdWords.length) {
+          const wordsTween = gsap.fromTo(createdWords,
+            { y: 28, opacity: 0, filter: "blur(4px)" },
+            { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.out", stagger: { each: 0.08, from: 0 }, delay: 0.55 }
+          );
+          wordsTween.eventCallback("onComplete", () => {
+            if (typeof window !== "undefined") {
+              // mark global flag to avoid race conditions with header listener
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (window as any).__heroHeadlineDone = true;
+              window.dispatchEvent(new Event("heroHeadlineDone"));
+            }
+          });
+        }
       }
 
       // Content section animation
@@ -52,6 +91,43 @@ export const Hero = () => {
           { y: 0, opacity: 1, duration: 1, stagger: 0.2, delay: 1.4, ease: "power2.out" }
         );
       }
+
+      // CTA buttons entrance animation
+      const ctaButtons: HTMLAnchorElement[] = [registerBtnRef.current, programBtnRef.current].filter(Boolean) as HTMLAnchorElement[];
+      if (ctaButtons.length) {
+        gsap.fromTo(ctaButtons,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, delay: 1.6, ease: "power2.out" }
+        );
+      }
+
+      // CTA hover interactions
+      type HoverBinding = {
+        btn: HTMLAnchorElement;
+        enter: (e: Event) => void;
+        leave: (e: Event) => void;
+        tl: gsap.core.Timeline;
+      };
+      const hoverBindings: HoverBinding[] = [];
+
+      const attachHover = (btn: HTMLAnchorElement | null, icon: SVGSVGElement | null) => {
+        if (!btn) return;
+        const timeline = gsap.timeline({ paused: true });
+        timeline.to(btn, { y: -3, scale: 1.04, duration: 0.28, ease: "power3.out", boxShadow: "0 12px 30px rgba(0,0,0,0.25)" }, 0);
+        if (icon) {
+          timeline.to(icon, { x: 6, y: -6, rotate: 15, duration: 0.28, ease: "power3.out" }, 0);
+        }
+        const onEnter = () => timeline.play();
+        const onLeave = () => timeline.reverse();
+        btn.addEventListener("mouseenter", onEnter);
+        btn.addEventListener("mouseleave", onLeave);
+        btn.addEventListener("focus", onEnter);
+        btn.addEventListener("blur", onLeave);
+        hoverBindings.push({ btn, enter: onEnter, leave: onLeave, tl: timeline });
+      };
+
+      attachHover(registerBtnRef.current, registerIconRef.current);
+      attachHover(programBtnRef.current, programIconRef.current);
 
 
       // Start continuous zoom effect after initial animations
@@ -119,13 +195,21 @@ export const Hero = () => {
       };
 
       // Set up image rotation every 6 seconds
-      const interval = setInterval(imageTransition, 6000);
+      const interval = setInterval(imageTransition, 5000);
 
       return () => {
         clearInterval(interval);
         clearTimeout(zoomTimeout);
         if (zoomTweenRef.current) zoomTweenRef.current.kill();
         if (transitionTweenRef.current) transitionTweenRef.current.kill();
+        // cleanup CTA hover listeners and timelines
+        hoverBindings.forEach(({ btn, enter, leave, tl }) => {
+          btn.removeEventListener("mouseenter", enter);
+          btn.removeEventListener("mouseleave", leave);
+          btn.removeEventListener("focus", enter);
+          btn.removeEventListener("blur", leave);
+          tl.kill();
+        });
       };
     }, heroRef);
 
@@ -153,11 +237,11 @@ export const Hero = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-rose-900/60"></div>
       
-      <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-32 min-h-screen flex flex-col justify-center">
+      <div className="relative mx-auto max-w-full px-6 pt-24 pb-32 min-h-screen flex flex-col justify-end">
         {/* Main Content */}
-        <div className="max-w-5xl">
+        <div className="w-full">
           {/* Main Headline */}
-          <div ref={titleRef} className="mb-16">
+          <div ref={titleRef} className="mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[0.95] tracking-tight">
               <span className="block">26TH PHILIPPINE COMPUTING</span>
               <span className="block">SCIENCE CONGRESS</span>
@@ -167,22 +251,22 @@ export const Hero = () => {
 
           {/* Event Details */}
           <div ref={contentRef} className="mb-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="flex flex-wrap gap-6">
               {/* Date */}
-              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                 <Calendar className="w-6 h-6 text-white flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-white/80 font-medium">Date</p>
-                  <p className="text-lg font-bold text-white">March 15-17, 2026</p>
+                  <p className="text-lg font-bold text-white">April 23 - 25</p>
+                  <p className="text-sm text-white/80 font-medium">2026</p>
                 </div>
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                 <MapPin className="w-6 h-6 text-white flex-shrink-0" />
-                <div>
-                  <p className="text-sm text-white/80 font-medium">Location</p>
-                  <p className="text-lg font-bold text-white">Chicago, IL</p>
+                <div> 
+                  <p className="text-lg font-bold text-white">University of the Immaculate Conception</p>
+                  <p className="text-sm text-white font-medium">Davao City</p>
                 </div>
               </div>
             </div>
@@ -192,18 +276,22 @@ export const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-6">
               <Link
                 href="/registration"
-                className="group inline-flex items-center justify-center gap-2 bg-white text-rose-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-rose-50 transition-all duration-300 transform hover:scale-105"
+                ref={registerBtnRef}
+                aria-label="Register for PCSC 2026"
+                className="group inline-flex items-center justify-center gap-2 bg-white text-rose-900 px-8 py-4 rounded-lg font-bold text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Register Now
-                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight ref={registerIconRef} className="w-5 h-5 transition-transform" />
               </Link>
               
               <Link
                 href="/program"
-                className="group inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-rose-900 transition-all duration-300"
+                ref={programBtnRef}
+                aria-label="View event program"
+                className="group inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 View Program
-                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <ArrowUpRight ref={programIconRef} className="w-5 h-5 transition-transform" />
               </Link>
             </div>
           </div>
