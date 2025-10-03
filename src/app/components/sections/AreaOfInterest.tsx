@@ -40,7 +40,7 @@ const areasOfInterest: AreaOfInterestItem[] = [
     color: "bg-blue-500/20 border-blue-400/30 text-blue-100",
   },
   {
-    title: "Intelligent Systems",
+    title: "Intelligent Systems (AI and Computational Intelligence)",
     description: "AI and computational intelligence, expert systems, knowledge representation, and reasoning",
     icon: <Brain className="h-6 w-6" />,
     color: "bg-green-500/20 border-green-400/30 text-green-100",
@@ -88,7 +88,7 @@ const areasOfInterest: AreaOfInterestItem[] = [
     color: "bg-teal-500/20 border-teal-400/30 text-teal-100",
   },
   {
-    title: "Information Retrieval Systems",
+    title: "Databases and Information Retrieval Systems",
     description: "Search engines, recommender systems, content-based retrieval, and multimedia information retrieval",
     icon: <Search className="h-6 w-6" />,
     color: "bg-cyan-500/20 border-cyan-400/30 text-cyan-100",
@@ -107,43 +107,41 @@ export const AreaOfInterest = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Scroll-triggered entrance animation for cards
+      // Unified scroll-triggered entrance animation
       gsap.fromTo(cardsRef.current?.children || [],
         { y: 60, opacity: 0 },
         { 
           y: 0, 
           opacity: 1, 
           duration: 0.8, 
-          stagger: 0.1, 
+          stagger: 0.12, 
           ease: "power2.out",
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 80%",
-            end: "bottom 20%",
             toggleActions: "play none none reverse"
           }
         }
       );
 
-      // Hover animations for each card
+      // Unified hover animations for each card
       const cards = Array.from(cardsRef.current?.children || []);
       cards.forEach((card: Element) => {
         const icon = card.querySelector('.icon-wrapper');
         
-        // Card hover animation
         gsap.set(card, { transformOrigin: "center center" });
         
         card.addEventListener('mouseenter', () => {
-          gsap.to(card, { scale: 1.05, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, { scale: 1.03, y: -4, duration: 0.3, ease: "power2.out" });
           if (icon) {
-            gsap.to(icon, { scale: 1.1, duration: 0.5, ease: "power2.out" });
+            gsap.to(icon, { scale: 1.08, rotation: 5, duration: 0.3, ease: "power2.out" });
           }
         });
         
         card.addEventListener('mouseleave', () => {
-          gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
           if (icon) {
-            gsap.to(icon, { scale: 1, duration: 0.5, ease: "power2.out" });
+            gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" });
           }
         });
       });

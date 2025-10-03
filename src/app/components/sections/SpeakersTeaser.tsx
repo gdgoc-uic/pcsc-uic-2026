@@ -47,41 +47,39 @@ export const SpeakersTeaser = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Scroll-triggered entrance animation for cards
+      // Unified scroll-triggered entrance animation
       gsap.fromTo(cardsRef.current?.children || [],
         { y: 60, opacity: 0 },
         { 
           y: 0, 
           opacity: 1, 
           duration: 0.8, 
-          stagger: 0.1, 
+          stagger: 0.12, 
           ease: "power2.out",
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 80%",
-            end: "bottom 20%",
             toggleActions: "play none none reverse"
           }
         }
       );
 
-      // Hover animations for each card
+      // Unified hover animations for each card
       const cards = Array.from(cardsRef.current?.children || []);
       cards.forEach((card: Element) => {
         const img = card.querySelector('img');
         const arrow = card.querySelector('svg');
         
-        // Card hover animation
         gsap.set(card, { transformOrigin: "center center" });
         
         card.addEventListener('mouseenter', () => {
-          gsap.to(card, { scale: 1.05, duration: 0.3, ease: "power2.out" });
-          gsap.to(img, { scale: 1.1, duration: 0.5, ease: "power2.out" });
+          gsap.to(card, { scale: 1.03, y: -4, duration: 0.3, ease: "power2.out" });
+          gsap.to(img, { scale: 1.08, duration: 0.5, ease: "power2.out" });
           gsap.to(arrow, { x: 4, y: -4, duration: 0.3, ease: "power2.out" });
         });
         
         card.addEventListener('mouseleave', () => {
-          gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
           gsap.to(img, { scale: 1, duration: 0.5, ease: "power2.out" });
           gsap.to(arrow, { x: 0, y: 0, duration: 0.3, ease: "power2.out" });
         });

@@ -5,6 +5,7 @@ import Programs from "./components/sections/Programs";
 import CallforPapers from "./components/sections/CallforPapers";
 import ImportantDates from "./components/sections/ImportantDates";
 import AreaOfInterest from "./components/sections/AreaOfInterest";
+import Venue from "./components/sections/Venue";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
       <Marquee marqueeText="AREA OF INTEREST" />
       <AreaOfInterest />
       <Marquee marqueeText="VENUE" />
-      <SpeakersTeaser />
+      <Venue />
     </main>
   );
 }

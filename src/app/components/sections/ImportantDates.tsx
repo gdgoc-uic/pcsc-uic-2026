@@ -16,64 +16,51 @@ type ImportantDate = {
 
 const importantDates: ImportantDate[] = [
   {
-    title: "Paper Submission Deadline",
-    date: "January 15, 2026",
-    description: "Final deadline for submitting full papers and abstracts",
-    category: "deadline",
-    isUrgent: true,
-  },
-  {
-    title: "Author Notification",
-    date: "February 15, 2026",
-    description: "Notification of acceptance/rejection decisions sent to authors",
+    title: "Paper Submission for Main Conference Deadline",
+    date: "December 20, 2025",
+    description: "December 20, 2025 | January 20, 2026",
     category: "deadline",
   },
   {
-    title: "Camera-Ready Paper Deadline",
-    date: "March 1, 2026",
-    description: "Final camera-ready papers due for accepted submissions",
+    title: "Author Notification for Main Conference",
+    date: "January 20, 2026",
+    description: "January 20, 2026 | February 20, 2026",
     category: "deadline",
   },
   {
-    title: "Early Bird Registration Opens",
-    date: "March 1, 2026",
-    description: "Early bird registration period begins with discounted rates",
+    title: "Camera-ready deadline",
+    date: "March 10, 2026",
+    description: "March 10, 2026",
+    category: "deadline",
+  },
+  {
+    title: "Announcement of Accepted Workshops",
+    date: "December 20, 2026",
+    description: "December 20, 2026",
+    category: "deadline",
+  },
+  {
+    title: "Call for Workshop Submission Deadline",
+    date: "November 20, 2025",
+    description: "November 20, 2025",
+    category: "deadline",
+  },
+  {
+    title: "Early Bird Registration Deadline",
+    date: "February 28, 2026",
+    description: "February 28, 2026",
     category: "registration",
   },
   {
-    title: "Workshop Proposal Deadline",
-    date: "March 15, 2026",
-    description: "Deadline for submitting workshop and tutorial proposals",
-    category: "deadline",
-  },
-  {
-    title: "Early Bird Registration Ends",
-    date: "March 31, 2026",
-    description: "Last day for early bird registration rates",
+    title: "Regular Registration",
+    date: "March 14, 2026",
+    description: "March 14, 2026",
     category: "registration",
   },
   {
-    title: "Regular Registration Opens",
-    date: "April 1, 2026",
-    description: "Regular registration period begins",
-    category: "registration",
-  },
-  {
-    title: "Conference Day 1",
+    title: "Conference Date",
     date: "April 23, 2026",
-    description: "Opening ceremony, keynote presentations, and paper sessions",
-    category: "conference",
-  },
-  {
-    title: "Conference Day 2",
-    date: "April 24, 2026",
-    description: "Workshops, panel discussions, and networking events",
-    category: "conference",
-  },
-  {
-    title: "Conference Day 3",
-    date: "April 25, 2026",
-    description: "Student research workshop, closing ceremony, and awards",
+    description: "April 23-25, 2026",
     category: "conference",
   },
 ];
@@ -102,63 +89,41 @@ const groupDatesByMonth = () => {
 export const ImportantDates = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
   const monthlyGroups = groupDatesByMonth();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title entrance animation
-      if (titleRef.current) {
-        gsap.fromTo(
-          titleRef.current,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: titleRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
-      // Calendar months entrance animation
+      // Unified scroll-triggered entrance animation for calendar months
       if (calendarRef.current?.children) {
         gsap.fromTo(
           Array.from(calendarRef.current.children),
-          { y: 50, opacity: 0 },
+          { y: 60, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.2,
+            stagger: 0.12,
             ease: "power2.out",
             scrollTrigger: {
               trigger: calendarRef.current,
               start: "top 80%",
-              end: "bottom 20%",
               toggleActions: "play none none reverse",
             },
           }
         );
       }
 
-      // Hover animations for calendar cards
+      // Unified hover animations for calendar cards
       const calendarCards = Array.from(calendarRef.current?.querySelectorAll(".calendar-card") || []);
       calendarCards.forEach((card: Element) => {
         gsap.set(card, { transformOrigin: "center center" });
 
         card.addEventListener("mouseenter", () => {
           gsap.to(card, {
-            scale: 1.02,
-            y: -2,
+            scale: 1.03,
+            y: -4,
             duration: 0.3,
             ease: "power2.out",
-            boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
           });
         });
 
@@ -168,7 +133,6 @@ export const ImportantDates = () => {
             y: 0,
             duration: 0.3,
             ease: "power2.out",
-            boxShadow: "0 0 0 rgba(0,0,0,0)",
           });
         });
       });

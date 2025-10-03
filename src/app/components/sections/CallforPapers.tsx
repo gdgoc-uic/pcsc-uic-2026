@@ -1,51 +1,39 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { FileText, BookOpen, GraduationCap, ExternalLink } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const CallforPapers = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const sectionEl = sectionRef.current;
-    if (!sectionEl) return;
+    const ctx = gsap.context(() => {
+      const items = Array.from(sectionRef.current?.querySelectorAll('[data-animate="item"]') || []);
+      if (items.length === 0) return;
 
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const items = Array.from(sectionEl.querySelectorAll('[data-animate="item"]')) as HTMLElement[];
-    if (items.length === 0) return;
+      // Unified scroll-triggered entrance animation
+      gsap.fromTo(items,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, sectionRef);
 
-    // Set initial hidden state
-    gsap.set(items, { opacity: 0, y: 16 });
-
-    if (media.matches) return; // Respect reduced motion
-
-    // Animate when section scrolls into view
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const tl = gsap.timeline();
-          tl.to(items, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: 0.08,
-            clearProps: "all",
-          });
-
-          observer.unobserve(entry.target);
-        });
-      },
-      { root: null, threshold: 0.2 }
-    );
-
-    observer.observe(sectionEl);
-
-    return () => {
-      observer.disconnect();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
