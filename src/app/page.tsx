@@ -2,6 +2,9 @@ import Hero from "./components/sections/Hero";
 import Marquee from "./components/sections/Marquee";
 import SpeakersTeaser from "./components/sections/SpeakersTeaser";
 import Programs from "./components/sections/Programs";
+import CallforPapers from "./components/sections/CallforPapers";
+import ImportantDates from "./components/sections/ImportantDates";
+import AreaOfInterest from "./components/sections/AreaOfInterest";
 
 export default function Home() {
   return (
@@ -12,11 +15,11 @@ export default function Home() {
       <Marquee marqueeText="PROGRAMS" />
       <Programs />
       <Marquee marqueeText="CALL FOR PAPERS" />
-      <SpeakersTeaser />
+      <CallforPapers />
       <Marquee marqueeText="IMPORTANT DATES" />
-      <SpeakersTeaser />
+      <ImportantDates />
       <Marquee marqueeText="AREA OF INTEREST" />
-      <SpeakersTeaser />
+      <AreaOfInterest />
       <Marquee marqueeText="VENUE" />
       <SpeakersTeaser />
     </main>

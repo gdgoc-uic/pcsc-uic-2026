@@ -92,7 +92,7 @@ export const SpeakersTeaser = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="speakers" className="bg-gradient-to-b from-rose-600 to-rose-700 text-white py-16 sm:py-20">
+    <section ref={sectionRef} id="speakers" className="bg-rose-900 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {speakers.map((speaker, index) => (
@@ -109,7 +109,7 @@ export const SpeakersTeaser = () => {
                 />
               </div>
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-xs font-semibold text-rose-300 mb-1">
+                <p className="text-xs font-semibold text-rose-50 mb-1">
                   {speaker.title}
                 </p>
                 <div className="flex items-center justify-between">
