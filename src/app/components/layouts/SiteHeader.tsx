@@ -28,9 +28,24 @@ export const SiteHeader = () => {
     () => {
       if (pathname !== "/") {
         // Ensure header is visible and no animation runs on non-home routes
-        gsap.set([headerRef.current, logoRef.current, ctaRef.current], { clearProps: "all" });
+        gsap.set(headerRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          clearProps: "transform,willChange" 
+        });
+        gsap.set([logoRef.current, ctaRef.current], { 
+          opacity: 1, 
+          y: 0, 
+          clearProps: "transform,willChange" 
+        });
         const anchors = navRef.current ? Array.from(navRef.current.querySelectorAll("a")) : [];
-        if (anchors.length) gsap.set(anchors, { clearProps: "all" });
+        if (anchors.length) {
+          gsap.set(anchors, { 
+            opacity: 1, 
+            y: 0, 
+            clearProps: "transform,willChange" 
+          });
+        }
         return;
       }
 
@@ -69,8 +84,18 @@ export const SiteHeader = () => {
     },
     { dependencies: [pathname], scope: headerRef }
   );
+  
+  const isHomePage = pathname === "/";
+  
   return (
-    <header ref={headerRef} className="absolute top-0 left-0 right-0 z-50 bg-transparent border-b border-white">
+    <header 
+      ref={headerRef} 
+      className={`absolute top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
+        isHomePage 
+          ? "bg-transparent" 
+          : "bg-rose-950"
+      }`}
+    >
       <div className="mx-auto w-full px-6 h-20 flex items-center justify-between">
         <Link 
           ref={logoRef}
