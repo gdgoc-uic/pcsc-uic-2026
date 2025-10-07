@@ -11,8 +11,8 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Marquee marqueeText="SPEAKERS" />
-      <SpeakersTeaser />
+      {/* <Marquee marqueeText="SPEAKERS" /> */}
+      {/* <SpeakersTeaser /> */}
       <Marquee marqueeText="PROGRAMS" />
       <Programs />
       <Marquee marqueeText="CALL FOR PAPERS" />

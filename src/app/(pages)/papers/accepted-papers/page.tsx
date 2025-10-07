@@ -1,4 +1,4 @@
-import PageHero from "../../components/sections/PageHero";
+import PageHero from "@/app/components/sections/PageHero";
 
 export default function AcceptedPapersPage() {
   return (
