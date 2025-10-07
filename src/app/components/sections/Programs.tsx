@@ -43,7 +43,7 @@ const programSchedule: DayProgram[] = [
       { time: "12:30 PM  - 1:30PM", activity: "Lunch Break" },
       { time: "1:30 PM - 4:00 PM", activity: "Parallel Sessions" },
       { time: "4:00 PM - 5:30 PM", activity: "Oldies but Goldies" },
-      { time: "5:30 PM – 6:00 PM", activity: "Board Meeting and President's Report" },
+      { time: "5:30 PM – 6:00 PM", activity: "Poster Presentations | Board Meeting and President's Report" },
       { time: "6:30 PM - 8:00 PM", activity: "Conference Dinner" },
     ],
   },

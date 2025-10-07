@@ -18,13 +18,13 @@ const importantDates: ImportantDate[] = [
   {
     title: "Paper Submission for Main Conference Deadline",
     date: "December 20, 2025",
-    description: "December 20, 2025 | January 20, 2026",
+    description: "December 20, 2025",
     category: "deadline",
   },
   {
     title: "Author Notification for Main Conference",
     date: "January 20, 2026",
-    description: "January 20, 2026 | February 20, 2026",
+    description: "January 20, 2026",
     category: "deadline",
   },
   {
@@ -35,8 +35,8 @@ const importantDates: ImportantDate[] = [
   },
   {
     title: "Announcement of Accepted Workshops",
-    date: "December 20, 2026",
-    description: "December 20, 2026",
+    date: "December 20, 2025",
+    description: "December 20, 2025",
     category: "deadline",
   },
   {

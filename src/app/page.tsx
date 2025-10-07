@@ -19,7 +19,7 @@ export default function Home() {
       <CallforPapers />
       <Marquee marqueeText="IMPORTANT DATES" />
       <ImportantDates />
-      <Marquee marqueeText="AREA OF INTEREST" />
+      <Marquee marqueeText="AREAS OF INTEREST" />
       <AreaOfInterest />
       <Marquee marqueeText="VENUE" />
       <Venue />
