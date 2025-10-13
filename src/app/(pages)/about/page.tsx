@@ -115,7 +115,7 @@ const AboutPage = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-rose-300">Secretariat</span>
-                    <span>Mr. Mon Rodriguez</span>
+                    <span>Prof. Mon Rodriguez</span>
                     <span>Prof. Tita Herradura</span>
                   </div>
                 </li>

@@ -156,7 +156,7 @@ export const AreaOfInterest = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="text-rose-100/80 text-lg max-w-3xl mx-auto">
-            Explore the diverse topics and research areas covered at PCSC-UIC 2026
+            Explore the diverse topics and research areas covered at PCSC 2026
           </p>
           <p className="text-rose-100/80 text-lg max-w-3xl mx-auto mb-4">
             (But are Not Limited to)
