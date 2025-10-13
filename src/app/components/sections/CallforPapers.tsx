@@ -58,13 +58,13 @@ export const CallforPapers = () => {
             </div>
             <p className="text-rose-100/90">
               <a
-                href="https://cmt3.research.microsoft.com/PCSC2025"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-rose-200 underline underline-offset-4 hover:text-rose-100 transition-colors"
                 aria-label="Open CMT submission portal in a new tab"
               >
-                https://cmt3.research.microsoft.com/PCSC2025
+                To be Announced...
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
               </a>
             </p>
@@ -77,7 +77,7 @@ export const CallforPapers = () => {
               <h3 className="text-lg font-semibold text-rose-50">Paper Template & Length</h3>
             </div>
             <p className="text-rose-100/90">
-              Papers should use the prescribed PCSC 2025 template and have a minimum of 6 pages and maximum of 8 pages,
+              Papers should use the prescribed PCSC 2026 template and have a minimum of 6 pages and maximum of 8 pages,
               including references.
             </p>
           </div>
@@ -130,14 +130,6 @@ export const CallforPapers = () => {
           >
             <BookOpen className="h-5 w-5" aria-hidden="true" />
             Author Guidelines
-          </Link>
-          <Link
-            href="/srw"
-            className="inline-flex items-center gap-2 rounded-md border-2 border-rose-200 px-6 py-3 text-sm font-semibold text-rose-50 transition hover:bg-rose-200 hover:text-rose-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-            aria-label="View student research workshop"
-          >
-            <GraduationCap className="h-5 w-5" aria-hidden="true" />
-            Student Research Workshop
           </Link>
         </div>
       </div>

@@ -4,7 +4,7 @@ const links = [
   { href: "/program", label: "Program" },
   { href: "/registration", label: "Register" },
   { href: "/accepted-papers", label: "Accepted Papers" },
-  { href: "/student-research-workshop", label: "SRW" },
+  //{ href: "/student-research-workshop", label: "SRW" },
   { href: "/author-guidelines", label: "Author Guidelines" },
   { href: "/proceedings", label: "Proceedings" },
   { href: "/contact", label: "Contact" },

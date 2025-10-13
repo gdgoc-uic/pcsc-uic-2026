@@ -106,7 +106,7 @@ const AboutPage = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-rose-300">Local Chair</span>
-                    <span>Ms. Kristine Mae M. Adlaon</span>
+                    <span>Prof. Kristine Mae M. Adlaon</span>
                   </div>
                 </li>
                 <li className="flex gap-4 items-start">
@@ -115,7 +115,8 @@ const AboutPage = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-rose-300">Secretariat</span>
-                    <span>Mr. Mon Rodriguez, Ma'am Tita Herradura</span>
+                    <span>Mr. Mon Rodriguez</span>
+                    <span>Prof. Tita Herradura</span>
                   </div>
                 </li>
                 <li className="flex gap-4 items-start">
@@ -133,7 +134,7 @@ const AboutPage = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-rose-300">Documentation and Social Media Team</span>
-                    <span>Mr. Michel Bolo</span>
+                    <span>Prof. Michel Bolo</span>
                   </div>
                 </li>
                 <li className="flex gap-4 items-start">
@@ -142,7 +143,7 @@ const AboutPage = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-rose-300">Webmaster</span>
-                    <span>Al Gabriel Orig</span>
+                    <span>Mr. Al Gabriel Orig</span>
                   </div>
                 </li>
               </ul>
@@ -150,6 +151,7 @@ const AboutPage = () => {
 
             <div className="rounded-lg border border-rose-200/20 bg-rose-950/40 p-8 ring-1 ring-white/5">
               <h3 className="text-xl font-semibold text-rose-50 mb-6">Review Committee</h3>
+              {/* 
               <ul className="space-y-6 text-rose-100/90">
                 <li className="flex gap-4 items-start">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
@@ -196,7 +198,8 @@ const AboutPage = () => {
                     <span>Dr. Lisa Torres</span>
                   </div>
                 </li>
-              </ul>
+              </ul>*/}
+              <p>To be Announced...</p>
             </div>
           </div>
         </section>
