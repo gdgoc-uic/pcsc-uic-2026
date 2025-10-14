@@ -115,7 +115,7 @@ const ProgramPage = () => {
 
   return (
     <div className="pt-20 bg-rose-900">
-      <PageHero title="Program" description="Program schedule and conference activities." />
+      <PageHero title="Program" />
 
       <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
         <section ref={sectionRef} id="programs" className="text-rose-50">
