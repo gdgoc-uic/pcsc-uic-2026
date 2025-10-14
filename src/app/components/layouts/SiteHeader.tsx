@@ -186,8 +186,7 @@ export const SiteHeader = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link
-            ref={ctaRef}
+          <Link ref={ctaRef}
             href="/registration"
             className="inline-flex items-center px-5 py-2 text-white rounded bg-rose-400 font-semibold hover:bg-rose-300 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2"
             aria-label="Register Now"
@@ -196,29 +195,29 @@ export const SiteHeader = () => {
             REGISTER NOW
           </Link>
           <button 
-            className={`lg:hidden text-white hover:text-rose-300 transition-all duration-300 p-2 bg-rose-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
+            className={`lg:hidden text-white hover:text-rose-300 transition-colors duration-200 p-2 bg-rose-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
               isMobileMenuOpen 
-                ? 'rotate-90 scale-110 bg-rose-500' 
-                : 'rotate-0 scale-100'
+                ? 'bg-rose-500' 
+                : 'bg-rose-600'
             }`}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
             onClick={handleMobileMenuToggle}
             tabIndex={0}
           >
-            <div className="relative w-5 h-5">
+            <div className="relative w-6 h-6 flex items-center justify-center">
               <Menu 
-                className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${
+                className={`absolute w-5 h-5 transition-all duration-300 ease-in-out ${
                   isMobileMenuOpen 
-                    ? 'opacity-0 rotate-180 scale-0' 
+                    ? 'opacity-0 rotate-45 scale-75' 
                     : 'opacity-100 rotate-0 scale-100'
                 }`} 
               />
               <X 
-                className={`absolute inset-0 w-5 h-5 transition-all duration-300 ${
+                className={`absolute w-5 h-5 transition-all duration-300 ease-in-out ${
                   isMobileMenuOpen 
                     ? 'opacity-100 rotate-0 scale-100' 
-                    : 'opacity-0 -rotate-180 scale-0'
+                    : 'opacity-0 -rotate-45 scale-75'
                 }`} 
               />
             </div>
@@ -229,26 +228,26 @@ export const SiteHeader = () => {
       {/* Mobile Menu Dropdown */}
       <div 
         ref={mobileMenuRef}
-        className={`lg:hidden absolute top-full left-0 right-0 bg-rose-950 border-b border-white shadow-lg transition-all duration-300 ease-in-out transform ${
+        className={`lg:hidden absolute top-full left-0 right-0 bg-rose-950 border-b border-white shadow-lg transition-all duration-300 ease-out transform ${
           isMobileMenuOpen 
             ? 'opacity-100 translate-y-0 visible' 
-            : 'opacity-0 -translate-y-4 invisible'
+            : 'opacity-0 -translate-y-2 invisible'
         }`}
         role="navigation"
         aria-label="Mobile navigation"
       >
-        <div className="px-6 py-4 space-y-2">
+        <div className="px-6 py-4 space-y-1">
           {navLinks.map((link, index) => (
             <Link 
               key={link.href} 
               href={link.href} 
-              className={`block px-2 py-3 text-lg font-semibold text-white hover:text-rose-300 hover:bg-rose-800 rounded transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
+              className={`block px-3 py-3 text-lg font-semibold text-white hover:text-rose-300 hover:bg-rose-800 rounded transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
                 isMobileMenuOpen 
-                  ? 'translate-x-0 opacity-100' 
-                  : 'translate-x-4 opacity-0'
+                  ? 'translate-y-0 opacity-100' 
+                  : 'translate-y-2 opacity-0'
               }`}
               style={{
-                transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : '0ms'
+                transitionDelay: isMobileMenuOpen ? `${index * 80}ms` : '0ms'
               }}
               onClick={handleMobileMenuClose}
               tabIndex={0}
