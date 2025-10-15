@@ -160,12 +160,12 @@ export const Venue = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-rose-200 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-rose-50">University of the Immaculate Conception</h3>
-                  <p className="text-sm text-rose-100/80 mt-1">Bajada (J.P. Laurel Ave), Davao City, Philippines</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 break-words">University of the Immaculate Conception</h3>
+                  <p className="text-xs sm:text-sm text-rose-100/80 mt-1 break-words">Bajada (J.P. Laurel Ave), Davao City, Philippines</p>
                 </div>
-                <Building2 className="h-5 w-5 text-rose-200 flex-shrink-0" aria-hidden="true" />
+                <Building2 className="h-5 w-5 text-rose-200 flex-shrink-0 hidden sm:block" aria-hidden="true" />
               </div>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-rose-100/90">
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-rose-100/90">
                 <div className="rounded-md border border-white/10 bg-rose-900/30 p-3">Accessible gates along J.P. Laurel Ave</div>
                 <div className="rounded-md border border-white/10 bg-rose-900/30 p-3">Conference halls signposted on-site</div>
               </div>

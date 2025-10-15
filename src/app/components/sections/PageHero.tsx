@@ -13,10 +13,10 @@ const PageHero = ({ title, description }: Props) => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 sm:py-20">        
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{title}</h1>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">        
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight break-words">{title}</h1>
         {description ? (
-          <p className="mt-4 max-w-3xl text-lg text-rose-100/90">{description}</p>
+          <p className="mt-4 max-w-3xl text-base sm:text-lg text-rose-100/90">{description}</p>
         ) : null}
       </div>
     </section>

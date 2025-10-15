@@ -729,15 +729,15 @@ const PapersPage = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
+                    className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold transition-all duration-200 ${
                       activeTab === tab.id
                         ? 'bg-rose-500 text-white shadow-lg'
                         : 'text-rose-200 hover:text-rose-100 hover:bg-rose-800/40'
                     }`}
                     aria-label={`Switch to ${tab.label} tab`}
                   >
-                    <Icon className="h-4 w-4" aria-hidden="true" />
-                    {tab.label}
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" aria-hidden="true" />
+                    <span className="whitespace-nowrap">{tab.label}</span>
                   </button>
                 );
               })}

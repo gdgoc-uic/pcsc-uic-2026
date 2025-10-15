@@ -44,10 +44,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         <SiteHeader />
-        {children}
+        <div className="overflow-x-hidden">
+          {children}
+        </div>
         <SiteFooter />
       </body>
     </html>

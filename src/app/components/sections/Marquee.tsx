@@ -20,13 +20,13 @@ export const Marquee = ({ marqueeText }: MarqueeProps) => {
 
       {/* Static overlay text */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
-        <div className="relative">
+        <div className="relative max-w-full">
           {/* Text shadow for depth */}
-          <span className="absolute inset-0 text-black text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-wide text-center blur-sm opacity-50">
+          <span className="absolute inset-0 text-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-wide text-center blur-sm opacity-50 break-words">
             {marqueeText}
           </span>
           {/* Main text */}
-          <span className="relative text-white text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-wide text-center drop-shadow-2xl">
+          <span className="relative text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-wide text-center drop-shadow-2xl break-words">
             {marqueeText}
           </span>
         </div>

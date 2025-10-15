@@ -161,22 +161,22 @@ export const SiteHeader = () => {
         <Link
           ref={logoRef}
           href="/"
-          className="flex items-center gap-2 text-white font-bold text-xl"
+          className="flex items-center gap-2 text-white font-bold text-base sm:text-lg md:text-xl"
           aria-label="PCSC 2026 Home"
         >
-          <div className="w-16 h-16 flex items-center justify-center">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center flex-shrink-0">
             <img
               src="/icon.png"
               alt="PCSC 2026 Logo"
               width={64}
               height={64}
-              className="block"
+              className="block w-full h-full object-contain"
               aria-label="PCSC 2026 Logo"
               tabIndex={-1}
               draggable={false}
             />
           </div>
-          <span>PCSC 2026</span>
+          <span className="whitespace-nowrap">PCSC 2026</span>
         </Link>
 
         <nav
@@ -194,10 +194,10 @@ export const SiteHeader = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Link ref={ctaRef}
             href="/registration"
-            className="inline-flex items-center px-5 py-2 text-white rounded bg-rose-400 font-semibold hover:bg-rose-300 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2"
+            className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-rose-400 font-semibold hover:bg-rose-300 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 whitespace-nowrap"
             aria-label="Register Now"
             tabIndex={0}
           >

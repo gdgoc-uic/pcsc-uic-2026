@@ -58,10 +58,9 @@ export const Hero = () => {
             wordSpan.setAttribute("aria-hidden", "true");
             wordSpan.style.display = "inline-block";
             wordSpan.style.willChange = "transform, opacity, filter";
+            wordSpan.style.marginRight = "0.25em";
             el.appendChild(wordSpan);
             createdWords.push(wordSpan);
-            // add a non-breaking space after each word except the last
-            if (wIdx < words.length - 1) el.appendChild(document.createTextNode("\u00A0"));
           });
         };
 
@@ -237,61 +236,64 @@ export const Hero = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-rose-900/60"></div>
       
-      <div className="relative mx-auto max-w-full px-6 pt-24 pb-32 min-h-screen flex flex-col justify-end">
+      <div className="relative mx-auto max-w-full px-3 sm:px-6 pt-24 pb-16 sm:pb-32 min-h-screen flex flex-col justify-end">
         {/* Main Content */}
-        <div className="w-full">
+        <div className="w-full max-w-full overflow-hidden">
           {/* Main Headline */}
-          <div ref={titleRef} className="mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[0.95] tracking-tight">
-              <span className="block">26TH PHILIPPINE COMPUTING</span>
+          <div ref={titleRef} className="mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.25] sm:leading-[1.1] md:leading-[0.95] tracking-tight">
+              <span className="block mb-2 sm:mb-0">
+                <span className="inline">26TH PHILIPPINE</span>{' '}
+                <span className="inline">COMPUTING</span>
+              </span>
               <span className="block">SCIENCE CONGRESS</span>
             </h1>
           </div>
           
 
           {/* Event Details */}
-          <div ref={contentRef} className="mb-8">
-            <div className="flex flex-wrap gap-6">
+          <div ref={contentRef} className="mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-6">
               {/* Date */}
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <Calendar className="w-6 h-6 text-white flex-shrink-0" />
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20">
+                <Calendar className="w-4 h-4 sm:w-6 sm:h-6 text-white flex-shrink-0" />
                 <div>
-                  <p className="text-lg font-bold text-white">April 23 - 25</p>
-                  <p className="text-sm text-white/80 font-medium">2026</p>
+                  <p className="text-sm sm:text-lg font-bold text-white">April 23 - 25</p>
+                  <p className="text-xs sm:text-sm text-white/80 font-medium">2026</p>
                 </div>
               </div>
 
               {/* Location */}
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <MapPin className="w-6 h-6 text-white flex-shrink-0" />
-                <div> 
-                  <p className="text-lg font-bold text-white">University of the Immaculate Conception</p>
-                  <p className="text-sm text-white font-medium">Davao City</p>
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20 max-w-full">
+                <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-white flex-shrink-0" />
+                <div className="min-w-0"> 
+                  <p className="text-sm sm:text-lg font-bold text-white break-words">University of the Immaculate Conception</p>
+                  <p className="text-xs sm:text-sm text-white font-medium">Davao City</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Event Details & CTA */}
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <Link
                 href="/registration"
                 ref={registerBtnRef}
                 aria-label="Register for PCSC 2026"
-                className="group inline-flex items-center justify-center gap-2 bg-white text-rose-900 px-8 py-4 rounded-lg font-bold text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="group inline-flex items-center justify-center gap-2 bg-white text-rose-900 px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Register Now
-                <ArrowUpRight ref={registerIconRef} className="w-5 h-5 transition-transform" />
+                <ArrowUpRight ref={registerIconRef} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform" />
               </Link>
               
               <Link
                 href="/program"
                 ref={programBtnRef}
                 aria-label="View event program"
-                className="group inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="group inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 View Program
-                <ArrowUpRight ref={programIconRef} className="w-5 h-5 transition-transform" />
+                <ArrowUpRight ref={programIconRef} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform" />
               </Link>
             </div>
           </div>

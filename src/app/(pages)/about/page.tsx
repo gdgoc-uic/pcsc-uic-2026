@@ -91,59 +91,59 @@ const AboutPage = () => {
             <div className="rounded-lg border border-rose-200/20 bg-rose-950/40 p-8 ring-1 ring-white/5">
               <h3 className="text-xl font-semibold text-rose-50 mb-6">Organizing Committee</h3>
               <ul className="space-y-6 text-rose-100/90">
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     JA
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">General Chair</span>
-                    <span>Dr. Judith J. Azcarraga</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">General Chair</span>
+                    <span className="text-sm sm:text-base break-words">Dr. Judith J. Azcarraga</span>
                   </div>
                 </li>
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-rose-700 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-500 to-rose-700 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     KA
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">Local Chair</span>
-                    <span>Prof. Kristine Mae M. Adlaon</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">Local Chair</span>
+                    <span className="text-sm sm:text-base break-words">Prof. Kristine Mae M. Adlaon</span>
                   </div>
                 </li>
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-600 to-rose-800 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-600 to-rose-800 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     MR
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">Secretariat</span>
-                    <span>Prof. Mon Rodriguez</span>
-                    <span>Prof. Tita Herradura</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">Secretariat</span>
+                    <span className="text-sm sm:text-base break-words">Prof. Mon Rodriguez</span>
+                    <span className="text-sm sm:text-base break-words">Prof. Tita Herradura</span>
                   </div>
                 </li>
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-400 to-rose-600 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     JA
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">General Program Chair</span>
-                    <span>Dr. Judith J. Azcarraga</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">General Program Chair</span>
+                    <span className="text-sm sm:text-base break-words">Dr. Judith J. Azcarraga</span>
                   </div>
                 </li>
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 to-rose-700 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-500 to-rose-700 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     MB
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">Documentation and Social Media Team</span>
-                    <span>Prof. Michel Bolo</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">Documentation and Social Media Team</span>
+                    <span className="text-sm sm:text-base break-words">Prof. Michel Bolo</span>
                   </div>
                 </li>
-                <li className="flex gap-4 items-start">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-rose-600 to-rose-800 flex-shrink-0 flex items-center justify-center text-white text-xl font-bold">
+                <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-600 to-rose-800 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     AO
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-rose-300">Webmaster</span>
-                    <span>Mr. Al Gabriel Orig</span>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-rose-300 text-sm sm:text-base">Webmaster</span>
+                    <span className="text-sm sm:text-base break-words">Mr. Al Gabriel Orig</span>
                   </div>
                 </li>
               </ul>
