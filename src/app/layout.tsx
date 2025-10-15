@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     description:
       "Join researchers, educators, and students for talks, workshops, and papers in computing and ICT.",
     type: "website",
+    images: [
+      {
+        url: "/meta-img.jpg",
+        width: 1200,
+        height: 630,
+        alt: "26th Philippine Computing Science Congress",
+      },
+    ],
   },
   icons: {
     icon: "/icon.png",
