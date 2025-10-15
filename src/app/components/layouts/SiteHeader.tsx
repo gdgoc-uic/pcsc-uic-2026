@@ -162,10 +162,19 @@ export const SiteHeader = () => {
           ref={logoRef}
           href="/"
           className="flex items-center gap-2 text-white font-bold text-xl"
-          aria-label="ITconf Home"
+          aria-label="PCSC 2026 Home"
         >
-          <div className="w-8 h-8 bg-rose-500 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full" />
+          <div className="w-16 h-16 flex items-center justify-center">
+            <img
+              src="/icon.png"
+              alt="PCSC 2026 Logo"
+              width={64}
+              height={64}
+              className="block"
+              aria-label="PCSC 2026 Logo"
+              tabIndex={-1}
+              draggable={false}
+            />
           </div>
           <span>PCSC 2026</span>
         </Link>
