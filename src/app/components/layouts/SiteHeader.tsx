@@ -25,6 +25,7 @@ export const SiteHeader = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const ctaRef = useRef<HTMLAnchorElement | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuBtnRef = useRef<HTMLButtonElement | null>(null);
 
   useGSAP(
     () => {
@@ -35,7 +36,7 @@ export const SiteHeader = () => {
           y: 0,
           clearProps: "transform,willChange",
         });
-        gsap.set([logoRef.current, ctaRef.current], {
+        gsap.set([logoRef.current, ctaRef.current, mobileMenuBtnRef.current], {
           opacity: 1,
           y: 0,
           clearProps: "transform,willChange",
@@ -59,7 +60,7 @@ export const SiteHeader = () => {
         opacity: 0,
         willChange: "transform, opacity",
       });
-      gsap.set([logoRef.current, ctaRef.current], {
+      gsap.set([logoRef.current, ctaRef.current, mobileMenuBtnRef.current], {
         opacity: 0,
         y: 8,
         willChange: "transform, opacity",
@@ -87,7 +88,7 @@ export const SiteHeader = () => {
           .to(headerRef.current, { y: 0, opacity: 1, duration: 0.45 })
           .to(logoRef.current, { y: 0, opacity: 1 }, "-=0.3")
           .to(navAnchors, { y: 0, opacity: 1, stagger: 0.05 }, "-=0.25")
-          .to(ctaRef.current, { y: 0, opacity: 1 }, "-=0.3");
+          .to([ctaRef.current, mobileMenuBtnRef.current], { y: 0, opacity: 1 }, "-=0.3");
       };
 
       const onHeadlineDone = () => play();
@@ -118,7 +119,7 @@ export const SiteHeader = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Handle click outside to close mobile menu
+  // Handle click outside to close mobile menu and body scroll lock
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -138,11 +139,35 @@ export const SiteHeader = () => {
     };
 
     if (isMobileMenuOpen) {
+      // Prevent body scroll when menu is open - comprehensive approach for all browsers
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscapeKey);
+    } else {
+      // Restore body scroll when menu is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -153,9 +178,9 @@ export const SiteHeader = () => {
   return (
     <header
       ref={headerRef}
-      className={`absolute top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
+      className={`${isMobileMenuOpen ? 'fixed' : 'absolute'} top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
         isHomePage ? "bg-transparent" : "bg-rose-950"
-      }`}
+      } ${isMobileMenuOpen ? 'bg-rose-950' : ''}`}
     >
       <div className="mx-auto w-full px-6 h-20 flex items-center justify-between">
         <Link
@@ -204,6 +229,7 @@ export const SiteHeader = () => {
             REGISTER NOW
           </Link>
           <button 
+            ref={mobileMenuBtnRef}
             className={`lg:hidden text-white hover:text-rose-300 transition-colors duration-200 p-2 bg-rose-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
               isMobileMenuOpen 
                 ? 'bg-rose-500' 
@@ -237,7 +263,7 @@ export const SiteHeader = () => {
       {/* Mobile Menu Dropdown */}
       <div 
         ref={mobileMenuRef}
-        className={`lg:hidden absolute top-full left-0 right-0 bg-rose-950 border-b border-white shadow-lg transition-all duration-300 ease-out transform ${
+        className={`lg:hidden fixed top-20 left-0 right-0 bg-rose-950 border-b border-white shadow-lg transition-all duration-300 ease-out transform max-h-[calc(100vh-5rem)] overflow-y-auto ${
           isMobileMenuOpen 
             ? 'opacity-100 translate-y-0 visible' 
             : 'opacity-0 -translate-y-2 invisible'
