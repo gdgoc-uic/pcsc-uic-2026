@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "PCSC 2026 — Philippine Computing Science Congress",
   description:
     "Official site for the Philippine Computing Science Congress. Program, workshops, accepted papers, registration, and venue details.",
-  metadataBase: new URL("https://pcsc-uic-2026.local"),
+  metadataBase: new URL("https://pcsc2026.uic.edu.ph"),
   openGraph: {
     title: "PCSC 2026 — Philippine Computing Science Congress",
     description:
@@ -27,8 +27,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/meta-img.jpg",
-        width: 1200,
-        height: 630,
         alt: "26th Philippine Computing Science Congress",
       },
     ],

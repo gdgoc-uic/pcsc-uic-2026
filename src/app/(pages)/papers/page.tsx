@@ -145,15 +145,15 @@ const PapersPage = () => {
           <div className="space-y-3 text-rose-100/90">
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Paper Submission Deadline</span>
-              <span className="font-semibold text-rose-200">To be announced</span>
+              <span className="font-semibold text-rose-200">December 20, 2025</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span>Notification of Acceptance</span>
-              <span className="font-semibold text-rose-200">To be announced</span>
+              <span>Author Notification</span>
+              <span className="font-semibold text-rose-200">January 20, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Camera-Ready Submission</span>
-              <span className="font-semibold text-rose-200">To be announced</span>
+              <span className="font-semibold text-rose-200">March 10, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2">
               <span>Conference Dates</span>
@@ -674,7 +674,7 @@ const PapersPage = () => {
             <div className="space-y-3 text-rose-100/90">
               <div className="flex justify-between items-center py-2 border-b border-white/10">
                 <span>Paper Submission Deadline</span>
-                <span className="font-semibold text-rose-200">To be announced</span>
+                <span className="font-semibold text-rose-200">December 20, 2025</span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-white/10">
                 <span>Review Assignment</span>
@@ -686,11 +686,11 @@ const PapersPage = () => {
               </div>
               <div className="flex justify-between items-center py-2 border-b border-white/10">
                 <span>Notification of Decision</span>
-                <span className="font-semibold text-rose-200">4-6 weeks after deadline</span>
+                <span className="font-semibold text-rose-200">January 20, 2026</span>
               </div>
               <div className="flex justify-between items-center py-2">
                 <span>Camera-Ready Submission</span>
-                <span className="font-semibold text-rose-200">2 weeks after notification</span>
+                <span className="font-semibold text-rose-200">March 10, 2026</span>
               </div>
             </div>
           </div>
