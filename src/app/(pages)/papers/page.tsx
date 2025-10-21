@@ -128,10 +128,9 @@ const PapersPage = () => {
 
           <div className="bg-rose-50 border-l-4 border-rose-400 p-4 text-sm text-rose-900 mt-6 rounded-md shadow-sm">
             <p>
-              <strong>Note:</strong> The peer-review process for this conference was managed using the 
-              <strong> Microsoft Conference Management Toolkit (CMT)</strong>. 
-              This service was provided free of charge by Microsoft, which covered all related costs, 
-              including Azure cloud services, software development, and technical support.
+               The Microsoft CMT service was used for managing the peer-reviewing process 
+                for this conference. This service was provided for free by Microsoft and they 
+                bore all expenses, including costs for Azure cloud services as well as for software development and support.
             </p>
           </div>
         </div>
