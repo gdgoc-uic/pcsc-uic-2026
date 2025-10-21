@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       {/* <Marquee marqueeText="SPEAKERS" /> */}
       {/* <SpeakersTeaser /> */}
-      <Marquee marqueeText="PROGRAM" />
+      <Marquee marqueeText="PROGRAMS" />
       <Programs />
       <Marquee marqueeText="CALL FOR PAPERS" />
       <CallforPapers />
