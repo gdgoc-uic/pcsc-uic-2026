@@ -309,11 +309,13 @@ export default function VenuePage() {
       <section ref={mapSectionRef} className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-              <MapPin className="h-8 w-8 text-rose-300 mr-3" />
-              <h2 className="text-3xl font-bold text-rose-50">University of the Immaculate Conception - Bajada Campus</h2>
+            <div className="flex items-center justify-center mb-4 flex-wrap gap-3">
+              <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-rose-300 flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-rose-50 leading-tight">
+                <span className="block sm:inline">University of the Immaculate Conception</span>
+                <span className="block sm:inline sm:ml-1">- Bajada Campus</span>
+              </h2>
             </div>
-            
           </div>
           
           {/* Embedded Map */}
@@ -339,21 +341,21 @@ export default function VenuePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-rose-800/10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-rose-50 mb-4">Directions from Airport</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Directions from Airport</h2>
           </div>
           
           <div ref={airportSectionRef} className="bg-rose-800/30 border border-rose-600/30 rounded-xl overflow-hidden">
             {/* Route Header */}
-            <div ref={routeHeaderRef} className="bg-rose-900/40 border-b border-rose-600/30 p-6">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div className="flex items-center gap-3">
-                  <div ref={timeRef} className="bg-rose-700/40 rounded-lg px-4 py-2">
+            <div ref={routeHeaderRef} className="bg-rose-900/40 border-b border-rose-600/30 p-4 sm:p-6">
+              <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4">
+                <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                  <div ref={timeRef} className="bg-rose-700/40 rounded-lg px-3 sm:px-4 py-2">
                     <div className="flex items-center gap-2">
-                      <Clock className="h-5 w-5 text-rose-200" />
-                      <span className="text-2xl font-bold text-rose-50">12 min</span>
+                      <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-rose-200" />
+                      <span className="text-lg sm:text-2xl font-bold text-rose-50">12 min</span>
                     </div>
                   </div>
-                  <div ref={transportRef} className="text-rose-200/80 text-sm">
+                  <div ref={transportRef} className="text-rose-200/80 text-xs sm:text-sm">
                     via Taxi or GrabCar
                   </div>
                 </div>
@@ -361,34 +363,37 @@ export default function VenuePage() {
             </div>
 
             {/* Route Details */}
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               {/* Starting Point */}
-              <div className="flex items-start gap-4 mb-6">
+              <div className="flex items-start gap-3 sm:gap-4 mb-6">
                 <div className="flex flex-col items-center">
                   <div ref={startPointRef} className="w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/30 flex-shrink-0"></div>
                   <div ref={arrowRef} className="w-0.5 h-16 bg-rose-600/40 my-1"></div>
                 </div>
-                <div className="flex-1 pt-0">
+                <div className="flex-1 pt-0 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <Plane className="h-4 w-4 text-rose-300" />
+                    <Plane className="h-4 w-4 text-rose-300 flex-shrink-0" />
                     <span className="text-xs text-rose-300 uppercase tracking-wide font-medium">Starting point</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-rose-50">Francis Bangoy International Airport</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-rose-50">Francis Bangoy International Airport</h3>
                   <p className="text-sm text-rose-200/70 mt-1">Davao City</p>
                 </div>
               </div>
 
               {/* Destination Point */}
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
                 <div className="flex flex-col items-center">
                   <div ref={endPointRef} className="w-3 h-3 rounded-full bg-rose-400 ring-4 ring-rose-400/30 flex-shrink-0"></div>
                 </div>
-                <div ref={descriptionRef} className="flex-1 pt-0">
+                <div ref={descriptionRef} className="flex-1 pt-0 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="h-4 w-4 text-rose-300" />
+                    <MapPin className="h-4 w-4 text-rose-300 flex-shrink-0" />
                     <span className="text-xs text-rose-300 uppercase tracking-wide font-medium">Destination</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-rose-50">University of the Immaculate Conception - Bajada Campus</h3>
+                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 leading-tight">
+                    <span className="block sm:inline">University of the Immaculate Conception</span>
+                    <span className="block sm:inline sm:ml-1">- Bajada Campus</span>
+                  </h3>
                   <p className="text-sm text-rose-200/70 mt-1">J.P. Laurel Ave, Bajada, Davao City</p>
                 </div>
               </div>
@@ -416,8 +421,8 @@ export default function VenuePage() {
       <section ref={hotelsSectionRef} className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-rose-50 mb-4">Accommodation</h2>
-            <p className="text-rose-200/80 text-lg max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Accommodation</h2>
+            <p className="text-rose-200/80 text-base sm:text-lg max-w-2xl mx-auto">
               Recommended hotels near the conference venue
             </p>
             <div className="mt-6 inline-block bg-amber-900/20 border border-amber-700/30 px-5 py-3 rounded-lg">
@@ -459,8 +464,8 @@ export default function VenuePage() {
       <section ref={amenitiesSectionRef} className="py-16 px-4 sm:px-6 lg:px-8 bg-rose-800/10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-rose-50 mb-4">Nearby Amenities</h2>
-            <p className="text-rose-200/80 text-lg max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Nearby Amenities</h2>
+            <p className="text-rose-200/80 text-base sm:text-lg max-w-2xl mx-auto">
               Shopping centers and dining options near the venue
             </p>
           </div>
