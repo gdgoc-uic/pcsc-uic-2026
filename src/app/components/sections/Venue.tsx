@@ -17,13 +17,13 @@ const travelTips: TravelTip[] = [
   {
     icon: <Plane className="h-5 w-5" />,
     title: "By Air",
-    details: "Fly to Davao International Airport (Francisco Bangoy). 25–35 minutes by car to campus.",
+    details: "Fly to Francis Bangoy International Airport (DIA). 12 minutes by taxi or GrabCar to campus.",
     tone: "blue",
   },
   {
     icon: <Car className="h-5 w-5" />,
     title: "By Car/Taxi",
-    details: "Search for ‘University of the Immaculate Conception – Bajada Campus’. Limited guest parking available.",
+    details: "Search for 'University of the Immaculate Conception – Bajada Campus'. Taxi and ride-sharing services available at airport terminal.",
     tone: "green",
   },
   {
@@ -35,7 +35,7 @@ const travelTips: TravelTip[] = [
   {
     icon: <Globe className="h-5 w-5" />,
     title: "Nearby Landmarks",
-    details: "Abreeza Mall and commercial centers are within 5–10 minutes for dining and errands.",
+    details: "Abreeza Ayala Malls and SM Lanang Premier are within 5–10 minutes for dining and shopping.",
     tone: "rose",
   },
 ];
@@ -142,7 +142,7 @@ export const Venue = () => {
         {/* Header */}
         <div className="mb-12 text-center">
           <p className="text-rose-100/80 text-base sm:text-lg max-w-3xl mx-auto">
-            Join us at the University of the Immaculate Conception (Bajada Campus), Davao City
+            Join us at the University of the Immaculate Conception - Bajada Campus, Davao City
           </p>
         </div>
 
@@ -160,8 +160,8 @@ export const Venue = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-rose-200 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 break-words">University of the Immaculate Conception</h3>
-                  <p className="text-xs sm:text-sm text-rose-100/80 mt-1 break-words">Bajada (J.P. Laurel Ave), Davao City, Philippines</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 break-words">University of the Immaculate Conception - Bajada Campus</h3>
+                  <p className="text-xs sm:text-sm text-rose-100/80 mt-1 break-words">J.P. Laurel Ave, Bajada, Davao City, Philippines</p>
                 </div>
                 <Building2 className="h-5 w-5 text-rose-200 flex-shrink-0 hidden sm:block" aria-hidden="true" />
               </div>
@@ -205,7 +205,7 @@ export const Venue = () => {
                 <iframe
                   title="University of the Immaculate Conception - Bajada Campus map"
                   className="absolute inset-0 h-full w-full"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.214495380153!2d125.61870867584925!3d7.101121116179806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96c4fc4bfbf1f%3A0x41426f341bce07d5!2sUniversity%20of%20the%20Immaculate%20Conception%20-%20Bajada%20Campus!5e0!3m2!1sen!2sph!4v1759485699162!5m2!1sen!2sph"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.214541205031!2d125.61870867566523!3d7.101115792902217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96c4fc4bfbf1f%3A0x41426f341bce07d5!2sUniversity%20of%20the%20Immaculate%20Conception%20-%20Bajada%20Campus!5e0!3m2!1sen!2sph!4v1761402242791!5m2!1sen!2sph"
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"

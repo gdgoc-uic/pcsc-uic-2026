@@ -31,6 +31,12 @@ export const Hero = () => {
   const programIconRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
+    // Reset the global flag when component mounts
+    if (typeof window !== "undefined") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window as any).__heroHeadlineDone = false;
+    }
+
     const ctx = gsap.context(() => {
       // Check if refs are available before animating
       if (!backgroundRef.current) return;
@@ -48,10 +54,23 @@ export const Hero = () => {
         const createdWords: HTMLElement[] = [];
 
         const splitTextToWords = (el: HTMLElement) => {
-          const original = el.textContent ?? "";
-          el.setAttribute("aria-label", original);
+          // First, restore any previously modified text using data attribute
+          const originalStored = el.getAttribute("data-original-html");
+          if (originalStored) {
+            el.innerHTML = originalStored;
+          } else {
+            // Store the original innerHTML before first modification
+            el.setAttribute("data-original-html", el.innerHTML);
+          }
+          
+          // Get all text nodes and inline spans within this block
+          const textContent = el.textContent ?? "";
+          const words = textContent.trim().split(/\s+/).filter(word => word.length > 0);
+          
+          // Clear the element and rebuild with word spans
           el.textContent = "";
-          const words = original.split(" ");
+          el.setAttribute("aria-label", textContent.trim());
+          
           words.forEach((word, wIdx) => {
             const wordSpan = document.createElement("span");
             wordSpan.textContent = word;
