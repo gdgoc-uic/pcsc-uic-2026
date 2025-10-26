@@ -157,22 +157,22 @@ export const ImportantDates = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "deadline":
-        return "bg-red-500/20 border-red-400/30 text-red-100";
+        return "bg-brick-red-800 border-brick-red-400/30 text-red-100";
       case "conference":
-        return "bg-blue-500/20 border-blue-400/30 text-blue-100";
+        return "bg-brick-red-800 border-brick-red-400/30 text-blue-100";
       case "registration":
-        return "bg-green-500/20 border-green-400/30 text-green-100";
+        return "bg-brick-red-800 border-brick-red-400/30 text-green-100";
       default:
-        return "bg-rose-500/20 border-rose-400/30 text-rose-100";
+        return "bg-brick-red-800 border-brick-red-400/30 text-rose-100";
     }
   };
 
   return (
-    <section ref={sectionRef} id="important-dates" className="bg-rose-900 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="important-dates" className="bg-brick-red-600 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-rose-100/80 text-lg max-w-3xl mx-auto">
+          <p className="text-white text-lg max-w-3xl mx-auto">
             Mark your calendar for these key deadlines and events for PCSC-UIC 2026
           </p>
         </div>
@@ -183,10 +183,10 @@ export const ImportantDates = () => {
             <div key={monthYear} className="calendar-month">
               {/* Month Header */}
               <div className="mb-6 text-center">
-                <h3 className="text-2xl font-bold text-rose-50 mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2">
                   {monthYear}
                 </h3>
-                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-rose-400 to-transparent mx-auto"></div>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-brick-red-100 to-transparent mx-auto"></div>
               </div>
 
               {/* Month Dates - Stack vertically within each month column */}
@@ -201,12 +201,12 @@ export const ImportantDates = () => {
                       <div className="flex items-center justify-between mb-3">
                         <div className={`inline-flex items-center gap-2 px-2 py-1 rounded-full text-xs font-semibold ${
                           date.isUrgent
-                            ? "bg-red-500/30 text-red-200"
+                            ? "bg-brick-red-500 text-white"
                             : date.category === "conference"
-                              ? "bg-blue-500/30 text-blue-200"
+                              ? "bg-brick-red-500 text-white" 
                               : date.category === "registration"
-                                ? "bg-green-500/30 text-green-200"
-                                : "bg-rose-500/30 text-rose-200"
+                                ? "bg-brick-red-500 text-white"
+                                : "bg-brick-red-500 text-white"
                         }`}>
                           <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
                           {new Date(date.date).toLocaleDateString("en-US", {
@@ -216,12 +216,12 @@ export const ImportantDates = () => {
                         </div>
                         <div className={`p-1 rounded-full ${
                           date.isUrgent
-                            ? "bg-red-500/30 text-red-300"
+                            ? "bg-brick-red-400 text-red-100"
                             : date.category === "conference"
                               ? "bg-blue-500/30 text-blue-300"
                               : date.category === "registration"
                                 ? "bg-green-500/30 text-green-300"
-                                : "bg-rose-500/30 text-rose-300"
+                                : "bg-brick-red-400 text-brick-red-100"
                         }`}>
                           {getCategoryIcon(date.category)}
                         </div>

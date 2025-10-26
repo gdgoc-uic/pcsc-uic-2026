@@ -114,14 +114,14 @@ const ProgramPage = () => {
   }, []);
 
   return (
-    <div className="pt-20 bg-rose-900">
+    <div className="pt-20 bg-brick-red-600">
       <PageHero title="Program" />
 
       <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
         <section ref={sectionRef} id="programs" className="text-rose-50">
           <div className="mb-10 sm:mb-12">
-            <p className="text-rose-100/80 text-base sm:text-lg max-w-3xl text-center mx-auto">
-            The 26th Philippine Computing Science Congress is organized by the <a href="https://csp.org.ph/" target="_blank" rel="noopener noreferrer" className="text-rose-200 underline">Computing Society of the Philippines</a> to enable local 
+            <p className="text-white text-base sm:text-lg max-w-3xl text-center mx-auto">
+            The 26th Philippine Computing Science Congress is organized by the <a href="https://csp.org.ph/" target="_blank" rel="noopener noreferrer" className="text-brick-red-50 underline">Computing Society of the Philippines</a> to enable local 
             and neighboring computing educators, researchers, information and communications technology (ICT) professionals, 
             and students to interact and share their work in computing, computer science, computational science, and ICT. 
             The conference features special lectures by prominent researchers and educators and contributed papers in ICT, computing, 
@@ -134,14 +134,14 @@ const ProgramPage = () => {
             {programSchedule.map((dayProgram) => (
               <div
                 key={dayProgram.day}
-                className="group relative overflow-hidden bg-rose-500/20 rounded-lg cursor-pointer"
+                className="group relative overflow-hidden bg-brick-red-800 rounded-lg cursor-pointer"
               >
                 <div className="relative p-6">
                   {/* Day Header */}
                   <div className="mb-6 border-b border-white/20 pb-4">
-                    <h3 className="text-2xl font-bold text-rose-50">{dayProgram.day}</h3>
+                    <h3 className="text-2xl font-bold text-white">{dayProgram.day}</h3>
                     {dayProgram.date && (
-                      <div className="mt-2 flex items-center gap-2 text-sm text-rose-200">
+                      <div className="mt-2 flex items-center gap-2 text-sm text-white">
                         <Calendar className="h-4 w-4" aria-hidden="true" />
                         <span>{dayProgram.date}</span>
                       </div>
@@ -149,17 +149,17 @@ const ProgramPage = () => {
                   </div>
 
                   {/* Schedule */}
-                  <div className="space-y-2 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-rose-800 scrollbar-track-rose-950/20">
+                  <div className="space-y-2 max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-brick-red-800 scrollbar-track-brick-red-950/20">
                     {dayProgram.schedule.map((slot, index) => (
                       <div
                         key={`${dayProgram.day}-${index}`}
-                        className="rounded-lg border border-white/10 bg-rose-900/30 p-3 transition-colors hover:bg-rose-900/50"
+                        className="rounded-lg border border-white/10 bg-brick-red-700 p-3 transition-colors hover:bg-brick-red-500"
                       >
                         <div className="flex items-start gap-2">
-                          <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-rose-200" aria-hidden="true" />
+                          <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-white" aria-hidden="true" />
                           <div className="flex-1 min-w-0">
-                            <div className="text-xs font-semibold text-rose-200">{slot.time}</div>
-                            <div className="text-sm font-medium mt-1 leading-snug text-rose-100">
+                            <div className="text-xs font-semibold text-white">{slot.time}</div>
+                            <div className="text-sm font-medium mt-1 leading-snug text-white">
                               {slot.activity}
                             </div>
                           </div>

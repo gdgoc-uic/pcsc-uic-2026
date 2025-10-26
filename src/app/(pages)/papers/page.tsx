@@ -41,14 +41,14 @@ const PapersPage = () => {
     { id: 'call-for-papers', label: 'Call for Papers', icon: FileText },
     { id: 'author-guidelines', label: 'Author Guidelines', icon: BookOpen },
     { id: 'proceedings', label: 'Proceedings', icon: FileText },
-    { id: 'accepted-papers', label: 'Accepted Papers', icon: Award },
+    //{ id: 'accepted-papers', label: 'Accepted Papers', icon: Award },
   ];
 
-  const renderCallForPapers = () => (
+const renderCallForPapers = () => (
     <div className="space-y-6">
       {/* Header */}
       <div className="mb-10 sm:mb-12" data-animate="item">
-        <p className="max-w-4xl text-rose-100/80 text-base sm:text-lg text-center mx-auto">
+        <p className="max-w-4xl text-white text-base sm:text-lg text-center mx-auto">
           The 26th Philippine Computing Science Congress is organized by the Computing Society of the Philippines
           to enable local and neighboring computing educators, researchers, ICT professionals, and students to
           interact and share their work in computing, computer science, computational science, and ICT.
@@ -58,12 +58,12 @@ const PapersPage = () => {
       {/* Content Sections */}
       <div className="space-y-6">
         {/* Submission Portal */}
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
           <div className="flex items-center gap-2 mb-3">
-            <ExternalLink className="h-5 w-5 text-rose-200" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-rose-50">Submission Portal</h3>
+            <ExternalLink className="h-5 w-5 text-white" aria-hidden="true" />
+            <h3 className="text-lg font-semibold text-white">Submission Portal</h3>
           </div>
-          <p className="text-rose-100/90">
+          <p className="text-white">
             <a
               href="#"
               target="_blank"
@@ -78,29 +78,29 @@ const PapersPage = () => {
         </div>
 
         {/* Paper Template and Length */}
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
           <div className="flex items-center gap-2 mb-3">
-            <BookOpen className="h-5 w-5 text-rose-200" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-rose-50">Paper Template & Length</h3>
+            <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
+            <h3 className="text-lg font-semibold text-white">Paper Template & Length</h3>
           </div>
-          <p className="text-rose-100/90">
+          <p className="text-white">
             Papers should use the prescribed PCSC 2026 template and have a minimum of 6 pages and maximum of 8 pages,
             including references.
           </p>
         </div>
 
         {/* Double-Blind Peer Review Guidelines */}
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
-          <h3 className="text-lg font-semibold text-rose-50 mb-4">Double-Blind Peer Review Guidelines</h3>
-          <ul className="space-y-3 text-rose-100/90">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+          <h3 className="text-lg font-semibold text-white mb-4">Double-Blind Peer Review Guidelines</h3>
+          <ul className="space-y-3 text-white">
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 1
               </span>
               <span>Name and affiliation of the Authors must be removed from the submitted manuscript.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 2
               </span>
               <span>
@@ -109,13 +109,13 @@ const PapersPage = () => {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 3
               </span>
               <span>Do not include acknowledgment and funding sources.</span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 4
               </span>
               <span>
@@ -126,7 +126,7 @@ const PapersPage = () => {
             </li>
           </ul>
 
-          <div className="bg-rose-50 border-l-4 border-rose-400 p-4 text-sm text-rose-900 mt-6 rounded-md shadow-sm">
+          <div className="bg-brick-red-50 border-l-4 border-brick-red-400 p-4 text-sm text-black mt-6 rounded-md shadow-sm">
             <p>
                The Microsoft CMT service was used for managing the peer-reviewing process 
                 for this conference. This service was provided for free by Microsoft and they 
@@ -136,27 +136,27 @@ const PapersPage = () => {
         </div>
 
         {/* Important Dates */}
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
           <div className="flex items-center gap-2 mb-4">
-            <Calendar className="h-5 w-5 text-rose-200" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-rose-50">Important Dates</h3>
+            <Calendar className="h-5 w-5 text-white" aria-hidden="true" />
+            <h3 className="text-lg font-semibold text-white">Important Dates</h3>
           </div>
-          <div className="space-y-3 text-rose-100/90">
+          <div className="space-y-3 text-white">
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Paper Submission Deadline</span>
-              <span className="font-semibold text-rose-200">December 20, 2025</span>
+              <span className="font-semibold text-white">December 20, 2025</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Author Notification</span>
-              <span className="font-semibold text-rose-200">January 20, 2026</span>
+              <span className="font-semibold text-white">January 20, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Camera-Ready Submission</span>
-              <span className="font-semibold text-rose-200">March 10, 2026</span>
+              <span className="font-semibold text-white">March 10, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2">
               <span>Conference Dates</span>
-              <span className="font-semibold text-rose-200">April 23-25, 2026</span>
+              <span className="font-semibold text-white">April 23-25, 2026</span>
             </div>
           </div>
         </div>
@@ -168,117 +168,117 @@ const PapersPage = () => {
     <div className="space-y-12">
       {/* Paper Template */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Paper Template</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Paper Template</h2>
         
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-8 ring-1 ring-inset ring-white/5">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-8 ring-1 ring-inset ring-white/5">
           <div className="flex items-center gap-3 mb-4">
-            <FileText className="h-6 w-6 text-rose-200" aria-hidden="true" />
-            <h3 className="text-xl font-semibold text-rose-50">PCSC 2026 Template</h3>
+            <FileText className="h-6 w-6 text-white" aria-hidden="true" />
+            <h3 className="text-xl font-semibold text-white">PCSC 2026 Template</h3>
           </div>
           
           <div className="space-y-4">
-            <p className="text-rose-100/90">
+            <p className="text-white">
               All papers must be formatted according to the official PCSC 2026 template. 
               The template ensures consistency and proper formatting for publication.
             </p>
             
-            <div className="bg-rose-50 border-l-4 border-rose-400 p-4 text-sm text-rose-900 rounded-md shadow-sm">
+            <div className="bg-brick-red-100 border-l-4 border-brick-red-400 p-4 text-sm text-black rounded-md shadow-sm">
               <p>
                 <strong>Template Download:</strong> The official PCSC 2026 template will be available for download soon. 
                 Please check back for updates.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            {/* <div className="flex flex-wrap gap-4">
               <a
                 href="#"
-                className="inline-flex items-center gap-2 rounded-md bg-rose-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
               >
                 <Download className="h-4 w-4" aria-hidden="true" />
                 Download Template
               </a>
               <a
-                href="https://pcsc.dlsu.edu.ph/"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-rose-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brick-red-200"
               >
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
                 Official Guidelines
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {/* Paper Formatting Requirements */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Formatting Requirements</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Formatting Requirements</h2>
         
         <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Page Length & Structure</h3>
-            <ul className="space-y-3 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
+            <h3 className="text-lg font-semibold text-white mb-4">Page Length & Structure</h3>
+            <ul className="space-y-3 text-white">
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-rose-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <CheckCircle className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <span><strong>Length:</strong> Minimum 6 pages, maximum 8 pages (including references)</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-rose-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <CheckCircle className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <span><strong>Format:</strong> Use the official PCSC 2026 template</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-rose-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <CheckCircle className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <span><strong>Language:</strong> English only</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-rose-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <CheckCircle className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <span><strong>File Format:</strong> PDF only</span>
               </li>
             </ul>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Content Structure</h3>
-            <ul className="space-y-3 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
+            <h3 className="text-lg font-semibold text-white mb-4">Content Structure</h3>
+            <ul className="space-y-3 text-white">
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   1
                 </span>
                 <span><strong>Abstract:</strong> 150-250 words summarizing the paper</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   2
                 </span>
                 <span><strong>Keywords:</strong> 3-5 relevant keywords</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   3
                 </span>
                 <span><strong>Introduction:</strong> Problem statement and motivation</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   4
                 </span>
                 <span><strong>Methodology:</strong> Research approach and methods</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   5
                 </span>
                 <span><strong>Results:</strong> Findings and analysis</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   6
                 </span>
                 <span><strong>Conclusion:</strong> Summary and future work</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   7
                 </span>
                 <span><strong>References:</strong> Properly formatted citations</span>
@@ -290,17 +290,17 @@ const PapersPage = () => {
 
       {/* Double-Blind Review Guidelines */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Double-Blind Review Guidelines</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Double-Blind Review Guidelines</h2>
         
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
           <div className="flex items-center gap-2 mb-4">
-            <AlertCircle className="h-5 w-5 text-rose-200" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-rose-50">Important: Double-Blind Review Process</h3>
+            <AlertCircle className="h-5 w-5 text-white" aria-hidden="true" />
+            <h3 className="text-lg font-semibold text-white">Important: Double-Blind Review Process</h3>
           </div>
           
-          <ul className="space-y-4 text-rose-100/90">
+          <ul className="space-y-4 text-white">
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 1
               </span>
               <span>
@@ -308,7 +308,7 @@ const PapersPage = () => {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 2
               </span>
               <span>
@@ -316,7 +316,7 @@ const PapersPage = () => {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 3
               </span>
               <span>
@@ -324,7 +324,7 @@ const PapersPage = () => {
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                 4
               </span>
               <span>
@@ -337,38 +337,38 @@ const PapersPage = () => {
 
       {/* Submission Process */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Submission Process</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Submission Process</h2>
         
         <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Step-by-Step Submission</h3>
-            <ol className="space-y-4 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
+            <h3 className="text-lg font-semibold text-white mb-4">Step-by-Step Submission</h3>
+            <ol className="space-y-4 text-white">
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-500 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   1
                 </span>
                 <span>Download and format your paper using the PCSC 2026 template</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-500 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   2
                 </span>
                 <span>Ensure your paper follows double-blind review guidelines</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-500 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   3
                 </span>
                 <span>Submit your paper through the CMT submission portal (to be announced)</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-500 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   4
                 </span>
                 <span>Wait for notification of acceptance/rejection</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-500 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   5
                 </span>
                 <span>If accepted, submit camera-ready version with author information</span>
@@ -376,9 +376,9 @@ const PapersPage = () => {
             </ol>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Review Process</h3>
-            <div className="space-y-3 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
+            <h3 className="text-lg font-semibold text-white mb-4">Review Process</h3>
+            <div className="space-y-3 text-white">
               <p>
                 <strong>Peer Review:</strong> Each paper will be reviewed by at least two independent reviewers.
               </p>
@@ -402,21 +402,21 @@ const PapersPage = () => {
     <div className="space-y-12">
       {/* Current Proceedings */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">PCSC 2026 Proceedings</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">PCSC 2026 Proceedings</h2>
         
-        <div className="rounded-lg border border-white/10 bg-rose-950/40 p-8 ring-1 ring-inset ring-white/5">
+        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-8 ring-1 ring-inset ring-white/5">
           <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="h-6 w-6 text-rose-200" aria-hidden="true" />
-            <h3 className="text-xl font-semibold text-rose-50">Conference Proceedings</h3>
+            <BookOpen className="h-6 w-6 text-white" aria-hidden="true" />
+            <h3 className="text-xl font-semibold text-white">Conference Proceedings</h3>
           </div>
           
           <div className="space-y-4">
-            <p className="text-rose-100/90">
+            <p className="text-white">
               The proceedings for PCSC 2026 will be published and made available after the conference. 
               All accepted papers will be included in the official conference proceedings.
             </p>
             
-            <div className="bg-rose-50 border-l-4 border-rose-400 p-4 text-sm text-rose-900 rounded-md shadow-sm">
+            <div className="bg-brick-red-100 border-l-4 border-brick-red-400 p-4 text-sm text-black rounded-md shadow-sm">
               <p>
                 <strong>Note:</strong> Proceedings will be available for download after the conference concludes. 
                 Registered participants will receive access to the digital proceedings.
@@ -427,94 +427,79 @@ const PapersPage = () => {
       </div>
 
       {/* Previous Proceedings */}
-      <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Previous Proceedings</h2>
+      {/* <div data-animate="item">
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Previous Proceedings</h2>
         
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-rose-200" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-rose-50">PCSC 2025</h3>
+              <FileText className="h-5 w-5 text-white" aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-white">PCSC 2025</h3>
             </div>
-            <p className="text-rose-100/90 mb-4">
+            <p className="text-white mb-4">
               Proceedings from the 25th Philippine Computing Science Congress.
             </p>
             <a
               href="#"
-              className="inline-flex items-center gap-2 text-rose-400 hover:text-rose-300 transition-colors underline underline-offset-4"
+              className="inline-flex items-center gap-2 text-brick-red-400 hover:text-brick-red-300 transition-colors underline underline-offset-4"
             >
               View Proceedings
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-rose-200" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-rose-50">PCSC 2024</h3>
+              <FileText className="h-5 w-5 text-white" aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-white">PCSC 2024</h3>
             </div>
-            <p className="text-rose-100/90 mb-4">
+            <p className="text-white mb-4">
               Proceedings from the 24th Philippine Computing Science Congress.
             </p>
             <a
               href="#"
-              className="inline-flex items-center gap-2 text-rose-400 hover:text-rose-300 transition-colors underline underline-offset-4"
+              className="inline-flex items-center gap-2 text-brick-red-400 hover:text-brick-red-300 transition-colors underline underline-offset-4"
             >
               View Proceedings
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Publication Information */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-rose-50 mb-8">Publication Information</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Publication Information</h2>
         
         <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Publication Details</h3>
-            <ul className="space-y-3 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
+            <h3 className="text-lg font-semibold text-white mb-4">Publication Details</h3>
+            <ul className="space-y-3 text-white">
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   1
                 </span>
                 <span>All accepted papers will be published in the conference proceedings</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   2
                 </span>
                 <span>Proceedings will be available in digital format for registered participants</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   3
                 </span>
                 <span>Selected papers may be invited for publication in special issues of journals</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   4
                 </span>
                 <span>Authors retain copyright of their work while granting conference publication rights</span>
               </li>
             </ul>
-          </div>
-
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Access Information</h3>
-            <div className="space-y-3 text-rose-100/90">
-              <p>
-                <strong>Digital Access:</strong> Proceedings will be available for download through the conference platform.
-              </p>
-              <p>
-                <strong>Physical Copies:</strong> Limited physical copies may be available for purchase at the conference venue.
-              </p>
-              <p>
-                <strong>Archive:</strong> All proceedings will be archived and accessible through the CSP website.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -714,14 +699,14 @@ const PapersPage = () => {
   };
 
   return (
-    <div className="pt-20 bg-rose-900">
+    <div className="pt-20 bg-brick-red-600">
       <PageHero title="Call for Papers"/>
 
       <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-        <section ref={sectionRef} className="text-rose-50">
+        <section ref={sectionRef} className="text-white">
           {/* Tab Navigation */}
           <div className="mb-12" data-animate="item">
-            <div className="flex flex-wrap justify-center gap-2 bg-rose-950/40 p-2 rounded-lg border border-white/10">
+            <div className="flex flex-wrap justify-center gap-2 bg-brick-red-800 p-2 rounded-lg border border-white/10">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -731,7 +716,7 @@ const PapersPage = () => {
                     className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold transition-all duration-200 ${
                       activeTab === tab.id
                         ? 'bg-rose-500 text-white shadow-lg'
-                        : 'text-rose-200 hover:text-rose-100 hover:bg-rose-800/40'
+                        : 'text-white hover:text-white hover:bg-brick-red-700'
                     }`}
                     aria-label={`Switch to ${tab.label} tab`}
                   >

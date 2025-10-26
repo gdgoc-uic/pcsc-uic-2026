@@ -179,8 +179,8 @@ export const SiteHeader = () => {
     <header
       ref={headerRef}
       className={`${isMobileMenuOpen ? 'fixed' : 'absolute'} top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
-        isHomePage ? "bg-transparent" : "bg-rose-950"
-      } ${isMobileMenuOpen ? 'bg-rose-950' : ''}`}
+        isHomePage ? "bg-transparent" : "bg-brick-red-800"
+      } ${isMobileMenuOpen ? 'bg-brick-red-800' : ''}`}
     >
       <div className="mx-auto w-full px-6 h-20 flex items-center justify-between">
         <Link
@@ -212,7 +212,7 @@ export const SiteHeader = () => {
             <Link
               key={link.href}
               href={link.href}
-              className="px-2 py-1 hover:text-rose-300 transition-colors"
+              className="px-2 py-1 hover:text-brick-red-300 transition-colors"
             >
               {link.label}
             </Link>
@@ -222,7 +222,7 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-2 sm:gap-4">
           <Link ref={ctaRef}
             href="/registration"
-            className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-rose-400 font-semibold hover:bg-rose-300 transition-colors focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 whitespace-nowrap"
+            className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-brick-red-600 font-semibold hover:bg-brick-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brick-red-300 focus:ring-offset-2 whitespace-nowrap"
             aria-label="Register Now"
             tabIndex={0}
           >
@@ -230,10 +230,10 @@ export const SiteHeader = () => {
           </Link>
           <button 
             ref={mobileMenuBtnRef}
-            className={`lg:hidden text-white hover:text-rose-300 transition-colors duration-200 p-2 bg-rose-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
+            className={`lg:hidden text-white hover:text-white transition-colors duration-200 p-2 bg-brick-red-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
               isMobileMenuOpen 
-                ? 'bg-rose-500' 
-                : 'bg-rose-600'
+                ? 'bg-brick-red-600' 
+                : 'bg-brick-red-600'
             }`}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
@@ -263,7 +263,7 @@ export const SiteHeader = () => {
       {/* Mobile Menu Dropdown */}
       <div 
         ref={mobileMenuRef}
-        className={`lg:hidden fixed top-20 left-0 right-0 bg-rose-950 border-b border-white shadow-lg transition-all duration-300 ease-out transform max-h-[calc(100vh-5rem)] overflow-y-auto ${
+        className={`lg:hidden fixed top-20 left-0 right-0 bg-brick-red-600 border-b border-white shadow-lg transition-all duration-300 ease-out transform max-h-[calc(100vh-5rem)] overflow-y-auto ${
           isMobileMenuOpen 
             ? 'opacity-100 translate-y-0 visible' 
             : 'opacity-0 -translate-y-2 invisible'
@@ -276,7 +276,7 @@ export const SiteHeader = () => {
             <Link 
               key={link.href} 
               href={link.href} 
-              className={`block px-3 py-3 text-lg font-semibold text-white hover:text-rose-300 hover:bg-rose-800 rounded transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
+              className={`block px-3 py-3 text-lg font-semibold text-white hover:text-white hover:bg-brick-red-800 rounded transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
                 isMobileMenuOpen 
                   ? 'translate-y-0 opacity-100' 
                   : 'translate-y-2 opacity-0'

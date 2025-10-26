@@ -151,14 +151,14 @@ export const AreaOfInterest = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="areas-of-interest" className="bg-rose-900 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="areas-of-interest" className="bg-brick-red-600 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-rose-100/80 text-lg max-w-3xl mx-auto">
+          <p className="text-white text-lg max-w-3xl mx-auto">
             Explore the diverse topics and research areas covered at PCSC 2026
           </p>
-          <p className="text-rose-100/80 text-lg max-w-3xl mx-auto mb-4">
+          <p className="text-white/80 text-lg max-w-3xl mx-auto mb-4">
             (But are Not Limited to)
           </p>
         </div>

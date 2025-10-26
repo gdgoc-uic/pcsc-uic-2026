@@ -253,7 +253,7 @@ export const Hero = () => {
       </div>
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-rose-900/60"></div>
+      <div className="absolute inset-0 bg-brick-red-600/50"></div>
       
       <div className="relative mx-auto max-w-full px-3 sm:px-6 pt-24 pb-16 sm:pb-32 min-h-screen flex flex-col justify-end">
         {/* Main Content */}
@@ -299,7 +299,7 @@ export const Hero = () => {
                 href="/registration"
                 ref={registerBtnRef}
                 aria-label="Register for PCSC 2026"
-                className="group inline-flex items-center justify-center gap-2 bg-white text-rose-900 px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="group inline-flex items-center justify-center gap-2 bg-white text-brick-red-600 px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 Register Now
                 <ArrowUpRight ref={registerIconRef} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform" />

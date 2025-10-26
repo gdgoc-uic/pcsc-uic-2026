@@ -10,7 +10,6 @@ type TravelTip = {
   icon: ReactNode;
   title: string;
   details: string;
-  tone: "blue" | "green" | "amber" | "rose";
 };
 
 const travelTips: TravelTip[] = [
@@ -22,7 +21,7 @@ const travelTips: TravelTip[] = [
   },
   {
     icon: <Car className="h-5 w-5" />,
-    title: "By Car/Taxi",
+    title: "By Taxi / GrabCar",
     details: "Search for 'University of the Immaculate Conception – Bajada Campus'. Taxi and ride-sharing services available at airport terminal.",
     tone: "green",
   },
@@ -40,12 +39,6 @@ const travelTips: TravelTip[] = [
   },
 ];
 
-const toneColors: Record<TravelTip["tone"], string> = {
-  blue: "bg-rose-500/20 border-rose-400/30 text-rose-100",
-  green: "bg-rose-500/20 border-rose-400/30 text-rose-100",
-  amber: "bg-rose-500/20 border-rose-400/30 text-rose-100",
-  rose: "bg-rose-500/20 border-rose-400/30 text-rose-100",
-};
 
 export const Venue = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -137,11 +130,11 @@ export const Venue = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="venue" className="bg-rose-900 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="venue" className="bg-brick-red-600 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-12 text-center">
-          <p className="text-rose-100/80 text-base sm:text-lg max-w-3xl mx-auto">
+          <p className="text-white text-base sm:text-lg max-w-3xl mx-auto">
             Join us at the University of the Immaculate Conception - Bajada Campus, Davao City
           </p>
         </div>
@@ -152,22 +145,21 @@ export const Venue = () => {
             {/* Address Card */}
             <div
               ref={addressCardRef}
-              className="relative overflow-hidden rounded-lg border border-white/10 bg-rose-500/20 p-6"
+              className="relative overflow-hidden rounded-lg border border-white/10 bg-rose-800 p-6"
               role="group"
               tabIndex={0}
               aria-label="Venue address and location details"
             >
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-rose-200 mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" aria-hidden="true" />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 break-words">University of the Immaculate Conception - Bajada Campus</h3>
-                  <p className="text-xs sm:text-sm text-rose-100/80 mt-1 break-words">J.P. Laurel Ave, Bajada, Davao City, Philippines</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-white break-words">University of the Immaculate Conception - Bajada Campus</h3>
+                  <p className="text-xs sm:text-sm text-white mt-1 break-words">J.P. Laurel Ave, Bajada, Davao City, Philippines</p>
                 </div>
-                <Building2 className="h-5 w-5 text-rose-200 flex-shrink-0 hidden sm:block" aria-hidden="true" />
               </div>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-rose-100/90">
-                <div className="rounded-md border border-white/10 bg-rose-900/30 p-3">Accessible gates along J.P. Laurel Ave</div>
-                <div className="rounded-md border border-white/10 bg-rose-900/30 p-3">Conference halls signposted on-site</div>
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-white">
+                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">Accessible gates along J.P. Laurel Ave</div>
+                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">Conference halls signposted on-site</div>
               </div>
             </div>
 
@@ -176,7 +168,7 @@ export const Venue = () => {
               {travelTips.map((tip, i) => (
                 <div
                   key={i}
-                  className={`relative rounded-lg border backdrop-blur-sm p-5 transition-all duration-300 ${toneColors[tip.tone]}`}
+                  className={`relative rounded-lg border backdrop-blur-sm p-5 transition-all duration-300 bg-brick-red-800 border-brick-red-400/20 text-white`}
                   role="group"
                   tabIndex={0}
                   aria-label={`${tip.title}: ${tip.details}`}
@@ -197,7 +189,7 @@ export const Venue = () => {
           {/* Right: Map/Illustration */}
           <div
             ref={mapCardRef}
-            className="relative rounded-lg border border-white/10 bg-rose-500/20 p-5 min-h-72"
+            className="relative rounded-lg border border-white/10 bg-rose-800 p-5 min-h-72"
             aria-label="Map placeholder to the venue"
           >
             <div className="h-full w-full rounded-md border border-white/10 bg-rose-900/30">

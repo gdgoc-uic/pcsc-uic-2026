@@ -300,7 +300,7 @@ export default function VenuePage() {
   }, []);
 
   return (
-    <main className="pt-20 min-h-screen bg-rose-900 text-rose-50">
+    <main className="pt-20 min-h-screen bg-brick-red-600 text-white">
       <PageHero 
         title="Venue" 
       />
@@ -310,8 +310,8 @@ export default function VenuePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4 flex-wrap gap-3">
-              <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-rose-300 flex-shrink-0" />
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-rose-50 leading-tight">
+              <MapPin className="h-6 w-6 sm:h-8 sm:w-8 text-white flex-shrink-0" />
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight">
                 <span className="block sm:inline">University of the Immaculate Conception</span>
                 <span className="block sm:inline sm:ml-1">- Bajada Campus</span>
               </h2>
@@ -319,7 +319,7 @@ export default function VenuePage() {
           </div>
           
           {/* Embedded Map */}
-          <div className="bg-rose-800/20 rounded-xl p-4 md:p-6 border border-rose-700/30 shadow-xl animate-item">
+          <div className="bg-brick-red-800 rounded-xl p-4 md:p-6 border border-brick-red-700 shadow-xl animate-item">
             <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.214541205031!2d125.61870867566523!3d7.101115792902217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96c4fc4bfbf1f%3A0x41426f341bce07d5!2sUniversity%20of%20the%20Immaculate%20Conception%20-%20Bajada%20Campus!5e0!3m2!1sen!2sph!4v1761402242791!5m2!1sen!2sph" 
@@ -338,24 +338,24 @@ export default function VenuePage() {
 
 
       {/* Airport Information */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-rose-800/10">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Directions from Airport</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Directions from Airport</h2>
           </div>
           
-          <div ref={airportSectionRef} className="bg-rose-800/30 border border-rose-600/30 rounded-xl overflow-hidden">
+          <div ref={airportSectionRef} className="bg-brick-red-800 border border-brick-red-600 rounded-xl overflow-hidden">
             {/* Route Header */}
-            <div ref={routeHeaderRef} className="bg-rose-900/40 border-b border-rose-600/30 p-4 sm:p-6">
+            <div ref={routeHeaderRef} className="bg-brick-red-800 border-b border-brick-red-600 p-4 sm:p-6">
               <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4">
                 <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                  <div ref={timeRef} className="bg-rose-700/40 rounded-lg px-3 sm:px-4 py-2">
+                  <div ref={timeRef} className="bg-brick-red-700 rounded-lg px-3 sm:px-4 py-2">
                     <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-rose-200" />
-                      <span className="text-lg sm:text-2xl font-bold text-rose-50">12 min</span>
+                      <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                      <span className="text-lg sm:text-2xl font-bold text-white">12 min</span>
                     </div>
                   </div>
-                  <div ref={transportRef} className="text-rose-200/80 text-xs sm:text-sm">
+                  <div ref={transportRef} className="text-white text-xs sm:text-sm">
                     via Taxi or GrabCar
                   </div>
                 </div>
@@ -368,65 +368,63 @@ export default function VenuePage() {
               <div className="flex items-start gap-3 sm:gap-4 mb-6">
                 <div className="flex flex-col items-center">
                   <div ref={startPointRef} className="w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/30 flex-shrink-0"></div>
-                  <div ref={arrowRef} className="w-0.5 h-16 bg-rose-600/40 my-1"></div>
+                  <div ref={arrowRef} className="w-0.5 h-16 bg-brick-red-400 my-1"></div>
                 </div>
                 <div className="flex-1 pt-0 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <Plane className="h-4 w-4 text-rose-300 flex-shrink-0" />
-                    <span className="text-xs text-rose-300 uppercase tracking-wide font-medium">Starting point</span>
+                    <Plane className="h-4 w-4 text-white flex-shrink-0" />
+                    <span className="text-xs text-white uppercase tracking-wide font-medium">Starting point</span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-semibold text-rose-50">Francis Bangoy International Airport</h3>
-                  <p className="text-sm text-rose-200/70 mt-1">Davao City</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-white">Francis Bangoy International Airport</h3>
+                  <p className="text-sm text-white mt-1">Davao City</p>
                 </div>
               </div>
 
               {/* Destination Point */}
               <div className="flex items-start gap-3 sm:gap-4">
                 <div className="flex flex-col items-center">
-                  <div ref={endPointRef} className="w-3 h-3 rounded-full bg-rose-400 ring-4 ring-rose-400/30 flex-shrink-0"></div>
+                  <div ref={endPointRef} className="w-3 h-3 rounded-full bg-brick-red-400 ring-4 ring-brick-red-400/30 flex-shrink-0"></div>
                 </div>
                 <div ref={descriptionRef} className="flex-1 pt-0 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="h-4 w-4 text-rose-300 flex-shrink-0" />
-                    <span className="text-xs text-rose-300 uppercase tracking-wide font-medium">Destination</span>
+                    <MapPin className="h-4 w-4 text-white flex-shrink-0" />
+                    <span className="text-xs text-white uppercase tracking-wide font-medium">Destination</span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-semibold text-rose-50 leading-tight">
+                  <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
                     <span className="block sm:inline">University of the Immaculate Conception</span>
                     <span className="block sm:inline sm:ml-1">- Bajada Campus</span>
                   </h3>
-                  <p className="text-sm text-rose-200/70 mt-1">J.P. Laurel Ave, Bajada, Davao City</p>
+                  <p className="text-sm text-white mt-1">J.P. Laurel Ave, Bajada, Davao City</p>
                 </div>
               </div>
             </div>
 
             {/* Transportation Info */}
-            <div ref={transportInfoRef} className="bg-rose-900/30 border-t border-rose-600/30 p-4">
-              <div className="flex items-center gap-3 text-sm text-rose-200/80 mb-3">
-                <Car className="h-4 w-4 text-rose-300" />
+            <div ref={transportInfoRef} className="bg-brick-red-800 border-t border-brick-red-600 p-4">
+              <div className="flex items-center gap-3 text-sm text-white mb-3">
+                <Car className="h-4 w-4 text-white" />
                 <span>Taxi and ride-sharing services available at airport terminal</span>
               </div>
-              <div className="pt-3 border-t border-rose-600/20">
-                <p className="text-xs text-rose-200/60">
+              <div className="pt-3 border-t border-brick-red-600">
+                <p className="text-xs text-white">
                   <strong>Note:</strong> Travel time is approximate and may vary depending on traffic conditions, time of day, and route taken.
                 </p>
               </div>
             </div>
           </div>
         </div>
-
+      </section>
 
       {/* Nearby Hotels Section */}
-      </section>
-      
       <section ref={hotelsSectionRef} className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Accommodation</h2>
-            <p className="text-rose-200/80 text-base sm:text-lg max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Accommodation</h2>
+            <p className="text-white text-base sm:text-lg max-w-2xl mx-auto">
               Recommended hotels near the conference venue
             </p>
-            <div className="mt-6 inline-block bg-amber-900/20 border border-amber-700/30 px-5 py-3 rounded-lg">
-              <p className="text-amber-200 text-sm">
+            <div className="mt-6 inline-block bg-brick-red-800 border border-brick-red-600 px-5 py-3 rounded-lg">
+              <p className="text-white text-sm">
                 <strong>Note:</strong> Travel times are approximate and may vary based on traffic conditions.
               </p>
             </div>
@@ -439,20 +437,20 @@ export default function VenuePage() {
                 href={hotel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hotel-card group bg-rose-800/20 hover:bg-rose-700/30 border border-rose-700/30 hover:border-rose-600/50 rounded-lg p-5 transition-all duration-300 hover:shadow-lg"
+                className="hotel-card group bg-brick-red-800 hover:bg-brick-red-700 border border-brick-red-600 hover:border-brick-red-500 rounded-lg p-5 transition-all duration-300 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-rose-50 group-hover:text-rose-100 transition-colors mb-2">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-white transition-colors mb-2">
                       {hotel.name}
                     </h3>
-                    <p className="text-rose-200/70 text-sm mb-1">{hotel.distance}</p>
-                    <div className="flex items-center gap-1.5 text-rose-200/60 text-xs group-hover:text-rose-200/80 transition-colors">
+                    <p className="text-white text-sm mb-1">{hotel.distance}</p>
+                    <div className="flex items-center gap-1.5 text-white text-xs group-hover:text-white transition-colors">
                       <ExternalLink className="h-3.5 w-3.5" />
                       <span>View on map</span>
                     </div>
                   </div>
-                  <Building className="h-5 w-5 text-rose-300 flex-shrink-0 mt-1" />
+                  <Building className="h-5 w-5 text-white flex-shrink-0 mt-1" />
                 </div>
               </a>
             ))}
@@ -461,11 +459,11 @@ export default function VenuePage() {
       {/* Nearby Malls Section */}
       </section>
       
-      <section ref={amenitiesSectionRef} className="py-16 px-4 sm:px-6 lg:px-8 bg-rose-800/10">
+      <section ref={amenitiesSectionRef} className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-50 mb-4">Nearby Amenities</h2>
-            <p className="text-rose-200/80 text-base sm:text-lg max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Nearby Amenities</h2>
+            <p className="text-white text-base sm:text-lg max-w-2xl mx-auto">
               Shopping centers and dining options near the venue
             </p>
           </div>
@@ -477,24 +475,24 @@ export default function VenuePage() {
                 href={mall.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="amenity-card group bg-rose-800/20 hover:bg-rose-700/30 border border-rose-700/30 hover:border-rose-600/50 rounded-lg p-6 transition-all duration-300 hover:shadow-lg"
+                className="amenity-card group bg-brick-red-800 hover:bg-brick-red-700 border border-brick-red-600 hover:border-brick-red-500 rounded-lg p-6 transition-all duration-300 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-rose-50 group-hover:text-rose-100 transition-colors mb-3">
+                    <h3 className="text-xl font-semibold text-white group-hover:text-white transition-colors mb-3">
                       {mall.name}
                     </h3>
-                    <ul className="space-y-2 text-rose-200/80 text-sm mb-4">
+                    <ul className="space-y-2 text-white text-sm mb-4">
                       <li className="flex items-start gap-2">
-                        <span className="text-rose-300 mt-0.5">•</span>
+                        <span className="text-white mt-0.5">•</span>
                         <span>Dining and restaurants</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-rose-300 mt-0.5">•</span>
+                        <span className="text-white mt-0.5">•</span>
                         <span>Retail and convenience stores</span>
                       </li>
                     </ul>
-                    <div className="flex items-center gap-1.5 text-rose-200/60 text-xs group-hover:text-rose-200/80 transition-colors">
+                    <div className="flex items-center gap-1.5 text-white text-xs group-hover:text-white transition-colors">
                       <ExternalLink className="h-3.5 w-3.5" />
                       <span>View on map</span>
                     </div>

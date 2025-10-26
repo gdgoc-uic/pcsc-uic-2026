@@ -113,11 +113,11 @@ export const Programs = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="programs" className="bg-rose-900 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="programs" className="bg-brick-red-600 text-rose-50 py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 sm:mb-12">
-          <p className="text-rose-100/80 text-base sm:text-lg max-w-3xl text-center mx-auto">
-          The 26th Philippine Computing Science Congress is organized by the <a href="https://csp.org.ph/" target="_blank" rel="noopener noreferrer" className="text-rose-200 underline">Computing Society of the Philippines</a> to enable local 
+          <p className="text-white text-base sm:text-lg max-w-3xl text-center mx-auto">
+          The 26th Philippine Computing Science Congress is organized by the <a href="https://csp.org.ph/" target="_blank" rel="noopener noreferrer" className="text-white underline">Computing Society of the Philippines</a> to enable local 
           and neighboring computing educators, researchers, information and communications technology (ICT) professionals, 
           and students to interact and share their work in computing, computer science, computational science, and ICT. 
           The conference features special lectures by prominent researchers and educators and contributed papers in ICT, computing, 
@@ -130,14 +130,14 @@ export const Programs = () => {
           {programSchedule.map((dayProgram) => (
             <div
               key={dayProgram.day}
-              className="group relative overflow-hidden bg-rose-500/20 rounded-lg cursor-pointer"
+              className="group relative overflow-hidden bg-brick-red-800 rounded-lg cursor-pointer"
             >
               <div className="relative p-6">
                 {/* Day Header */}
                 <div className="mb-6 border-b border-white/20 pb-4">
-                  <h3 className="text-2xl font-bold text-rose-50">{dayProgram.day}</h3>
+                  <h3 className="text-2xl font-bold text-white">{dayProgram.day}</h3>
                   {dayProgram.date && (
-                    <div className="mt-2 flex items-center gap-2 text-sm text-rose-200">
+                    <div className="mt-2 flex items-center gap-2 text-sm text-white">
                       <Calendar className="h-4 w-4" aria-hidden="true" />
                       <span>{dayProgram.date}</span>
                     </div>
@@ -149,13 +149,13 @@ export const Programs = () => {
                   {dayProgram.schedule.map((slot, index) => (
                     <div
                       key={`${dayProgram.day}-${index}`}
-                      className="rounded-lg border border-white/10 bg-rose-900/30 p-3 transition-colors hover:bg-rose-900/50"
+                      className="rounded-lg border border-white/10 bg-brick-red-600/30 p-3 transition-colors hover:bg-brick-red-600/50"
                     >
                       <div className="flex items-start gap-2">
-                        <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-rose-200" aria-hidden="true" />
+                        <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-white" aria-hidden="true" />
                         <div className="flex-1 min-w-0">
-                          <div className="text-xs font-semibold text-rose-200">{slot.time}</div>
-                          <div className="text-sm font-medium mt-1 leading-snug text-rose-100">
+                          <div className="text-xs font-semibold text-white">{slot.time}</div>
+                          <div className="text-sm font-medium mt-1 leading-snug text-white">
                             {slot.activity}
                           </div>
                         </div>
@@ -169,12 +169,12 @@ export const Programs = () => {
         </div>
 
         {/* Venue Info & CTA */}
-        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-lg border border-white/10 bg-rose-500/20 p-6">
+        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-lg border border-white/10 bg-brick-red-800 p-6">
           <div className="flex items-start gap-3">
-            <MapPin className="h-5 w-5 text-rose-200 mt-0.5 flex-shrink-0" aria-hidden="true" />
+            <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" aria-hidden="true" />
             <div>
-              <h4 className="text-sm font-semibold text-rose-50">Conference Venue</h4>
-              <p className="text-sm text-rose-100/80 mt-1">
+              <h4 className="text-sm font-semibold text-white">Conference Venue</h4>
+              <p className="text-sm text-white mt-1">
                 University of the Immaculate Conception (Bajada Campus), Davao City
               </p>
             </div>
@@ -182,7 +182,7 @@ export const Programs = () => {
           <Link
             href="/program"
             aria-label="View the detailed program schedule"
-            className="inline-flex items-center gap-2 rounded-md bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-rose-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+            className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brick-red-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brick-red-200"
           >
             View Full Program
             <span aria-hidden="true">→</span>

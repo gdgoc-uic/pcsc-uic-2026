@@ -37,11 +37,11 @@ export const CallforPapers = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="call-for-papers" className="bg-rose-900 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="call-for-papers" className="bg-brick-red-600 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-10 sm:mb-12" data-animate="item">
-          <p className="max-w-4xl text-rose-100/80 text-base sm:text-lg text-center mx-auto">
+          <p className="max-w-4xl text-white text-base sm:text-lg text-center mx-auto">
             The 26th Philippine Computing Science Congress is organized by the Computing Society of the Philippines
             to enable local and neighboring computing educators, researchers, ICT professionals, and students to
             interact and share their work.
@@ -51,17 +51,17 @@ export const CallforPapers = () => {
         {/* Content Sections */}
         <div className="space-y-6">
           {/* Submission Portal */}
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
             <div className="flex items-center gap-2 mb-3">
-              <ExternalLink className="h-5 w-5 text-rose-200" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-rose-50">Submission Portal</h3>
+              <ExternalLink className="h-5 w-5 text-white" aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-white">Submission Portal</h3>
             </div>
-            <p className="text-rose-100/90">
+            <p className="text-white">
               <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-rose-200 underline underline-offset-4 hover:text-rose-100 transition-colors"
+                className="inline-flex items-center gap-2 text-white underline underline-offset-4 hover:text-rose-100 transition-colors"
                 aria-label="Open CMT submission portal in a new tab"
               >
                 To be Announced...
@@ -71,29 +71,29 @@ export const CallforPapers = () => {
           </div>
 
           {/* Paper Template and Length */}
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
             <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="h-5 w-5 text-rose-200" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-rose-50">Paper Template & Length</h3>
+              <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-white">Paper Template & Length</h3>
             </div>
-            <p className="text-rose-100/90">
+            <p className="text-white">
               Papers should use the prescribed PCSC 2026 template and have a minimum of 6 pages and maximum of 8 pages,
               including references.
             </p>
           </div>
 
           {/* Double-Blind Peer Review Guidelines */}
-          <div className="rounded-lg border border-white/10 bg-rose-950/40 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
-            <h3 className="text-lg font-semibold text-rose-50 mb-4">Double-Blind Peer Review Guidelines</h3>
-            <ul className="space-y-3 text-rose-100/90">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5" data-animate="item">
+            <h3 className="text-lg font-semibold text-white mb-4">Double-Blind Peer Review Guidelines</h3>
+            <ul className="space-y-3 text-white">
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   1
                 </span>
                 <span>Name and affiliation of the Authors must be removed from the submitted manuscript.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   2
                 </span>
                 <span>
@@ -102,13 +102,13 @@ export const CallforPapers = () => {
                 </span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   3
                 </span>
                 <span>Do not include acknowledgment and funding sources.</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-rose-800/60 text-rose-200 text-xs font-semibold flex-shrink-0 mt-0.5">
+                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   4
                 </span>
                 <span>
@@ -119,7 +119,7 @@ export const CallforPapers = () => {
               </li>
             </ul>
 
-            <div className="bg-rose-50 border-l-4 border-rose-400 p-4 text-sm text-rose-900 mt-6 rounded-md shadow-sm">
+            <div className="bg-brick-red-600 border-l-4 border-brick-red-400 p-4 text-sm text-white mt-6 rounded-md shadow-sm">
               <p>
                 The Microsoft CMT service was used for managing the peer-reviewing process 
                 for this conference. This service was provided for free by Microsoft and they 
@@ -127,18 +127,6 @@ export const CallforPapers = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="mt-10 flex flex-wrap justify-center gap-4" data-animate="item">
-          <Link
-            href="/papers/author-guidelines"
-            className="inline-flex items-center gap-2 rounded-md bg-rose-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-            aria-label="View author guidelines"
-          >
-            <BookOpen className="h-5 w-5" aria-hidden="true" />
-            Author Guidelines
-          </Link>
         </div>
       </div>
     </section>
