@@ -16,29 +16,28 @@ const travelTips: TravelTip[] = [
   {
     icon: <Plane className="h-5 w-5" />,
     title: "By Air",
-    details: "Fly to Francis Bangoy International Airport (DIA). 12 minutes by taxi or GrabCar to campus.",
-    tone: "blue",
+    details:
+      "Fly to Francis Bangoy International Airport (DIA). 12 minutes by taxi or GrabCar to campus.",
   },
   {
     icon: <Car className="h-5 w-5" />,
     title: "By Taxi / GrabCar",
-    details: "Search for 'University of the Immaculate Conception – Bajada Campus'. Taxi and ride-sharing services available at airport terminal.",
-    tone: "green",
+    details:
+      "Search for 'University of the Immaculate Conception – Bajada Campus'. Taxi and ride-sharing services available at airport terminal.",
   },
   {
     icon: <Train className="h-5 w-5" />,
     title: "Public Transport",
-    details: "Local jeepney and bus routes stop along J.P. Laurel Ave. Short walk to the campus gate.",
-    tone: "amber",
+    details:
+      "Local jeepney and bus routes stop along J.P. Laurel Ave. Short walk to the campus gate.",
   },
   {
     icon: <Globe className="h-5 w-5" />,
     title: "Nearby Landmarks",
-    details: "Abreeza Ayala Malls and SM Lanang Premier are within 5–10 minutes for dining and shopping.",
-    tone: "rose",
+    details:
+      "Abreeza Ayala Malls and SM Lanang Premier are within 5–10 minutes for dining and shopping.",
   },
 ];
-
 
 export const Venue = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -63,7 +62,7 @@ export const Venue = () => {
               start: "top 80%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
@@ -82,7 +81,7 @@ export const Venue = () => {
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
 
       // Unified scroll-triggered entrance animation for map card
@@ -100,27 +99,42 @@ export const Venue = () => {
               start: "top 80%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
 
       // Unified hover animations for each card
       const cards = Array.from(cardsRef.current?.children || []);
       cards.forEach((card: Element) => {
-        const icon = card.querySelector('.icon-wrapper');
+        const icon = card.querySelector(".icon-wrapper");
         gsap.set(card, { transformOrigin: "center center" });
 
-        card.addEventListener('mouseenter', () => {
-          gsap.to(card, { scale: 1.03, y: -4, duration: 0.3, ease: "power2.out" });
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            scale: 1.03,
+            y: -4,
+            duration: 0.3,
+            ease: "power2.out",
+          });
           if (icon) {
-            gsap.to(icon, { scale: 1.08, rotation: 5, duration: 0.3, ease: "power2.out" });
+            gsap.to(icon, {
+              scale: 1.08,
+              rotation: 5,
+              duration: 0.3,
+              ease: "power2.out",
+            });
           }
         });
 
-        card.addEventListener('mouseleave', () => {
+        card.addEventListener("mouseleave", () => {
           gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
           if (icon) {
-            gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" });
+            gsap.to(icon, {
+              scale: 1,
+              rotation: 0,
+              duration: 0.3,
+              ease: "power2.out",
+            });
           }
         });
       });
@@ -130,12 +144,17 @@ export const Venue = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="venue" className="bg-brick-red-600 text-white py-16 sm:py-20">
+    <section
+      ref={sectionRef}
+      id="venue"
+      className="bg-brick-red-600 text-white py-16 sm:py-20"
+    >
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <div className="mb-12 text-center">
           <p className="text-white text-base sm:text-lg max-w-3xl mx-auto">
-            Join us at the University of the Immaculate Conception - Bajada Campus, Davao City
+            Join us at the University of the Immaculate Conception - Bajada
+            Campus, Davao City
           </p>
         </div>
 
@@ -151,20 +170,34 @@ export const Venue = () => {
               aria-label="Venue address and location details"
             >
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <MapPin
+                  className="h-5 w-5 text-white mt-0.5 flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base sm:text-lg font-semibold text-white break-words">University of the Immaculate Conception - Bajada Campus</h3>
-                  <p className="text-xs sm:text-sm text-white mt-1 break-words">J.P. Laurel Ave, Bajada, Davao City, Philippines</p>
+                  <h3 className="text-base sm:text-lg font-semibold text-white break-words">
+                    University of the Immaculate Conception - Bajada Campus
+                  </h3>
+                  <p className="text-xs sm:text-sm text-white mt-1 break-words">
+                    J.P. Laurel Ave, Bajada, Davao City, Philippines
+                  </p>
                 </div>
               </div>
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-white">
-                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">Accessible gates along J.P. Laurel Ave</div>
-                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">Conference halls signposted on-site</div>
+                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">
+                  Accessible gates along J.P. Laurel Ave
+                </div>
+                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">
+                  Conference halls signposted on-site
+                </div>
               </div>
             </div>
 
             {/* Travel Tips Grid */}
-            <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              ref={cardsRef}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
               {travelTips.map((tip, i) => (
                 <div
                   key={i}
@@ -174,10 +207,19 @@ export const Venue = () => {
                   aria-label={`${tip.title}: ${tip.details}`}
                 >
                   <div className="flex items-start gap-3">
-                    <div className="icon-wrapper p-2 rounded-full bg-white/10" aria-hidden="true">{tip.icon}</div>
+                    <div
+                      className="icon-wrapper p-2 rounded-full bg-white/10"
+                      aria-hidden="true"
+                    >
+                      {tip.icon}
+                    </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-semibold text-white">{tip.title}</h4>
-                      <p className="mt-1 text-sm leading-relaxed text-current opacity-90">{tip.details}</p>
+                      <h4 className="text-sm font-semibold text-white">
+                        {tip.title}
+                      </h4>
+                      <p className="mt-1 text-sm leading-relaxed text-current opacity-90">
+                        {tip.details}
+                      </p>
                     </div>
                   </div>
                   <div className="pointer-events-none absolute inset-0 rounded-lg border-2 border-transparent group-focus:border-current/50"></div>
