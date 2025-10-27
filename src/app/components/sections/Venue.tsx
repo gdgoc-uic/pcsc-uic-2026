@@ -1,8 +1,23 @@
 "use client";
-import { MapPin, Building2, Train, Car, Plane, Globe } from "lucide-react";
-import { useEffect, useRef, type ReactNode } from "react";
+import {
+  MapPin,
+  Train,
+  Car,
+  Plane,
+  Globe,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  type ReactNode,
+  useState,
+  useCallback,
+} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +26,24 @@ type TravelTip = {
   title: string;
   details: string;
 };
+
+const campusImages = [
+  {
+    src: "/images/campus/1.jpeg",
+    title: "Sto. Niño Building",
+    description: "Grade School Department",
+  },
+  {
+    src: "/images/campus/2.jpeg",
+    title: "Immaculate Heart Building",
+    description: "Junior High School Department",
+  },
+  {
+    src: "/images/campus/3.jpeg",
+    title: "Our Lady of Peace Building",
+    description: "Senior High School Department",
+  },
+];
 
 const travelTips: TravelTip[] = [
   {
@@ -45,6 +78,60 @@ export const Venue = () => {
   const cardsRef = useRef<HTMLDivElement>(null);
   const mapCardRef = useRef<HTMLDivElement>(null);
 
+  // Carousel state
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  // Optimized image transition animation
+  const animateImageTransition = useCallback((newIndex: number) => {
+    if (timelineRef.current) {
+      timelineRef.current.kill();
+    }
+
+    const tl = gsap.timeline({
+      defaults: { ease: "power2.inOut" },
+    });
+
+    imageRefs.current.forEach((ref, index) => {
+      if (!ref) return;
+      if (index === newIndex) {
+        tl.to(ref, { opacity: 1, duration: 0.6 }, 0);
+      } else {
+        tl.to(ref, { opacity: 0, duration: 0.6 }, 0);
+      }
+    });
+
+    timelineRef.current = tl;
+  }, []);
+
+  // Carousel handlers
+  const handleNextImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % campusImages.length);
+  }, []);
+
+  const handlePrevImage = useCallback(() => {
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + campusImages.length) % campusImages.length,
+    );
+  }, []);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        handlePrevImage();
+      } else if (e.key === "ArrowRight") {
+        handleNextImage();
+      }
+    },
+    [handleNextImage, handlePrevImage],
+  );
+
+  // Initial GSAP animations setup
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Unified scroll-triggered entrance animation for address card
@@ -138,10 +225,68 @@ export const Venue = () => {
           }
         });
       });
+
+      // Carousel initial setup
+      if (carouselRef.current) {
+        // Set all images to absolute positioning with proper stacking
+        imageRefs.current.forEach((ref, index) => {
+          if (ref) {
+            gsap.set(ref, {
+              opacity: index === 0 ? 1 : 0,
+              willChange: "opacity",
+            });
+          }
+        });
+
+        // Animate carousel entrance
+        gsap.fromTo(
+          carouselRef.current,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: carouselRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+
+  // Handle image transition when index changes
+  useEffect(() => {
+    animateImageTransition(currentImageIndex);
+  }, [currentImageIndex, animateImageTransition]);
+
+  // Keyboard navigation listener
+  useEffect(() => {
+    if (!carouselRef.current) return;
+
+    const carouselElement = carouselRef.current;
+    carouselElement.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      carouselElement.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isPlaying || isHovered) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % campusImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isPlaying, isHovered]);
 
   return (
     <section
@@ -158,84 +303,78 @@ export const Venue = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left: Address + Travel Tips */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Address Card */}
+        <div className="space-y-6 lg:space-y-8">
+          {/* Top Row: Carousel and Map */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            {/* Campus Carousel */}
             <div
-              ref={addressCardRef}
-              className="relative overflow-hidden rounded-lg border border-white/10 bg-rose-800 p-6"
-              role="group"
+              ref={carouselRef}
+              className="relative rounded-xl border border-white/10 bg-rose-800/90 backdrop-blur-sm min-h-[320px] md:min-h-[380px] lg:min-h-[460px] shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
+              aria-label="Campus images carousel"
+              aria-live="polite"
+              aria-atomic="true"
               tabIndex={0}
-              aria-label="Venue address and location details"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <div className="flex items-start gap-3">
-                <MapPin
-                  className="h-5 w-5 text-white mt-0.5 flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base sm:text-lg font-semibold text-white break-words">
-                    University of the Immaculate Conception - Bajada Campus
-                  </h3>
-                  <p className="text-xs sm:text-sm text-white mt-1 break-words">
-                    J.P. Laurel Ave, Bajada, Davao City, Philippines
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-white">
-                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">
-                  Accessible gates along J.P. Laurel Ave
-                </div>
-                <div className="rounded-md border border-white/10 bg-brick-red-700 p-3">
-                  Conference halls signposted on-site
-                </div>
-              </div>
-            </div>
-
-            {/* Travel Tips Grid */}
-            <div
-              ref={cardsRef}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-              {travelTips.map((tip, i) => (
-                <div
-                  key={i}
-                  className={`relative rounded-lg border backdrop-blur-sm p-5 transition-all duration-300 bg-brick-red-800 border-brick-red-400/20 text-white`}
-                  role="group"
-                  tabIndex={0}
-                  aria-label={`${tip.title}: ${tip.details}`}
-                >
-                  <div className="flex items-start gap-3">
+              <div className="relative h-[320px] md:h-[380px] lg:h-[460px] w-full">
+                  {/* Images */}
+                  {campusImages.map((image, index) => (
                     <div
-                      className="icon-wrapper p-2 rounded-full bg-white/10"
-                      aria-hidden="true"
+                      key={index}
+                      ref={(el) => {
+                        imageRefs.current[index] = el;
+                      }}
+                      className="absolute top-0 left-0 w-full h-full"
                     >
-                      {tip.icon}
+                      <Image
+                        src={image.src}
+                        alt={image.title}
+                        fill
+                        className="object-cover"
+                        priority={index === 0}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4 z-10">
+                        <h3 className="text-white font-semibold text-lg mb-1 drop-shadow-lg">
+                          {image.title}
+                        </h3>
+                        <p className="text-white/95 text-sm drop-shadow-md">
+                          {image.description}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-semibold text-white">
-                        {tip.title}
-                      </h4>
-                      <p className="mt-1 text-sm leading-relaxed text-current opacity-90">
-                        {tip.details}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pointer-events-none absolute inset-0 rounded-lg border-2 border-transparent group-focus:border-current/50"></div>
-                </div>
-              ))}
-            </div>
-          </div>
+                  ))}
 
-          {/* Right: Map/Illustration */}
-          <div
-            ref={mapCardRef}
-            className="relative rounded-lg border border-white/10 bg-rose-800 p-5 min-h-72"
-            aria-label="Map placeholder to the venue"
-          >
-            <div className="h-full w-full rounded-md border border-white/10 bg-rose-900/30">
-              <div className="relative h-[300px] sm:h-[360px] lg:h-[420px] w-full overflow-hidden rounded-md">
+                  {/* Navigation Controls */}
+                  <div className="absolute inset-y-0 left-0 flex items-center p-2 z-20">
+                    <button
+                      onClick={handlePrevImage}
+                      className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
+                    </button>
+                  </div>
+
+                  <div className="absolute inset-y-0 right-0 flex items-center p-2 z-10">
+                    <button
+                      onClick={handleNextImage}
+                      className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
+                    </button>
+                  </div>
+                </div>
+            </div>
+
+            {/* Map */}
+            <div
+              ref={mapCardRef}
+              className="relative rounded-xl border border-white/10 bg-rose-800/90 backdrop-blur-sm min-h-[320px] md:min-h-[380px] lg:min-h-[460px] shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
+            >
+              <div className="relative h-[320px] md:h-[380px] lg:h-[460px] w-full overflow-hidden rounded-xl">
                 <iframe
                   title="University of the Immaculate Conception - Bajada Campus map"
                   className="absolute inset-0 h-full w-full"
@@ -246,6 +385,74 @@ export const Venue = () => {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Address Card - Full Width */}
+          <div
+            ref={addressCardRef}
+            className="relative overflow-hidden rounded-xl border border-white/10 bg-rose-800/90 backdrop-blur-sm p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            role="group"
+            tabIndex={0}
+            aria-label="Venue address and location details"
+          >
+            <div className="flex items-start gap-4">
+              <div className="p-2.5 rounded-full bg-white/10">
+                <MapPin
+                  className="h-6 w-6 text-white flex-shrink-0"
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-xl font-semibold text-white break-words">
+                  University of the Immaculate Conception - Bajada Campus
+                </h3>
+                <p className="text-sm sm:text-base text-white/90 mt-2 break-words">
+                  J.P. Laurel Ave, Bajada, Davao City, Philippines
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-white">
+              <div className="rounded-lg border border-white/10 bg-brick-red-700/50 backdrop-blur-sm p-3.5 hover:bg-brick-red-700/70 transition-colors duration-200">
+                Accessible gates along J.P. Laurel Ave
+              </div>
+              <div className="rounded-lg border border-white/10 bg-brick-red-700/50 backdrop-blur-sm p-3.5 hover:bg-brick-red-700/70 transition-colors duration-200">
+                Conference halls signposted on-site
+              </div>
+            </div>
+          </div>
+
+          {/* Travel Tips Grid - Full Width */}
+          <div
+            ref={cardsRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6"
+          >
+            {travelTips.map((tip, i) => (
+              <div
+                key={i}
+                className="relative rounded-xl border backdrop-blur-sm p-5 transition-all duration-300 bg-brick-red-800/80 border-white/10 text-white shadow-md hover:shadow-lg"
+                role="group"
+                tabIndex={0}
+                aria-label={`${tip.title}: ${tip.details}`}
+              >
+                <div className="flex items-start gap-3.5">
+                  <div
+                    className="icon-wrapper p-2.5 rounded-full bg-white/10"
+                    aria-hidden="true"
+                  >
+                    {tip.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-base font-semibold text-white mb-2">
+                      {tip.title}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-white/90">
+                      {tip.details}
+                    </p>
+                  </div>
+                </div>
+                <div className="pointer-events-none absolute inset-0 rounded-xl border-2 border-transparent group-focus:border-white/50 transition-colors duration-200"></div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

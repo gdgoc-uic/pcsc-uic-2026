@@ -379,33 +379,106 @@ export default function VenuePage() {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* About UIC Section */}
       <section ref={mapSectionRef} className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-              Campus Location
+              About
             </h2>
           </div>
 
-          {/* Embedded Map */}
-          <div className="bg-brick-red-800 rounded-xl p-4 md:p-6 border border-brick-red-700 shadow-xl animate-item">
-            <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.214541205031!2d125.61870867566523!3d7.101115792902217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96c4fc4bfbf1f%3A0x41426f341bce07d5!2sUniversity%20of%20the%20Immaculate%20Conception%20-%20Bajada%20Campus!5e0!3m2!1sen!2sph!4v1761402242791!5m2!1sen!2sph"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* About Content */}
+            <div className="space-y-6 animate-item">
+              {/* Hero Image */}
+              <div className="relative rounded-xl overflow-hidden shadow-xl">
+                <img
+                  src="/images/campus/main.jpg"
+                  alt="University of the Immaculate Conception - Main Campus"
+                  className="w-full h-64 sm:h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="text-white font-bold text-xl sm:text-2xl drop-shadow-lg">
+                    University of the Immaculate Conception
+                  </h3>
+                </div>
+              </div>
+
+              {/* Hook Text */}
+              <div className="bg-brick-red-800/50 rounded-xl p-6 border border-brick-red-700">
+                <p className="text-white text-lg sm:text-xl leading-relaxed font-medium">
+                  119 years of Transformative Ignacian Marian Service and
+                  Commitment to Christian Education. Producer of top-notch
+                  graduates in the fields of allied health, technology,
+                  engineering and architecture, education, music, and the arts.
+                </p>
+              </div>
+
+              {/* Main About Text */}
+              <div className="space-y-4 text-white/95 text-sm sm:text-base leading-relaxed">
+                <p>
+                  The University of the Immaculate Conception (UIC), the first
+                  Catholic school in Davao City, has crossed the centennial
+                  threshold as an educational institution.
+                </p>
+
+                <p>
+                  UIC was founded by the Religious of the Virgin Mary (RVM) in
+                  1905 as the St. Peter Parochial School, initially offering
+                  only primary and intermediate courses. In 1934, the school
+                  opened a secondary department and assumed the name Immaculate
+                  Conception Academy. With the first batch of high school
+                  graduates in 1938, it was renamed Immaculate Conception
+                  Institute.
+                </p>
+
+                <p>
+                  It was granted University Status in 1992; it has remained
+                  steadfast in its mission to provide Christian and quality
+                  education relevant to the demands of the time and focused its
+                  vision on a transformed society where persons live their
+                  dignity as children of God.
+                </p>
+
+                <p>
+                  Existing now for over a hundred years, UIC is recognized as a
+                  premier and leading University in Davao City, Philippines.
+                  With its banner: Allied Health, Science and Technology,
+                  Information Technology, Engineering, Education, and the Arts
+                  and Sciences, UIC is moving towards ASEAN integration,
+                  internationalization, and innovation as its contribution to
+                  transformative education geared towards continuous excellence
+                  and life-long learning with a purpose.
+                </p>
+              </div>
             </div>
-            <div className="mt-4 text-center">
-              <p className="text-white text-sm">
-                <strong>Address:</strong> J.P. Laurel Ave, Bajada, Davao City,
-                Philippines
-              </p>
+
+            {/* Map Section */}
+            <div className="animate-item">
+              <div className="bg-brick-red-800 rounded-xl p-4 md:p-6 border border-brick-red-700 shadow-xl">
+                <h3 className="text-white text-lg sm:text-xl font-semibold mb-4 text-center">
+                  Campus Location
+                </h3>
+                <div className="aspect-square rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.214541205031!2d125.61870867566523!3d7.101115792902217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f96c4fc4bfbf1f%3A0x41426f341bce07d5!2sUniversity%20of%20the%20Immaculate%20Conception%20-%20Bajada%20Campus!5e0!3m2!1sen!2sph!4v1761402242791!5m2!1sen!2sph"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="mt-4 text-center">
+                  <p className="text-white text-sm">
+                    <strong>Address:</strong> J.P. Laurel Ave, Bajada, Davao
+                    City, Philippines
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
