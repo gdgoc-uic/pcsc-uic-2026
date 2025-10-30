@@ -232,33 +232,36 @@ const PapersPage = () => {
               template. The template ensures consistency and proper formatting
               for publication.
             </p>
-
-            <div className="bg-brick-red-100 border-l-4 border-brick-red-400 p-4 text-sm text-black rounded-md shadow-sm">
-              <p>
-                <strong>Template Download:</strong> The official PCSC 2026
-                template will be available for download soon. Please check back
-                for updates.
-              </p>
-            </div>
-
-            {/* <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               <a
-                href="#"
+                href="/PCSC2026%20Paper%20Template.docx"
+                download
                 className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Download PCSC 2026 Word template as DOCX"
               >
                 <Download className="h-4 w-4" aria-hidden="true" />
-                Download Template
+                MS Word Template
               </a>
               <a
-                href="#"
+                href="/PCSC2026%20LaTeX%20Template.zip"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Download PCSC 2026 LaTeX template as ZIP"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                LaTeX Template (ZIP)
+              </a>
+              <a
+                href="/PCSC2026%20Paper%20Template.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brick-red-200"
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-700/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Open PCSC 2026 template PDF preview in a new tab"
               >
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                Official Guidelines
+                Preview PDF
               </a>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { FileText, BookOpen, GraduationCap, ExternalLink } from "lucide-react";
+import { FileText, BookOpen, GraduationCap, ExternalLink, Download } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,6 +99,36 @@ export const CallforPapers = () => {
               Papers should use the prescribed PCSC 2026 template and have a
               minimum of 6 pages and maximum of 8 pages, including references.
             </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <a
+                href="/PCSC2026%20Paper%20Template.docx"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Download PCSC 2026 Word template as DOCX"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                MS Word Template
+              </a>
+              <a
+                href="/PCSC2026%20LaTeX%20Template.zip"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Download PCSC 2026 LaTeX template as ZIP"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                LaTeX Template (ZIP)
+              </a>
+              <a
+                href="/PCSC2026%20Paper%20Template.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md bg-brick-red-700/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
+                aria-label="Open PCSC 2026 template PDF preview in a new tab"
+              >
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                Preview PDF
+              </a>
+            </div>
           </div>
 
           {/* Double-Blind Peer Review Guidelines */}
