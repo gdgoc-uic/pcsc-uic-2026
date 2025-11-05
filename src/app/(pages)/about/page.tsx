@@ -129,6 +129,15 @@ const AboutPage = () => {
                   </div>
                 </li>
                 <li className="flex gap-3 sm:gap-4 items-start">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-brick-red-600 to-brick-red-800 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
+                    JC
+                  </div>
+                  <div className="flex flex-col gap-1 min-w-0">
+                    <span className="font-semibold text-white text-sm sm:text-base">Workshop Committee Chair</span>
+                    <span className="text-sm sm:text-base break-words">Prof. Jhon Bryan Cantil, MIT</span>
+                  </div>
+                </li>
+                <li className="flex gap-3 sm:gap-4 items-start">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-brick-red-500 to-brick-red-700 flex-shrink-0 flex items-center justify-center text-white text-base sm:text-xl font-bold">
                     MB
                   </div>

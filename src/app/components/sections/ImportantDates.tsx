@@ -41,8 +41,14 @@ const importantDates: ImportantDate[] = [
   },
   {
     title: "Call for Workshop Submission Deadline",
-    date: "November 20, 2025",
-    description: "November 20, 2025",
+    date: "December 20, 2025",
+    description: "December 20, 2025",
+    category: "deadline",
+  },
+  {
+    title: "Workshop Notification",
+    date: "January 20, 2026",
+    description: "January 20, 2026",
     category: "deadline",
   },
   {
