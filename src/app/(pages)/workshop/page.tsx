@@ -42,6 +42,14 @@ const workshops: Workshop[] = [
       { name: "Henry Adorna", affiliation: "Computing Society of the Philippines" }
     ],
   },
+  {
+    id: 4,
+    title: "PCSC Programming Compiitition",
+    objective: "Programming Competition organized by the Computing Society of the Philippines – Special Interest Group for Women in Computing. The event will be held at the University of the Immaculate Conception, Davao City on April 23, 2026 from 1:30 – 3:30 PM. Each school may send at most 2 teams of 3 female students per team. Each team should be represented by aEach team should be represented by a coach.",
+    organizers: [
+      { name: "Computing Society of the Philippines – Special Interest Group for Women in Computing.", affiliation: "" }
+    ]
+  },
 ];
 
 const getInitials = (name: string): string => {
