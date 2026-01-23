@@ -187,12 +187,12 @@ const PapersPage = () => {
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Paper Submission Deadline</span>
               <span className="font-semibold text-white">
-                December 20, 2025
+                January 31, 2026
               </span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Author Notification</span>
-              <span className="font-semibold text-white">January 20, 2026</span>
+              <span className="font-semibold text-white">February 20, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Camera-Ready Submission</span>
