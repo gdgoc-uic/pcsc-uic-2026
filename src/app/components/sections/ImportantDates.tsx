@@ -17,8 +17,8 @@ type ImportantDate = {
 const importantDates: ImportantDate[] = [
   {
     title: "Paper Submission for Main Conference Deadline",
-    date: "January 20, 2026",
-    description: "January 20, 2026",
+    date: "January 31, 2026",
+    description: "January 31, 2026",
     category: "deadline",
   },
   {
