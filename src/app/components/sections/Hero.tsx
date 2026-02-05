@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowUpRight, Calendar, MapPin, Clock, Users, Globe } from "lucide-react";
+import { ArrowUpRight, Calendar, MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,8 +19,7 @@ const heroImages = [
 export const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const zoomTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -71,7 +70,7 @@ export const Hero = () => {
           el.textContent = "";
           el.setAttribute("aria-label", textContent.trim());
           
-          words.forEach((word, wIdx) => {
+          words.forEach((word) => {
             const wordSpan = document.createElement("span");
             wordSpan.textContent = word;
             wordSpan.setAttribute("aria-hidden", "true");
@@ -84,7 +83,9 @@ export const Hero = () => {
         };
 
         // build words in visual reading order: first line then second line
-        lineSpans.forEach((line) => splitTextToWords(line as HTMLElement));
+        lineSpans.forEach((line) => {
+          splitTextToWords(line as HTMLElement)
+        });
 
         if (createdWords.length) {
           const wordsTween = gsap.fromTo(createdWords,
@@ -296,7 +297,8 @@ export const Hero = () => {
           {/* Event Details & CTA */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <Link
-                href="/registration"
+                href="https://forms.gle/hqxPkvvTMph5UgTg8"
+                target="_blank"
                 ref={registerBtnRef}
                 aria-label="Register for PCSC 2026"
                 className="group inline-flex items-center justify-center gap-2 bg-white text-brick-red-600 px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"

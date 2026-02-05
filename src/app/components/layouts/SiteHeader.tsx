@@ -222,14 +222,15 @@ export const SiteHeader = () => {
 
         <div className="flex items-center gap-2 sm:gap-4">
           <Link ref={ctaRef}
-            href="/registration"
+            href="https://forms.gle/hqxPkvvTMph5UgTg8"
+            target="_blank"
             className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-brick-red-600 font-semibold hover:bg-brick-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brick-red-300 focus:ring-offset-2 whitespace-nowrap"
             aria-label="Register Now"
             tabIndex={0}
           >
             REGISTER NOW
           </Link>
-          <button 
+          <button type="button"
             ref={mobileMenuBtnRef}
             className={`lg:hidden text-white hover:text-white transition-colors duration-200 p-2 bg-brick-red-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
               isMobileMenuOpen 
@@ -269,7 +270,7 @@ export const SiteHeader = () => {
             ? 'opacity-100 translate-y-0 visible' 
             : 'opacity-0 -translate-y-2 invisible'
         }`}
-        role="navigation"
+        role="menu"
         aria-label="Mobile navigation"
       >
         <div className="px-6 py-4 space-y-1">
