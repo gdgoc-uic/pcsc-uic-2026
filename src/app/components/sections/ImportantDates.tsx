@@ -23,14 +23,14 @@ const importantDates: ImportantDate[] = [
   },
   {
     title: "Author Notification for Main Conference",
-    date: "February 20, 2026",
-    description: "February 20, 2026",
+    date: "March 9, 2026",
+    description: "March 9, 2026",
     category: "deadline",
   },
   {
     title: "Camera-ready deadline",
-    date: "March 10, 2026",
-    description: "March 10, 2026",
+    date: "March 23, 2026",
+    description: "March 23, 2026",
     category: "deadline",
   },
   {
@@ -46,21 +46,15 @@ const importantDates: ImportantDate[] = [
     category: "deadline",
   },
   {
-    title: "Workshop Notification",
-    date: "January 20, 2026",
-    description: "January 20, 2026",
-    category: "deadline",
-  },
-  {
     title: "Early Bird Registration Deadline",
-    date: "February 28, 2026",
-    description: "February 28, 2026",
+    date: "March 23, 2026",
+    description: "March 23, 2026",
     category: "registration",
   },
   {
     title: "Regular Registration",
-    date: "March 14, 2026",
-    description: "March 14, 2026",
+    date: "March 24, 2026",
+    description: "March 24, 2026",
     category: "registration",
   },
   {
