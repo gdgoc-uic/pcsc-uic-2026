@@ -192,11 +192,11 @@ const PapersPage = () => {
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Author Notification</span>
-              <span className="font-semibold text-white">February 20, 2026</span>
+              <span className="font-semibold text-white">March 9, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-white/10">
               <span>Camera-Ready Submission</span>
-              <span className="font-semibold text-white">March 10, 2026</span>
+              <span className="font-semibold text-white">March 23, 2026</span>
             </div>
             <div className="flex justify-between items-center py-2">
               <span>Conference Dates</span>
