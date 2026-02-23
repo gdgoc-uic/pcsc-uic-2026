@@ -52,9 +52,15 @@ const importantDates: ImportantDate[] = [
     category: "registration",
   },
   {
-    title: "Regular Registration",
-    date: "March 24, 2026",
-    description: "March 24, 2026",
+    title: "Author Registration Deadline",
+    date: "March 30, 2026",
+    description: "March 30, 2026",
+    category: "registration",
+  },
+  {
+    title: "Regular Registration Deadline",
+    date: "March 30, 2026",
+    description: "March 30, 2026",
     category: "registration",
   },
   {
