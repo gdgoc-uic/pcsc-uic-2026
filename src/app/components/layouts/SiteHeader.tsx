@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useRef, useState, useEffect } from "react";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -89,7 +89,11 @@ export const SiteHeader = () => {
           .to(headerRef.current, { y: 0, opacity: 1, duration: 0.45 })
           .to(logoRef.current, { y: 0, opacity: 1 }, "-=0.3")
           .to(navAnchors, { y: 0, opacity: 1, stagger: 0.05 }, "-=0.25")
-          .to([ctaRef.current, mobileMenuBtnRef.current], { y: 0, opacity: 1 }, "-=0.3");
+          .to(
+            [ctaRef.current, mobileMenuBtnRef.current],
+            { y: 0, opacity: 1 },
+            "-=0.3",
+          );
       };
 
       const onHeadlineDone = () => play();
@@ -142,33 +146,33 @@ export const SiteHeader = () => {
     if (isMobileMenuOpen) {
       // Prevent body scroll when menu is open - comprehensive approach for all browsers
       const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscapeKey);
     } else {
       // Restore body scroll when menu is closed
       const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
       }
     }
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -179,10 +183,23 @@ export const SiteHeader = () => {
   return (
     <header
       ref={headerRef}
-      className={`${isMobileMenuOpen ? 'fixed' : 'absolute'} top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
+      className={`${isMobileMenuOpen ? "fixed" : "absolute"} top-0 left-0 right-0 z-50 border-b border-white transition-all duration-500 ease-out ${
         isHomePage ? "bg-transparent" : "bg-brick-red-800"
-      } ${isMobileMenuOpen ? 'bg-brick-red-800' : ''}`}
+      } ${isMobileMenuOpen ? "bg-brick-red-800" : ""}`}
     >
+      {/* Announcement banner */}
+      <div className="bg-rose-700/90 backdrop-blur-sm border-b border-white/20 text-white text-xs sm:text-sm py-2 px-4 flex items-center justify-center gap-x-2 gap-y-0 overflow-hidden">
+        <span className="font-semibold text-rose-100 whitespace-nowrap">
+          ACCEPTED PAPERS FOR PCSC 2026 ARE OUT!
+        </span>
+        <Link
+          href="/papers"
+          className="underline underline-offset-2 font-semibold text-rose-50 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/60 rounded whitespace-nowrap"
+          aria-label="View the list of accepted full and short papers for PCSC 2026"
+        >
+          View Papers →
+        </Link>
+      </div>
       <div className="mx-auto w-full px-6 h-20 flex items-center justify-between">
         <Link
           ref={logoRef}
@@ -190,7 +207,7 @@ export const SiteHeader = () => {
           className="flex items-center gap-2 text-white font-bold text-base sm:text-lg md:text-xl"
           aria-label="PCSC 2026 Home"
         >
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center shrink-0">
             <img
               src="/icon.png"
               alt="PCSC 2026 Logo"
@@ -221,7 +238,8 @@ export const SiteHeader = () => {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-4">
-          <Link ref={ctaRef}
+          <Link
+            ref={ctaRef}
             href="https://forms.gle/hqxPkvvTMph5UgTg8"
             target="_blank"
             className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-brick-red-600 font-semibold hover:bg-brick-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brick-red-300 focus:ring-offset-2 whitespace-nowrap"
@@ -230,12 +248,11 @@ export const SiteHeader = () => {
           >
             REGISTER NOW
           </Link>
-          <button type="button"
+          <button
+            type="button"
             ref={mobileMenuBtnRef}
             className={`lg:hidden text-white hover:text-white transition-colors duration-200 p-2 bg-brick-red-600 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 ${
-              isMobileMenuOpen 
-                ? 'bg-brick-red-600' 
-                : 'bg-brick-red-600'
+              isMobileMenuOpen ? "bg-brick-red-600" : "bg-brick-red-600"
             }`}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMobileMenuOpen}
@@ -243,19 +260,19 @@ export const SiteHeader = () => {
             tabIndex={0}
           >
             <div className="relative w-6 h-6 flex items-center justify-center">
-              <Menu 
+              <Menu
                 className={`absolute w-5 h-5 transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen 
-                    ? 'opacity-0 rotate-45 scale-75' 
-                    : 'opacity-100 rotate-0 scale-100'
-                }`} 
+                  isMobileMenuOpen
+                    ? "opacity-0 rotate-45 scale-75"
+                    : "opacity-100 rotate-0 scale-100"
+                }`}
               />
-              <X 
+              <X
                 className={`absolute w-5 h-5 transition-all duration-300 ease-in-out ${
-                  isMobileMenuOpen 
-                    ? 'opacity-100 rotate-0 scale-100' 
-                    : 'opacity-0 -rotate-45 scale-75'
-                }`} 
+                  isMobileMenuOpen
+                    ? "opacity-100 rotate-0 scale-100"
+                    : "opacity-0 -rotate-45 scale-75"
+                }`}
               />
             </div>
           </button>
@@ -263,28 +280,28 @@ export const SiteHeader = () => {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <div 
+      <div
         ref={mobileMenuRef}
-        className={`lg:hidden fixed top-20 left-0 right-0 bg-brick-red-600 border-b border-white shadow-lg transition-all duration-300 ease-out transform max-h-[calc(100vh-5rem)] overflow-y-auto ${
-          isMobileMenuOpen 
-            ? 'opacity-100 translate-y-0 visible' 
-            : 'opacity-0 -translate-y-2 invisible'
+        className={`lg:hidden fixed top-[116px] left-0 right-0 bg-brick-red-600 border-b border-white shadow-lg transition-all duration-300 ease-out transform max-h-[calc(100vh-116px)] overflow-y-auto ${
+          isMobileMenuOpen
+            ? "opacity-100 translate-y-0 visible"
+            : "opacity-0 -translate-y-2 invisible"
         }`}
         role="menu"
         aria-label="Mobile navigation"
       >
         <div className="px-6 py-4 space-y-1">
           {navLinks.map((link, index) => (
-            <Link 
-              key={link.href} 
-              href={link.href} 
+            <Link
+              key={link.href}
+              href={link.href}
               className={`block px-3 py-3 text-lg font-semibold text-white hover:text-white hover:bg-brick-red-800 rounded transition-all duration-300 ease-out focus:outline-none focus:ring-2 focus:ring-rose-300 focus:ring-offset-2 transform ${
-                isMobileMenuOpen 
-                  ? 'translate-y-0 opacity-100' 
-                  : 'translate-y-2 opacity-0'
+                isMobileMenuOpen
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-2 opacity-0"
               }`}
               style={{
-                transitionDelay: isMobileMenuOpen ? `${index * 80}ms` : '0ms'
+                transitionDelay: isMobileMenuOpen ? `${index * 80}ms` : "0ms",
               }}
               onClick={handleMobileMenuClose}
               tabIndex={0}

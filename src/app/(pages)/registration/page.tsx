@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function RegistrationPage() {
   return (
-    <main className="pt-20 min-h-screen bg-rose-900 text-rose-50">
+    <main className="pt-[116px] min-h-screen bg-rose-900 text-rose-50">
       <PageHero title="Registration" />
       <section className="mx-auto max-w-7xl px-6 py-10">
         <div className="text-center">

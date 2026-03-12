@@ -2,8 +2,9 @@ import Link from "next/link";
 
 const links = [
   { href: "/program", label: "Program" },
-  { href: "/venue", label: "Venue" },
   { href: "/papers", label: "Papers" },
+  { href: "/accepted-papers", label: "Accepted Papers" },
+  { href: "/venue", label: "Venue" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact Us" },
 ];

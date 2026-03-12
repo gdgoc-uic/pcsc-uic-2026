@@ -2,7 +2,7 @@ import PageHero from "@/app/components/sections/PageHero";
 
 const ContactPage = () => {
   return (
-    <div className="pt-20 bg-brick-red-600">
+    <div className="pt-[116px] bg-brick-red-600">
       <PageHero title="Contact Us" />
 
       <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
