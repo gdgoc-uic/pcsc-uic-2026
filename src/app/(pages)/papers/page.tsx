@@ -505,7 +505,7 @@ const PaperTable = ({ papers, query }: PaperTableProps) => {
 
   if (filtered.length === 0)
     return (
-      <p className="text-white/60 text-sm py-6 text-center">
+      <p className="text-white/80 text-sm py-6 text-center">
         No papers match your search.
       </p>
     );
@@ -515,7 +515,7 @@ const PaperTable = ({ papers, query }: PaperTableProps) => {
       {/* Desktop table */}
       <div className="hidden md:block overflow-x-auto rounded-lg border border-white/10">
         <table className="w-full text-sm text-left">
-          <thead className="bg-brick-red-950/60 text-white/70 uppercase text-xs tracking-wider">
+          <thead className="bg-brick-red-800/80 text-white/85 uppercase text-xs tracking-wider">
             <tr>
               <th className="px-4 py-3 w-16 font-semibold">ID</th>
               <th className="px-4 py-3 font-semibold">Title</th>
@@ -528,7 +528,7 @@ const PaperTable = ({ papers, query }: PaperTableProps) => {
                 key={paper.id}
                 className="bg-brick-red-800/60 hover:bg-brick-red-700/60 transition-colors"
               >
-                <td className="px-4 py-4 text-white/50 font-mono text-xs font-medium align-top">
+                <td className="px-4 py-4 text-white/70 font-mono text-xs font-medium align-top">
                   {paper.id}
                 </td>
                 <td className="px-4 py-4 text-white font-medium align-top leading-snug">
@@ -551,7 +551,7 @@ const PaperTable = ({ papers, query }: PaperTableProps) => {
             className="rounded-lg border border-white/10 bg-brick-red-800/60 p-4 ring-1 ring-inset ring-white/5"
           >
             <div className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-10 rounded bg-brick-red-600/60 text-white/60 text-xs font-mono font-semibold flex-shrink-0 mt-0.5">
+              <span className="inline-flex items-center justify-center h-6 w-10 rounded bg-brick-red-600/60 text-white/80 text-xs font-mono font-semibold flex-shrink-0 mt-0.5">
                 #{paper.id}
               </span>
               <div className="min-w-0 space-y-2">
@@ -1236,7 +1236,7 @@ const PapersPage = () => {
       <div data-animate="item">
         <div className="relative max-w-xl">
           <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50"
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/70"
             aria-hidden="true"
           />
           <input
@@ -1268,7 +1268,7 @@ const PapersPage = () => {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">Full Papers</h2>
-            <p className="text-white/50 text-sm">{fullPapers.length} accepted</p>
+            <p className="text-white/70 text-sm">{fullPapers.length} accepted</p>
           </div>
         </div>
         <PaperTable papers={fullPapers} query={query} />
@@ -1282,7 +1282,7 @@ const PapersPage = () => {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">Short Papers</h2>
-            <p className="text-white/50 text-sm">{shortPapers.length} accepted</p>
+            <p className="text-white/70 text-sm">{shortPapers.length} accepted</p>
           </div>
         </div>
         <PaperTable papers={shortPapers} query={query} />
@@ -1306,7 +1306,7 @@ const PapersPage = () => {
   };
 
   return (
-    <div className="pt-[116px] bg-brick-red-600">
+    <div className="pt-[116px] bg-brick-red-950">
       <PageHero
         title={heroMeta[activeTab].title}
         description={heroMeta[activeTab].description}

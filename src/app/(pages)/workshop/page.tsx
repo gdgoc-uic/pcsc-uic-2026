@@ -79,7 +79,7 @@ const getInitials = (name: string): string => {
 
 const WorkshopPage = () => {
   return (
-    <div className="pt-[116px] bg-brick-red-600">
+    <div className="pt-[116px] bg-brick-red-950">
       <PageHero
         title="Workshops"
         description="Explore specialized workshops designed to provide hands-on learning experiences and foster collaboration among researchers and practitioners."

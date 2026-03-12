@@ -360,7 +360,7 @@ export default function VenuePage() {
   }, []);
 
   return (
-    <main className="pt-[116px] min-h-screen bg-brick-red-600 text-white">
+    <main className="pt-[116px] min-h-screen bg-brick-red-950 text-white">
       <PageHero title="Venue" />
 
       {/* Campus Carousel Section */}

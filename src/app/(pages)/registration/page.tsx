@@ -50,7 +50,7 @@ const FeeTable = ({ rows }: { rows: FeeRow[] }) => (
             {row.label}
           </span>
           {row.note && (
-            <p className="text-white/60 text-xs mt-0.5">{row.note}</p>
+            <p className="text-white/80 text-xs mt-0.5">{row.note}</p>
           )}
         </div>
         <span className="text-white font-bold text-base sm:text-lg whitespace-nowrap">
@@ -87,7 +87,7 @@ const RegisterButton = () => (
 
 export default function RegistrationPage() {
   return (
-    <main className="pt-[116px] min-h-screen bg-brick-red-600 text-white">
+    <main className="pt-[116px] min-h-screen bg-brick-red-950 text-white">
       <PageHero
         title="Registration"
         description="Participants, paper presenters, and authors for the PCSC Main Conference and Student Research Workshop must register for the conference."
@@ -104,7 +104,7 @@ export default function RegistrationPage() {
             >
               Option 1: Main Conference and Workshop
             </h2>
-            <p className="text-white/70 text-sm">April 23 – 25, 2026</p>
+            <p className="text-white/85 text-sm">April 23 – 25, 2026</p>
           </div>
 
           <div className="space-y-6">
@@ -113,7 +113,7 @@ export default function RegistrationPage() {
               <h3 className="text-base sm:text-lg font-semibold text-rose-200 mb-3 flex items-center gap-2">
                 <span className="inline-block w-2.5 h-2.5 rounded-full bg-rose-300" />
                 Early Bird
-                <span className="text-white/60 font-normal text-sm">
+                <span className="text-white/80 font-normal text-sm">
                   — on or before March 23, 2026
                 </span>
               </h3>
@@ -125,7 +125,7 @@ export default function RegistrationPage() {
               <h3 className="text-base sm:text-lg font-semibold text-rose-200 mb-3 flex items-center gap-2">
                 <span className="inline-block w-2.5 h-2.5 rounded-full bg-white/50" />
                 Regular Registration
-                <span className="text-white/60 font-normal text-sm">
+                <span className="text-white/80 font-normal text-sm">
                   — March 30, 2026 onwards
                 </span>
               </h3>
@@ -154,7 +154,7 @@ export default function RegistrationPage() {
             >
               Option 2: Workshop Only — Day 1
             </h2>
-            <p className="text-white/70 text-sm">April 23, 2026</p>
+            <p className="text-white/85 text-sm">April 23, 2026</p>
           </div>
 
           <div className="space-y-6">
@@ -198,7 +198,7 @@ export default function RegistrationPage() {
 
         {/* CTA */}
         <div className="text-center pt-2">
-          <p className="text-white/70 text-sm mb-5">
+          <p className="text-white/85 text-sm mb-5">
             Click the button below to complete your registration via Google
             Forms.
           </p>

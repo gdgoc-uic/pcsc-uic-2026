@@ -151,7 +151,7 @@ export const AreaOfInterest = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="areas-of-interest" className="bg-brick-red-600 text-white py-16 sm:py-20">
+    <section ref={sectionRef} id="areas-of-interest" className="bg-brick-red-950 text-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <div className="text-center mb-16">

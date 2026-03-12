@@ -114,7 +114,7 @@ const ProgramPage = () => {
   }, []);
 
   return (
-    <div className="pt-[116px] bg-brick-red-600">
+    <div className="pt-[116px] bg-brick-red-950">
       <PageHero title="Program" />
 
       <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">

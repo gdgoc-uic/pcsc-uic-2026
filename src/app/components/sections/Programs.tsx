@@ -113,7 +113,7 @@ export const Programs = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="programs" className="bg-brick-red-600 text-rose-50 py-16 sm:py-20">
+    <section ref={sectionRef} id="programs" className="bg-brick-red-950 text-rose-50 py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 sm:mb-12">
           <p className="text-white text-base sm:text-lg max-w-3xl text-center mx-auto">

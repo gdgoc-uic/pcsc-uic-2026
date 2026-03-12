@@ -43,7 +43,7 @@ export const CallforPapers = () => {
     <section
       ref={sectionRef}
       id="call-for-papers"
-      className="bg-brick-red-600 text-white py-16 sm:py-20"
+      className="bg-brick-red-950 text-white py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
