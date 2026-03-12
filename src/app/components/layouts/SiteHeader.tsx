@@ -240,8 +240,7 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-2 sm:gap-4">
           <Link
             ref={ctaRef}
-            href="https://forms.gle/hqxPkvvTMph5UgTg8"
-            target="_blank"
+            href="/registration"
             className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-brick-red-600 font-semibold hover:bg-brick-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brick-red-300 focus:ring-offset-2 whitespace-nowrap"
             aria-label="Register Now"
             tabIndex={0}

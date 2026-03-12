@@ -297,8 +297,7 @@ export const Hero = () => {
           {/* Event Details & CTA */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <Link
-                href="https://forms.gle/hqxPkvvTMph5UgTg8"
-                target="_blank"
+                href="/registration"
                 ref={registerBtnRef}
                 aria-label="Register for PCSC 2026"
                 className="group inline-flex items-center justify-center gap-2 bg-white text-brick-red-600 px-5 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-sm sm:text-lg transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
