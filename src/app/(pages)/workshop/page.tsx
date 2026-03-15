@@ -20,7 +20,7 @@ const workshops: Workshop[] = [
     title: "Transforming HCI Research in the Philippines Workshop 2026",
     objective:
       "The workshop aims to catalyze and advance Human-Computer Interaction (HCI) research in the Philippines by fostering collaboration and knowledge exchange among researchers and practitioners. By bringing together diverse perspectives and experiences, we aim to explore innovative approaches and solutions to contemporary HCI challenges in the Philippine context.",
-    website: "https://sigchimnl.org/chirp/chirp2025/",
+    website: "https://sigchimnl.org/chirp/chirp2026/",
     organizers: [
       { name: "Briane Paul Samson", affiliation: "De La Salle University" },
       { name: "Jordan Aiko Deja", affiliation: "De La Salle University" },
