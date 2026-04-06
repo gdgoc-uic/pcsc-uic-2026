@@ -135,12 +135,7 @@ const programSchedule: DayProgram[] = [
         badge: "Closing",
         eventType: "featured",
         speakerName: "Election Results · Special Awards",
-      },
-      {
-        time: "12:30PM – 1:30PM",
-        activity: "Lunch Break",
-        eventType: "break",
-      },
+      }
     ],
   },
 ];
