@@ -163,18 +163,6 @@ export const Programs = () => {
         }
       );
 
-      const cards = Array.from(cardsRef.current?.children || []);
-      cards.forEach((card: Element) => {
-        gsap.set(card, { transformOrigin: "center center" });
-
-        card.addEventListener("mouseenter", () => {
-          gsap.to(card, { scale: 1.03, y: -4, duration: 0.3, ease: "power2.out" });
-        });
-
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
-        });
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -207,7 +195,7 @@ export const Programs = () => {
             return (
               <div
                 key={dayProgram.dayNumber}
-                className="group relative overflow-hidden bg-brick-red-800 rounded-xl cursor-pointer"
+                className="relative overflow-hidden bg-brick-red-800 rounded-xl"
               >
                 <div className="relative p-6 flex flex-col h-full">
                   {/* Day Header */}
