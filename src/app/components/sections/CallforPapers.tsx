@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { FileText, BookOpen, GraduationCap, ExternalLink, Download } from "lucide-react";
+import { FileText, BookOpen, GraduationCap, ExternalLink, Download, Award } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,6 +58,32 @@ export const CallforPapers = () => {
 
         {/* Content Sections */}
         <div className="space-y-6">
+          {/* Accepted Papers CTA */}
+          <div
+            className="rounded-lg border border-white/20 bg-white/10 p-6 ring-1 ring-inset ring-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            data-animate="item"
+          >
+            <div className="flex items-start gap-3">
+              <Award className="h-6 w-6 text-white flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <h3 className="text-lg font-semibold text-white">
+                  Accepted Papers
+                </h3>
+                <p className="text-white/80 text-sm mt-1">
+                  View the list of papers accepted for PCSC 2026.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/papers"
+              className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-brick-red-900 transition hover:bg-rose-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white flex-shrink-0"
+              aria-label="View accepted papers for PCSC 2026"
+            >
+              <FileText className="h-4 w-4" aria-hidden="true" />
+              View Accepted Papers
+            </Link>
+          </div>
+
           {/* Submission Portal */}
           <div
             className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
