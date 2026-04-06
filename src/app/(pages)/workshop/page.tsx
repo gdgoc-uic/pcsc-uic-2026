@@ -51,7 +51,7 @@ const workshops: Workshop[] = [
     title: "Generative AI in Education",
     objective:
       "This workshop provides educators with a grounded understanding of generative AI’s mechanics to effectively navigate its rapid impact on student learning and research. By identifying specific opportunities and risks, participants will learn to design educational activities that harness AI as a learning enhancement rather than a replacement for human effort. Ultimately, the session moves beyond the extremes of ineffective bans or uncritical use, equipping educators with practical strategies to integrate these tools while strictly preserving academic integrity and the development of critical thinking skills.",
-    website: "Launching Soon",
+    website: "- - -",
     organizers: [
       { name: "Thomas James Tiam-Lee", affiliation: "De La Salle University" }
     ],
