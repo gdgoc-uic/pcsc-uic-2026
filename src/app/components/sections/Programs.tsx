@@ -258,13 +258,6 @@ export const Programs = () => {
                       );
                     })}
                   </div>
-
-                  {/* Hidden count */}
-                  {hiddenCount > 0 && (
-                    <p className="mt-3 text-sm text-white/30 text-center">
-                      +{hiddenCount} more event{hiddenCount !== 1 ? "s" : ""}
-                    </p>
-                  )}
                 </div>
               </div>
             );
