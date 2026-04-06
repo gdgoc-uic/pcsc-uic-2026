@@ -1,0 +1,9 @@
+Computer Vision Applications Across Disciplines
+
+Speaker: Dr. John Jethro Virtusio  
+Balik Scientist.  
+Faculty member, De La Salle University, College of Computer Studies.  
+**Bio**   
+Dr. John is a researcher under the Center for Computational Imaging and Visual Innovations (CIVI) and a faculty member at the De La Salle University, College of Computer Studies. He earned both his Master's and PhD in Computer Science from the National Taiwan University of Science and Technology (NTUST), where his research contributions were recognized with the prestigious CTCI Research Performance Scholarship Award. After his PhD program, he worked in the industry as an AI engineer where he led two automation projects focused on industrial applications. Notably, one of his projects—a manufacturing co-pilot system designed to minimize human errors in operating press machines—secured first place in the 2023 AI+ Contest. He is now a medium-term Balik Scientist of DOST-PCAARRD specializing in Artificial Intelligence and Computer Vision.   
+**Abstract**   
+The drive to automatically turn raw data into actionable information has long motivated research across many fields, aiming to save significant labor and time. Advancements in deep learning and computer vision now provide the robust methodologies to achieve this, offering an exciting opportunity to automatically turn pixels into insights across a wide array of domains. Specifically, the object detection and counting task is one of the most useful and popular applications emerging in numerous disciplines. This presentation will detail CIVI's ongoing work in developing practical object detection and counting tools for wide-ranging disciplines, including aquaculture, healthcare, and agriculture. Moreover, I will share key technical insights and lessons learned throughout the development process, providing a comprehensive overview of our methodologies and their real-world impact.   
