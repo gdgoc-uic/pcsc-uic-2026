@@ -108,12 +108,7 @@ const programSchedule: DayProgram[] = [
         activity: "Oldies but Goldies — \"Advances and Challenges in Computing Research in the Age of AI\"",
         badge: "Fireside Chat",
         eventType: "featured",
-      },
-      {
-        time: "6:00PM – 8:00PM",
-        activity: "Conference Dinner",
-        eventType: "default",
-      },
+      }
     ],
   },
   {
