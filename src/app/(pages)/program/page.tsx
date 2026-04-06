@@ -1,6 +1,7 @@
 "use client";
 import PageHero from "../../components/sections/PageHero";
 import { MapPin, Star, Users, Coffee, CalendarDays } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,6 +19,8 @@ type TimeSlot = {
   subItems?: SubItem[];
   eventType?: EventType;
   badge?: string;
+  speakerImage?: string;
+  speakerName?: string;
 };
 
 type DayProgram = {
@@ -130,6 +133,8 @@ const programSchedule: DayProgram[] = [
         venue: "OLP Hall",
         badge: "Plenary Talk 1",
         eventType: "featured",
+        speakerImage: "/images/talks/sison.JPG",
+        speakerName: "Prof. Raymund Sison",
         activity: (
           <>
             <strong className="text-base">"Quality Education in Resource-challenged Schools with the help of Technology"</strong>
@@ -145,6 +150,8 @@ const programSchedule: DayProgram[] = [
         venue: "OLP Hall",
         badge: "Plenary Talk 2",
         eventType: "featured",
+        speakerImage: "/images/talks/virtusio.JPG",
+        speakerName: "Dr. John Jethro Virtusio",
         activity: (
           <>
             <strong className="text-base">"Computer Vision Applications Across Disciplines"</strong>
@@ -167,6 +174,8 @@ const programSchedule: DayProgram[] = [
         venue: "OLP Hall",
         badge: "Plenary Talk 3",
         eventType: "featured",
+        speakerImage: "/images/talks/mariano.jpeg",
+        speakerName: "Dr. Vladimir Mariano",
         activity: (
           <>
             <strong className="text-base">"Embodied AI for All: Bringing Intelligence to the Physical Edge"</strong>
@@ -320,8 +329,23 @@ const TimelineRow = ({ slot, isLast }: TimelineRowProps) => {
               </span>
             )}
 
-            {/* Activity */}
-            <div className="text-white leading-snug">{slot.activity}</div>
+            {/* Activity + Speaker Image */}
+            <div className="flex items-start gap-4">
+              <div className="flex-1 text-white leading-snug min-w-0">{slot.activity}</div>
+              {slot.speakerImage && (
+                <div className="shrink-0 flex flex-col items-center gap-1.5">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-amber-400/40 ring-offset-2 ring-offset-brick-red-800">
+                    <Image
+                      src={slot.speakerImage}
+                      alt={slot.speakerName ?? "Speaker"}
+                      fill
+                      className="object-cover object-top"
+                      sizes="80px"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Venue */}
             {slot.venue && (
