@@ -481,7 +481,7 @@ const programSchedule: DayProgram[] = [
             <div className="mt-2 space-y-2 text-sm text-white/80">
               <div>
                 <p className="font-semibold text-white/60 text-xs uppercase tracking-wider mb-1">Welcome Messages</p>
-                <p><em>S. Ma. Marissa R. Viri, RVM</em> — President, University of the Immaculate Conception</p>
+                <p><em>S. Ma. Leonora Espallardo, RVM</em> — VP Administration, University of the Immaculate Conception</p>
                 <p><em>Mr. Ceasar Ian P. Benablo, MIT</em> — Dean, CCS, University of the Immaculate Conception</p>
               </div>
               <div>
