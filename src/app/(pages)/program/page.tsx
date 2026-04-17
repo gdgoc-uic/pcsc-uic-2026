@@ -10,7 +10,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 type EventType = "featured" | "parallel" | "break" | "default";
 
-type SubItem = { label: string; venue?: string };
+type SubItem = {
+  label: string;
+  venue?: string;
+  session?: string;
+  time?: string;
+  authors?: string;
+};
 
 type TimeSlot = {
   time: string;
@@ -43,17 +49,377 @@ const workshops12345: SubItem[] = [
   { label: "Workshop 5: Generative AI in Education", venue: "GS Comlab 2" },
 ];
 
-const sessions1to4: SubItem[] = [
-  { label: "Session 1", venue: "Rm. 305 OLP" },
-  { label: "Session 2", venue: "Rm. 306 OLP" },
-  { label: "Session 3", venue: "Rm. 307 OLP" },
-  { label: "Session 4", venue: "Rm. 308 OLP" },
+const day2PapersAM: SubItem[] = [
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "11:00AM - 11:20AM",
+    label: "Flotector: A Floating Waste Detection System for the Imus River through Participatory Sensing and YOLOv11",
+    authors: "Ascaño, Charles Ian; Cayabyab, Giero Smith; Gamilla, Ken Lemer",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "11:20AM - 11:40AM",
+    label: "FITPOSE: A COMPUTER VISION-BASED SYSTEM FOR REAL-TIME POSTURE ASSESSMENT IN HOME-BASED WORKOUT ENHANCEMENT",
+    authors: "Abot, Nicolei Faith",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "11:40AM - 12:00PM",
+    label: "Conversion from Nondeterminism to Determinism at the Rule Level of Spiking Neural P Systems with Structural Plasticity",
+    authors: "Jimenez, Zechariah; Cabarle, Francis George",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "12:00PM - 12:20PM",
+    label: "Dynamic Load Balancing and Parallel Non-Maximum Suppres",
+    authors: "Lanting, Kurt; Chio, Mikhail Anton; Buño, Kelvin; Cabarle, Francis; de la Cruz, Ren Tristan; Ko, Daryll",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "11:00AM - 11:20AM",
+    label: "On the Notions of Soundness in Spiking Neural P Systems",
+    authors: "Ramirez, Ronnie II; Cabarle, Francis George",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "11:20AM - 11:40AM",
+    label: "Parallel Permutation Testing for One-Way ANOVA Using CUDA",
+    authors: "Lasala, Kyle Carlo; Manlises, Maria Monica; Go, Daphne Janelyn; Uy, Roger Luis",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "11:40AM - 12:00PM",
+    label: "FRIAD-IR: A Framework for Image-Augmented Dynamic Information Retrieval",
+    authors: "Heffron, Joaquin; Calabia, Bastian Nathaniel; Regonia, Paul Rossener; Gabud, Roselyn",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "12:00PM - 12:20PM",
+    label: "Adaptive Shot Allocation for Quantum Observable with Statistical Guarantees",
+    authors: "Pontiveros, Marc Jermaine; Adorna, Henry",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "11:00AM - 11:20AM",
+    label: "Machine Learning-Based Regional K-12 Enrollment Forecasting and Volatility Classification for Adaptive Resource Allocation in the Philippines",
+    authors: "Cardaño, Mc Sergel; Bulio, Nice; Muñez-Paglinawan, Neila",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "11:20AM - 11:40AM",
+    label: "Handwritten Gregg Shorthand Brief Forms Recognition Using Convolutional Neural Networks",
+    authors: "Silva, Lysha; Paglinawan-Muñez, Neila",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "11:40AM - 12:00PM",
+    label: "Integrating Adaptive Mechanisms for Feature Selection with Mayfly Algorithm, Monarch Butterfly Optimization, and Monarch Mayfly Optimization",
+    authors: "Antoque, Jane; Paglinawan-Muñez, Neila; Lucero, Samuel; Pillodar, Frence Clifford",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "12:00PM - 12:20PM",
+    label: "Mixture of Experts with Soft Nearest Neighbor Loss: Resolving Expert Collapse via Representation Disentanglement",
+    authors: "Agarap, Abien Fred; Azcarraga, Arnulfo",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "11:00AM - 11:20AM",
+    label: "Predictive Models for Solar Energy Output: Performance Evaluation of K-Means and GMM Clustering with Model Interpretability",
+    authors: "Jakosalem, Carlos Miguel; Abrenica, Francis Rale",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "11:20AM - 11:40AM",
+    label: "Early Dengue Diagnosis using Machine Learning on Structured Clinical and Hematological Data",
+    authors: "Natavio, Rani Jay; Guanzon, Katelyn Leigh; Paglinawan-Muñez, Neila",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "11:40AM - 12:00PM",
+    label: "Comparative Study of MobileNetV2 and Hybrid MobileNetV2 with SVM Classifier for Efficient Waste Classification in Low-Resource Environments",
+    authors: "Torayno, Earl Jay; Asaria, J Faye Champ; Paglinawan-Muñez, Neila",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "12:00PM - 12:20PM",
+    label: "Apparent Age Estimation: Challenges and Outcomes - A Comparative Analysis on Apparent Age Estimation Methods and Datasets",
+    authors: "Go, Justin Rainier; Marqueses, Lorenz Bernard; Martinez, Mikaella Kaye; Agarap, Abien Fred; Sarmiento, John Kevin Patrick",
+  },
 ];
 
-const sessions1to6: SubItem[] = [
-  ...sessions1to4,
-  { label: "Session 5", venue: "Rm. 309 OLP" },
-  { label: "Session 6", venue: "Rm. 310 OLP" },
+const day2PapersPM: SubItem[] = [
+  {
+    session: "Session 1 (PM)",
+    venue: "Rm. 305 OLP",
+    time: "2:30PM - 2:50PM",
+    label: "Gated Learning-Progress Exploration",
+    authors: "Tumampos, Mikael Vincent; Guirnela, Ervin Joshua; Peña, Christine",
+  },
+  {
+    session: "Session 1 (PM)",
+    venue: "Rm. 305 OLP",
+    time: "2:50PM - 3:10PM",
+    label: "DermaTector: Increasing Efficiency in Diagnostics of Sun-Induced Skin Diseases Utilizing EfficientNet",
+    authors: "Llamera, Josh Mickel; Marticio, Viktor Harold; Paule, Faith Moselle",
+  },
+  {
+    session: "Session 1 (PM)",
+    venue: "Rm. 305 OLP",
+    time: "3:10PM - 3:30PM",
+    label: "GaitAware: A Lightweight Hybrid Gait Analysis System Using BlazePose-BiLSTM and CNN for Identifying Potential Gait Abnormalities",
+    authors: "Binanitan, John Rebb; Bautista, Timothy James; Espino, Zalzon III",
+  },
+  {
+    session: "Session 1 (PM)",
+    venue: "Rm. 305 OLP",
+    time: "3:30PM - 3:50PM",
+    label: "Neuro-Symbolic AI and Autoformalization: Restoring Determinism in the Age of Probabilistic Computing",
+    authors: "ISANAN, JUNEL ALJE",
+  },
+  {
+    session: "Session 2 (PM)",
+    venue: "Rm. 306 OLP",
+    time: "2:30PM - 2:50PM",
+    label: "Defending against Membership Inference Attacks through Contrastive Representation Learning",
+    authors: "Agarap, Abien Fred; Aguinaldo, Miguel Anton; Madrigal, Rafael; Benavides, Inigo Miguel; Venturina, Sara Ann",
+  },
+  {
+    session: "Session 2 (PM)",
+    venue: "Rm. 306 OLP",
+    time: "2:50PM - 3:10PM",
+    label: "An Ensemble Prediction Model Using LightGBM and Bidirectional LSTM for Bitcoin Price Dip Detection",
+    authors: "Barria, Rameses; Pilapil, Marc Dylan; Peña, Christine",
+  },
+  {
+    session: "Session 2 (PM)",
+    venue: "Rm. 306 OLP",
+    time: "3:10PM - 3:30PM",
+    label: "Nonbalanced and Nonhomogenous Spiking Neural dP Systems",
+    authors: "Naraval, Victor Dominic; Cabarle, Francis George; Buño, Kelvin; de la Cruz, Ren Tristan; Ko, Daryll Carlsten",
+  },
+  {
+    session: "Session 2 (PM)",
+    venue: "Rm. 306 OLP",
+    time: "3:30PM - 3:50PM",
+    label: "Uncertainty-Aware Temporal Transformer Modeling with Masked Self-Attention and Missingness Encoding for Early Sepsis Risk Stratification from ICU Time-Series Data",
+    authors: "Floreta, Zak; Bitayo, Brix; Binangbang, Derrick; Omictin, Jether; Pardillo, Jun Albert",
+  },
+  {
+    session: "Session 3 (PM)",
+    venue: "Rm. 307 OLP",
+    time: "2:30PM - 2:50PM",
+    label: "A Hybrid Machine Learning Framework for Predictive Maintenance of Bearings in Philippine Power Plants",
+    authors: "Consunji, Beaux Nathania Immanuelle; Muli, Lamberlain; Zapico, Joshua Paolo; Vergara, John Paul",
+  },
+  {
+    session: "Session 3 (PM)",
+    venue: "Rm. 307 OLP",
+    time: "2:50PM - 3:10PM",
+    label: "Accelerating Symptom Detection in Canine Ocular Diseases: A Comparative Analysis and Heterogeneous Ensemble of YOLOv8 and RT-DETR",
+    authors: "Rosillosa, Kristian Angelo Ray; Manlangit, Venzhower",
+  },
+  {
+    session: "Session 3 (PM)",
+    venue: "Rm. 307 OLP",
+    time: "3:10PM - 3:30PM",
+    label: "A Scalable and Computationally Efficient Implementation of a Macroscopic Traffic Model for Urban Networks",
+    authors: "Soriano, Jaymar",
+  },
+  {
+    session: "Session 3 (PM)",
+    venue: "Rm. 307 OLP",
+    time: "3:30PM - 3:50PM",
+    label: "Distributed SNP: A High-Performance Hybrid MPI+CUDA Framework for Spiking Neural P Systems",
+    authors: "Lipat, Job; Luzada, Jarred Sueño; Cabarle, Francis George; Martínez-del-Amor, Miguel Ángel; Orellana-Martín, David",
+  },
+  {
+    session: "Session 4 (PM)",
+    venue: "Rm. 308 OLP",
+    time: "2:30PM - 2:50PM",
+    label: "TUDLO: Parameter-Efficient Fine-Tuning for Tagalog and Cebuano Early-Grade Mathematics Explanation Generation",
+    authors: "Ramos, Trisha Jean, Roxas, Rachel Edita",
+  },
+  {
+    session: "Session 4 (PM)",
+    venue: "Rm. 308 OLP",
+    time: "2:50PM - 3:10PM",
+    label: "Evaluating Large Language Models in Filipino Underspecified, Multi-Turn Conversations",
+    authors: "Pintor, Renee Rosary; Wang, Lisa Juress; Pepito, Glenn",
+  },
+  {
+    session: "Session 4 (PM)",
+    venue: "Rm. 308 OLP",
+    time: "3:10PM - 3:30PM",
+    label: "MAMBO (Multi AI Model Bench Operations): A Framework for Dynamic Model Switching and Benchmarking On-Device AI",
+    authors: "Bernabe, Marveen Antonio; Madrid, Val Randolf",
+  },
+  {
+    session: "Session 4 (PM)",
+    venue: "Rm. 308 OLP",
+    time: "3:30PM - 3:50PM",
+    label: "Galaw at Gunita: Extended Reality Murals for Experiencing Filipino Art",
+    authors: "Delos Reyes, Jomar; Dy, Sealtiel; Sales, Rica Mae; Uy, Orrin Landon; Monserrat, Toni-Jan Keith; Fernandez, Ryan Austin; Deja, Jordan Aiko",
+  },
+];
+
+const day3Papers: SubItem[] = [
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "9:15AM - 9:35AM",
+    label: "Towards More Empathic Programming Environments - An Experimental Empathic AI-Enhanced IDE",
+    authors: "Go, Justin Rainier; Caliboso, Roemer Gabriel; Andaya, Kurt Christian; Go, Aaron Daniel; Cu, Jocelynn",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "9:35AM - 9:55AM",
+    label: "Augmenting a Force Directed Layout Algorithm in Drawing Adjacent Transposition Graphs",
+    authors: "Antonio, Harold; Albarracin, Francis; Ordanel, Ivy",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "9:55AM - 10:15AM",
+    label: "Novel CUDA and Segment Tree-Accelerated Simulated Annealing Approaches to the Time-Dependent Knapsack Problem",
+    authors: "Chua, Harvey Shawn; Asturiano, Christian Emmanuel; Uy, Nicole Kate; Uy, Roger Luis",
+  },
+  {
+    session: "Session 1",
+    venue: "Rm. 305 OLP",
+    time: "10:15AM - 10:35AM",
+    label: "Judo Throw Recognition Using Computer Vision Techniques",
+    authors: "Arenas, Angelo Gabriel; Madrid, Val Randol; Araneta, Jesus",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "9:15AM - 9:35AM",
+    label: "Toward Multimodal Monitoring of Systemic Lupus Erythematosus: A Swin-SNN Cross-Modal Attention Approach",
+    authors: "Manulat, Thomas Danjo",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "9:35AM - 9:55AM",
+    label: "Evaluation of Target Encoding Methods Across Linear and Tree-Based Models for Cardiovascular Disease Prediction",
+    authors: "Cahilog, Kenneth; Linao, Carl Andrew; Peña, Christine",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "9:55AM - 10:15AM",
+    label: "Scrum vs. Extreme Programming (XP) vs Kanban in the Age of AI and DevOps: A Comparative Analysis of Cultural Resilience to Modern Development Challenges",
+    authors: "Bernardez, Fernand; Torres, Francis Luis",
+  },
+  {
+    session: "Session 2",
+    venue: "Rm. 306 OLP",
+    time: "10:15AM - 10:35AM",
+    label: "ATHENA: An Image Captioning Pipeline for Constrained Underwater Environments",
+    authors: "Roy, Rodrigo Emmanuel; Chan, Krisha Anne",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "9:15AM - 9:35AM",
+    label: "Self-Training an Image Binary Classification Model using a Multi-Agent System",
+    authors: "Cambarijan, Angel Sheinen; Repuesto, Charlene; Talip, Deo; Bajo, Jake; Aliac, Chris Jordan",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "9:35AM - 9:55AM",
+    label: "ReHaPT: Integrating Machine Learning and Computer Vision for a Hand Rehabilitation Recognition System",
+    authors: "Paguiligan, James Archer; Azcarraga, Judith; Cataluña, Jorice Erika; Seperidad, Abigail",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "9:55AM - 10:15AM",
+    label: "Bridging the Gap Between Synthetic and Real Handwriting: Using Visual AI to Accurately Parse Structured Logic Proofs",
+    authors: "Bascug, Felisa Melanie Fay; Gemina, Roddneil; Mendoza, Basil Xavier; Arellano, Catherine",
+  },
+  {
+    session: "Session 3",
+    venue: "Rm. 307 OLP",
+    time: "10:15AM - 10:35AM",
+    label: "Queue Management System with Smart Feedback, Sentiment Analysis and Geolocation in Holy Child College of Davao",
+    authors: "Chan, Amy Rosal; Fabian, Alrheem",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "9:15AM - 9:35AM",
+    label: "Integrating Deep Learning Models to Improve Cheating Detection in UPOU's Specialized Online Assessment Platform",
+    authors: "Tuazon, Joseph",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "9:35AM - 9:55AM",
+    label: "Solving the Senior High School Timetabling Problem using a Multi-Agent Reinforcement Learning Approach",
+    authors: "Reyes, Alroy Leon; Cabredo, Rafael; Cuya, Vhonne; Ocampo, Gabriel",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "9:55AM - 10:15AM",
+    label: "Birdview: Human Crowd Density Visualization Tool from Video Feed to Floor Plan using Deep Learning and Homography",
+    authors: "Dela Cruz, Shanmykel Ace; Regis, Michael Anthony Jay",
+  },
+  {
+    session: "Session 4",
+    venue: "Rm. 308 OLP",
+    time: "10:15AM - 10:35AM",
+    label: "Technical Validation of an MDP-Based Adaptive Geometry Learning System via Q-Learning and LLM Hints",
+    authors: "Abellana, Paul Thomas; Chavez, Francis Benedict; Catubig, Niña Margarette; Sta Romana, Cherry Lyn; Tito, Almara",
+  },
+  {
+    session: "Session 5",
+    venue: "Rm. 309 OLP",
+    time: "9:15AM - 9:35AM",
+    label: "Analysis of Machine Learning Approaches for Real-Time Human Exercise Classification Using Pose Estimation Joint Angles",
+    authors: "Limbo, Moses",
+  },
+  {
+    session: "Session 5",
+    venue: "Rm. 309 OLP",
+    time: "9:35AM - 9:55AM",
+    label: "Sign Lang: Developing a VR Game for FSL Learning",
+    authors: "Chan, Caryl Rae; Abarico, Michelle Kim Angela; Vidal, Eric",
+  },
+  {
+    session: "Session 5",
+    venue: "Rm. 309 OLP",
+    time: "9:55AM - 10:15AM",
+    label: "FIRE!: A Fire Simulation Game that Educates Filipinos on Fire Safety",
+    authors: "Benito, Matthew Josh Benedict; Gomez, Enrique Jose Stefan; Que, Nate Brevin",
+  },
+  {
+    session: "Session 5",
+    venue: "Rm. 309 OLP",
+    time: "10:15AM - 10:35AM",
+    label: "Text Mining Analysis of Review Bombing Incidents in Filipino Films",
+    authors: "Gonzales, Joshua Nicolai; Cariaga, Josh Enrico; Alonzo, Ron Fourier; Barcelita, Aaron John; Reyes, Nathaniel Kurt; Gonda, Raphael",
+  },
 ];
 
 const programSchedule: DayProgram[] = [
@@ -164,7 +530,7 @@ const programSchedule: DayProgram[] = [
       {
         time: "11:00AM – 12:30PM",
         activity: "Parallel Sessions (Paper Presentations)",
-        subItems: sessions1to4,
+        subItems: day2PapersAM,
         eventType: "parallel",
         badge: "Session",
       },
@@ -189,7 +555,7 @@ const programSchedule: DayProgram[] = [
       {
         time: "2:30PM – 4:00PM",
         activity: "Parallel Sessions (Paper Presentations)",
-        subItems: sessions1to4,
+        subItems: day2PapersPM,
         eventType: "parallel",
         badge: "Session",
       },
@@ -221,7 +587,7 @@ const programSchedule: DayProgram[] = [
       {
         time: "9:15AM – 10:45AM",
         activity: "Parallel Sessions (Short Paper Presentations)",
-        subItems: sessions1to6,
+        subItems: day3Papers,
         eventType: "parallel",
         badge: "Session",
       },
@@ -275,6 +641,7 @@ type TimelineRowProps = {
 const TimelineRow = ({ slot, isLast }: TimelineRowProps) => {
   const type = slot.eventType ?? "default";
   const isBreak = type === "break";
+  const hasPaperSubItems = slot.subItems?.some((sub) => sub.session && sub.time && sub.authors);
 
   return (
     <div className="timeline-row flex gap-0 sm:gap-4 group">
@@ -355,23 +722,77 @@ const TimelineRow = ({ slot, isLast }: TimelineRowProps) => {
               </div>
             )}
 
-            {/* SubItems chip grid */}
+            {/* SubItems */}
             {slot.subItems && slot.subItems.length > 0 && (
-              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
-                {slot.subItems.map((sub) => (
-                  <div
-                    key={sub.label}
-                    className="rounded-md bg-brick-red-950/50 border border-white/10 px-3 py-2"
-                  >
-                    <p className="text-xs text-white/90 leading-snug">{sub.label}</p>
-                    {sub.venue && (
-                      <p className="mt-1 flex items-center gap-1 text-xs text-white/40">
-                        <MapPin className="h-2.5 w-2.5 shrink-0" />
-                        {sub.venue}
-                      </p>
-                    )}
+              <div className="mt-3">
+                {hasPaperSubItems ? (
+                  <div className="space-y-3">
+                    {Object.values(
+                      slot.subItems.reduce<Record<string, SubItem[]>>((acc, sub) => {
+                        const session = sub.session ?? "Session";
+                        const venue = sub.venue ?? "Venue TBA";
+                        const key = `${session}|${venue}`;
+                        if (!acc[key]) {
+                          acc[key] = [];
+                        }
+                        acc[key].push(sub);
+                        return acc;
+                      }, {})
+                    ).map((sessionPapers) => {
+                      const [firstPaper] = sessionPapers;
+                      return (
+                        <div
+                          key={`${firstPaper.session}-${firstPaper.venue}`}
+                          className="rounded-md bg-brick-red-950/50 border border-white/10 px-3 py-3"
+                        >
+                          <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between mb-2">
+                            <p className="text-xs font-semibold text-white/85 uppercase tracking-wide">
+                              {firstPaper.session}
+                            </p>
+                            {firstPaper.venue && (
+                              <p className="flex items-center gap-1 text-xs text-white/45">
+                                <MapPin className="h-2.5 w-2.5 shrink-0" />
+                                {firstPaper.venue}
+                              </p>
+                            )}
+                          </div>
+
+                          <div className="space-y-2">
+                            {sessionPapers.map((paper) => (
+                              <div
+                                key={`${paper.session}-${paper.time}-${paper.label}`}
+                                className="rounded-md border border-white/10 bg-brick-red-900/40 px-2.5 py-2"
+                              >
+                                {paper.time && (
+                                  <p className="text-[11px] font-mono uppercase tracking-wide text-sky-200/80">{paper.time}</p>
+                                )}
+                                <p className="mt-1 text-xs text-white/90 leading-snug">{paper.label}</p>
+                                {paper.authors && <p className="mt-1 text-xs text-white/55 leading-snug">{paper.authors}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                ))}
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2">
+                    {slot.subItems.map((sub) => (
+                      <div
+                        key={sub.label}
+                        className="rounded-md bg-brick-red-950/50 border border-white/10 px-3 py-2"
+                      >
+                        <p className="text-xs text-white/90 leading-snug">{sub.label}</p>
+                        {sub.venue && (
+                          <p className="mt-1 flex items-center gap-1 text-xs text-white/40">
+                            <MapPin className="h-2.5 w-2.5 shrink-0" />
+                            {sub.venue}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
