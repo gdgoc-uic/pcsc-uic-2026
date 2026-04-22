@@ -41,16 +41,16 @@
 | 11:00AM – 12:30AM |  Parallel Sessions (Paper Presentations)  |  |
 |  | Session 1 | Rm. 305 OLP |
 |  | Session 2 | Rm. 306 OLP |
-|  | Session 3 | Rm. 307 OLP |
-|  | Session 4 | Rm. 308 OLP |
+|  | Session 3 | Rm. 303 OLP |
+|  | Session 4 | Rm. 304 OLP |
 | 12:30PM – 1:30PM | Lunch Break | OLP Hall |
 | 1:30PM – 2:15PM | Plenary Talk 3 **Embodied AI for All: Bringing Intelligence to the Physical Edge** Dr. Vladimir Mariano NICER Project, National University | OLP Hall |
 | 2:15PM – 2:30PM | Afternoon Snacks | OLP Hall |
 | 2:30PM – 4:00PM | Parallel Sessions (Paper Presentations) |  |
 |  | Session 1 | Rm. 305 OLP |
 |  | Session 2 | Rm. 306 OLP |
-|  | Session 3 | Rm. 307 OLP |
-|  | Session 4 | Rm. 308 OLP |
+|  | Session 3 | Rm. 303 OLP |
+|  | Session 4 | Rm. 304 OLP |
 | 4:00PM – 5:30PM |  Oldies but Goldies (Fireside Chat)  **Advances and Challenges in Computing Research in the Age of AI** Facilitated by: Dr. Henry Adorna  | OLP Hall |
 | 5:30PM – 6:00PM |  Board Meeting and President's Report  | OLP Hall |
 | 6:00 PM \- 8:00 PM |  Conference Dinner  | OLP Hall |
@@ -65,9 +65,9 @@
 |  | Session 1 | Rm. 305 OLP |
 |  | Session 2 | Rm. 306 OLP |
 |  | Session 3 | Rm. 307 OLP |
-|  | Session 4 | Rm. 308 OLP |
-|  | Session 5 | Rm. 309 OLP |
-|  | Session 6 | Rm. 310 OLP |
+|  | Session 4 | Rm. 304 OLP |
+|  | Session 5 | Rm. 303 OLP |
+|  | Session 6 | Rm. 302 OLP |
 | 10:45AM – 11:00AM | Morning Snacks |  |
 | 11:00AM \- 12:30AM | Results of Election of New Board Members Announcement of Special Awards Closing Ceremonies | OLP Hall |
 | 12:30PM \- 1:30PM | Lunch Break | OLP Hall |
