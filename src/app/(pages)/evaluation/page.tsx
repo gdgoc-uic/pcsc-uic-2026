@@ -69,7 +69,6 @@ export default function EvaluationPage() {
 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
-  const [comment, setComment] = useState("");
   const [answers, setAnswers] = useState<FormAnswers>({});
 
   const [validationResult, setValidationResult] =
@@ -192,7 +191,6 @@ export default function EvaluationPage() {
           email: email.trim().toLowerCase(),
           fullName: fullName.trim(),
           answers,
-          comment: comment.trim(),
         }),
       });
 
@@ -518,24 +516,6 @@ export default function EvaluationPage() {
                 ))}
               </div>
             )}
-
-            <div>
-              <label
-                htmlFor="feedback-comment"
-                className="block text-sm text-white/90 mb-1"
-              >
-                Additional Feedback
-              </label>
-              <textarea
-                id="feedback-comment"
-                value={comment}
-                onChange={(event) => setComment(event.target.value)}
-                rows={5}
-                className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300"
-                placeholder="Share your feedback and recommendations."
-                aria-label="Additional feedback"
-              />
-            </div>
 
             <button
               type="button"

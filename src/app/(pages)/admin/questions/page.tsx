@@ -522,14 +522,7 @@ export default function AdminEvaluationQuestionsPage() {
                   ))
                 )}
 
-                <div>
-                  <p className="text-sm text-white/90 mb-1">Additional Feedback</p>
-                  <textarea
-                    rows={4}
-                    placeholder="Share your feedback and recommendations."
-                    className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white placeholder:text-white/40"
-                  />
-                </div>
+                
               </div>
             </section>
           </div>
