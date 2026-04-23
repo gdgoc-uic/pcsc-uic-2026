@@ -154,3 +154,42 @@ The project is optimized for deployment on Vercel:
 ---
 
 Built by Google Developer Groups on Campus - UIC with ❤️ for the Philippine Computing Science Congress 2026
+
+## Evaluation and Certificate Setup
+
+The project includes a Supabase-backed stakeholder evaluation flow that auto-generates certificate images.
+
+### 1. Configure Environment Variables
+
+Copy [.env.example](.env.example) to `.env.local` and fill in your Supabase credentials:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+### 2. Run Supabase SQL Migration
+
+Apply [supabase/migrations/202604230001_evaluation_and_certificates.sql](supabase/migrations/202604230001_evaluation_and_certificates.sql) in your Supabase SQL editor.
+
+This migration creates:
+
+- `admin_users`
+- `stakeholders`
+- `certificate_templates`
+- `evaluation_submissions`
+- `generated_certificates`
+- storage buckets `certificate-templates` and `generated-certificates`
+
+### 3. Seed Access Data
+
+Insert records into:
+
+- `admin_users`: authorized admin auth users who can access `/admin/*`
+- `stakeholders`: preloaded stakeholder emails allowed to submit one evaluation
+
+### 4. Feature Routes
+
+- Stakeholder evaluation: `/evaluation`
+- Certificate lookup: `/evaluation/certificate`
+- Admin login: `/admin/login`
+- Admin template management: `/admin/certificates`
