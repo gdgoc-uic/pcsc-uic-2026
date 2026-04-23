@@ -239,17 +239,17 @@ export default function EvaluationPage() {
   return (
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
       <PageHero
-        title="Stakeholder Evaluation"
+        title="PSCS 2026 Post-Event Evaluation"
         description="Submit your conference feedback. After successful submission, your certificate will be generated automatically."
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-8">
         <section className="rounded-xl border border-brick-red-600 bg-brick-red-800/40 p-5 sm:p-6 space-y-4">
           <h2 className="text-xl font-bold text-white">
-            Step 1: Validate stakeholder email
+            Step 1: Validate participant email
           </h2>
           <p className="text-sm text-white/80">
-            Only preloaded stakeholder emails are allowed to submit.
+            Only registered participants emails are allowed to submit.
           </p>
           <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
@@ -257,7 +257,7 @@ export default function EvaluationPage() {
                 htmlFor="stakeholder-email"
                 className="block text-sm text-white/90 mb-1"
               >
-                Stakeholder Email
+                Participant Email
               </label>
               <input
                 id="stakeholder-email"
@@ -266,7 +266,7 @@ export default function EvaluationPage() {
                 onChange={(event) => setEmail(event.target.value)}
                 className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300"
                 placeholder="name@example.com"
-                aria-label="Stakeholder email"
+                aria-label="Participant email"
               />
             </div>
             <button

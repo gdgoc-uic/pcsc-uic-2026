@@ -1,9 +1,21 @@
 import "server-only";
+import fs from "fs";
+import path from "path";
 import sharp from "sharp";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 
 const TEMPLATE_BUCKET = "certificate-templates";
 const GENERATED_BUCKET = "generated-certificates";
+
+const ARIAL_FONT_PATH = path.join(process.cwd(), "public/font/Arial.ttf");
+let arialFontBase64: string | null = null;
+
+const loadArialFont = () => {
+  if (arialFontBase64) return arialFontBase64;
+  const fontBuffer = fs.readFileSync(ARIAL_FONT_PATH);
+  arialFontBase64 = fontBuffer.toString("base64");
+  return arialFontBase64;
+};
 
 type ActiveTemplate = {
   id: string;
@@ -81,8 +93,23 @@ const createOverlay = (params: {
     ? `\n        transform="rotate(${-rotation} ${x} ${y})"`
     : "";
 
+  const fontBase64 = loadArialFont();
+
   return Buffer.from(
-    `<svg width="${params.width}" height="${params.height}" xmlns="http://www.w3.org/2000/svg">\n      <text\n        x="${x}"\n        y="${y}"\n        fill="${params.template.font_color}"\n        font-size="${params.template.font_size}"\n        font-family="${escapeXml(params.template.font_family)}"\n        text-anchor="${buildTextAnchor(params.template.text_align)}"\n        dominant-baseline="middle"${rotationAttr}\n      >${safeName}</text>\n    </svg>`,
+    `<svg width="${params.width}" height="${params.height}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style type="text/css">@font-face { font-family: Arial; src: url(data:font/ttf;base64,${fontBase64}); }</style>
+      </defs>
+      <text
+        x="${x}"
+        y="${y}"
+        fill="${params.template.font_color}"
+        font-size="${params.template.font_size}"
+        font-family="Arial"
+        text-anchor="${buildTextAnchor(params.template.text_align)}"
+        dominant-baseline="middle"${rotationAttr}
+      >${safeName}</text>
+    </svg>`,
   );
 };
 
