@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
 import type { QuestionType } from "@/types/evaluation";
@@ -31,7 +32,6 @@ type ValidationResult = {
   message?: string;
   stakeholder?: {
     fullName: string;
-    role: string | null;
   };
 };
 
@@ -64,11 +64,12 @@ const multipleMeta = (m: QuestionMeta): m is { options: string[]; min_select: nu
   "options" in m && "min_select" in m;
 
 export default function EvaluationPage() {
+  const router = useRouter();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
 
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [stakeholderName, setStakeholderName] = useState("");
   const [answers, setAnswers] = useState<FormAnswers>({});
 
   const [validationResult, setValidationResult] =
@@ -102,10 +103,6 @@ export default function EvaluationPage() {
       return false;
     }
 
-    if (fullName.trim().length < 2) {
-      return false;
-    }
-
     for (const question of questions) {
       if (question.is_required) {
         const answer = answers[question.question_key];
@@ -119,7 +116,7 @@ export default function EvaluationPage() {
     }
 
     return true;
-  }, [fullName, validationResult, questions, answers]);
+  }, [validationResult, questions, answers]);
 
   const handleValidateEmail = async () => {
     const trimmedEmail = email.trim().toLowerCase();
@@ -146,7 +143,7 @@ export default function EvaluationPage() {
       setValidationResult(result);
 
       if (result.allowed && result.stakeholder?.fullName) {
-        setFullName(result.stakeholder.fullName);
+        setStakeholderName(result.stakeholder.fullName);
       }
 
       if (!result.allowed) {
@@ -157,7 +154,15 @@ export default function EvaluationPage() {
       }
 
       if (result.alreadySubmitted) {
-        setStatusMessage("This stakeholder already submitted an evaluation.");
+        setStakeholderName(result.stakeholder?.fullName ?? "");
+        const params = new URLSearchParams({
+          email: trimmedEmail,
+          name: result.stakeholder?.fullName ?? "",
+        });
+        if (result.existingCertificateUrl) {
+          params.set("certificateUrl", result.existingCertificateUrl);
+        }
+        router.push(`/evaluation/certificate-preview?${params.toString()}`);
         return;
       }
 
@@ -189,7 +194,7 @@ export default function EvaluationPage() {
         body: JSON.stringify({
           intent: "submit",
           email: email.trim().toLowerCase(),
-          fullName: fullName.trim(),
+          fullName: stakeholderName,
           answers,
         }),
       });
@@ -203,14 +208,16 @@ export default function EvaluationPage() {
 
       setSubmissionResult(result);
 
+      const params = new URLSearchParams({
+        submissionId: result.submissionId ?? "",
+        email: email.trim().toLowerCase(),
+        name: stakeholderName,
+        new: "true",
+      });
       if (result.certificateUrl) {
-        setStatusMessage("Evaluation submitted and certificate generated.");
-      } else {
-        setStatusMessage(
-          result.message ??
-            "Evaluation submitted, but the certificate is still being prepared.",
-        );
+        params.set("certificateUrl", result.certificateUrl);
       }
+      router.push(`/evaluation/certificate-preview?${params.toString()}`);
     } catch {
       setStatusMessage("Submission failed due to a network error.");
     } finally {
@@ -275,23 +282,7 @@ export default function EvaluationPage() {
             </button>
           </div>
 
-          {validationResult?.alreadySubmitted ? (
-            <div className="rounded-lg border border-rose-400/40 bg-rose-700/20 p-4 space-y-3">
-              <p className="text-sm text-rose-100">
-                This stakeholder already has a submission.
-              </p>
-              {validationResult.existingCertificateUrl ? (
-                <a
-                  href={validationResult.existingCertificateUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex rounded-md bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100"
-                >
-                  Download Existing Certificate
-                </a>
-              ) : null}
-            </div>
-          ) : null}
+          
         </section>
 
         {validationResult?.allowed && !validationResult.alreadySubmitted ? (
@@ -300,35 +291,7 @@ export default function EvaluationPage() {
               Step 2: Submit feedback
             </h2>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="full-name"
-                  className="block text-sm text-white/90 mb-1"
-                >
-                  Full Name (for certificate)
-                </label>
-                <input
-                  id="full-name"
-                  type="text"
-                  value={fullName}
-                  onChange={(event) => setFullName(event.target.value)}
-                  className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300"
-                  aria-label="Full name"
-                />
-              </div>
-              <div>
-                <p className="block text-sm text-white/90 mb-1">
-                  Stakeholder Role
-                </p>
-                <div
-                  className="rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white/90 min-h-10.5"
-                  aria-live="polite"
-                >
-                  {validationResult.stakeholder?.role || "Not specified"}
-                </div>
-              </div>
-            </div>
+            
 
             {isLoadingQuestions ? (
               <div className="py-8 text-center">
@@ -532,23 +495,10 @@ export default function EvaluationPage() {
         ) : null}
 
         {submissionResult?.submissionId ? (
-          <section className="rounded-xl border border-emerald-500/40 bg-emerald-600/20 p-5 sm:p-6 space-y-3">
-            <h3 className="text-lg font-bold text-emerald-100">
-              Submission complete
-            </h3>
+          <section className="rounded-xl border border-emerald-500/40 bg-emerald-600/20 p-5 sm:p-6">
             <p className="text-sm text-emerald-100/90">
-              Submission ID: {submissionResult.submissionId}
+              Your evaluation has been submitted successfully. Redirecting you to your certificate...
             </p>
-            {submissionResult.certificateUrl ? (
-              <a
-                href={submissionResult.certificateUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex rounded-md bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100"
-              >
-                Download Certificate (PNG)
-              </a>
-            ) : null}
           </section>
         ) : null}
 

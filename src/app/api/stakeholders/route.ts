@@ -6,7 +6,6 @@ import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 const createStakeholderSchema = z.object({
   email: z.string().email("Invalid email address"),
   full_name: z.string().min(1).max(200),
-  stakeholder_role: z.string().max(100).optional(),
   is_active: z.boolean().default(true),
 });
 
@@ -14,7 +13,6 @@ const updateStakeholderSchema = z.object({
   id: z.uuid(),
   email: z.string().email("Invalid email address").optional(),
   full_name: z.string().min(1).max(200).optional(),
-  stakeholder_role: z.string().max(100).optional(),
   is_active: z.boolean().optional(),
 });
 
@@ -36,7 +34,7 @@ export async function GET() {
     const adminClient = createAdminSupabaseClient() as any;
     const { data, error } = await adminClient
       .from("stakeholders")
-      .select("id, email, full_name, stakeholder_role, is_active, created_at, updated_at")
+      .select("id, email, full_name, is_active, created_at, updated_at")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -98,10 +96,9 @@ export async function POST(request: Request) {
       .insert({
         email: payload.email.toLowerCase().trim(),
         full_name: payload.full_name.trim(),
-        stakeholder_role: payload.stakeholder_role?.trim() || null,
         is_active: payload.is_active,
       })
-      .select("id, email, full_name, stakeholder_role, is_active, created_at, updated_at")
+      .select("id, email, full_name, is_active, created_at, updated_at")
       .single();
 
     if (insertError || !inserted) {
@@ -188,9 +185,6 @@ export async function PATCH(request: Request) {
     if (payload.full_name !== undefined) {
       updateData.full_name = payload.full_name.trim();
     }
-    if (payload.stakeholder_role !== undefined) {
-      updateData.stakeholder_role = payload.stakeholder_role?.trim() || null;
-    }
     if (payload.is_active !== undefined) {
       updateData.is_active = payload.is_active;
     }
@@ -206,7 +200,7 @@ export async function PATCH(request: Request) {
       .from("stakeholders")
       .update(updateData)
       .eq("id", payload.id)
-      .select("id, email, full_name, stakeholder_role, is_active, created_at, updated_at")
+      .select("id, email, full_name, is_active, created_at, updated_at")
       .single();
 
     if (updateError || !updated) {

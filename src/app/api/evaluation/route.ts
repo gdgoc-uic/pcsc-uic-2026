@@ -71,7 +71,7 @@ export async function GET(request: Request) {
           certificate_path,
           certificate_download_url,
           created_at,
-          stakeholder:stakeholders!inner(id, full_name, stakeholder_role, email)
+          stakeholder:stakeholders!inner(id, full_name, email)
         `)
         .order("created_at", { ascending: false });
 
@@ -92,7 +92,6 @@ export async function GET(request: Request) {
         certificate_download_url: row.certificate_download_url,
         created_at: row.created_at,
         stakeholder_name: row.stakeholder?.full_name,
-        stakeholder_role: row.stakeholder?.stakeholder_role,
       }));
 
       return NextResponse.json({ submissions });
@@ -200,7 +199,7 @@ export async function POST(request: Request) {
       const normalizedEmail = normalizeEmail(payload.email);
       const { data: stakeholder, error: stakeholderError } = await adminClient
         .from("stakeholders")
-        .select("id, full_name, stakeholder_role")
+        .select("id, full_name")
         .eq("email", normalizedEmail)
         .eq("is_active", true)
         .maybeSingle();
@@ -242,7 +241,6 @@ export async function POST(request: Request) {
           existingSubmission?.certificate_download_url ?? null,
         stakeholder: {
           fullName: stakeholder.full_name,
-          role: stakeholder.stakeholder_role,
         },
       });
     }

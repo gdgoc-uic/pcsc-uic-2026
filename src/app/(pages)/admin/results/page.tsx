@@ -13,7 +13,6 @@ type Submission = {
   certificate_download_url: string | null;
   created_at: string;
   stakeholder_name: string | null;
-  stakeholder_role: string | null;
 };
 
 type Question = {
@@ -82,11 +81,10 @@ export default function AdminResultsPage() {
   };
 
   const handleExportCSV = () => {
-    const headers = ["Name", "Email", "Role", ...questions.map((q) => q.text), "Comment", "Submitted At"];
+    const headers = ["Name", "Email", ...questions.map((q) => q.text), "Comment", "Submitted At"];
     const rows = submissions.map((sub) => [
       sub.submitted_name,
       sub.email,
-      sub.stakeholder_role || "",
       ...questions.map((q) => getAnswerDisplay(sub.answers[q.key], q.type)),
       sub.comment || "",
       sub.created_at,
@@ -271,10 +269,6 @@ export default function AdminResultsPage() {
                             <div>
                               <p className="text-xs text-white/50">Email</p>
                               <p className="text-sm text-white font-mono">{sub.email}</p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-white/50">Role</p>
-                              <p className="text-sm text-white">{sub.stakeholder_role || "—"}</p>
                             </div>
                             <div>
                               <p className="text-xs text-white/50">Submitted</p>

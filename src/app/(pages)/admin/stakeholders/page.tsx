@@ -8,7 +8,6 @@ type Stakeholder = {
   id: string;
   email: string;
   full_name: string;
-  stakeholder_role: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
@@ -17,17 +16,15 @@ type Stakeholder = {
 type StakeholderFormData = {
   email: string;
   full_name: string;
-  stakeholder_role: string;
   is_active: boolean;
 };
 
-const parseCSVLine = (line: string): { email: string; name: string; role: string } | null => {
+const parseCSVLine = (line: string): { email: string; name: string } | null => {
   const parts = line.split(",").map((p) => p.trim());
   if (parts.length >= 2 && parts[0] && parts[1]) {
     return {
       email: parts[0],
       name: parts[1],
-      role: parts[2] || "",
     };
   }
   return null;
@@ -43,7 +40,6 @@ export default function AdminStakeholdersPage() {
   const [formData, setFormData] = useState<StakeholderFormData>({
     email: "",
     full_name: "",
-    stakeholder_role: "",
     is_active: true,
   });
   const [isSaving, setIsSaving] = useState(false);
@@ -79,7 +75,6 @@ export default function AdminStakeholdersPage() {
     setFormData({
       email: "",
       full_name: "",
-      stakeholder_role: "",
       is_active: true,
     });
     setIsEditing(true);
@@ -90,7 +85,6 @@ export default function AdminStakeholdersPage() {
     setFormData({
       email: s.email,
       full_name: s.full_name,
-      stakeholder_role: s.stakeholder_role || "",
       is_active: s.is_active,
     });
     setIsEditing(true);
@@ -123,7 +117,6 @@ export default function AdminStakeholdersPage() {
             id: editingId,
             email: formData.email.trim(),
             full_name: formData.full_name.trim(),
-            stakeholder_role: formData.stakeholder_role.trim() || undefined,
             is_active: formData.is_active,
           }),
         });
@@ -220,7 +213,6 @@ export default function AdminStakeholdersPage() {
           body: JSON.stringify({
             email: row.email,
             full_name: row.name,
-            stakeholder_role: row.role || undefined,
             is_active: true,
           }),
         });
@@ -329,7 +321,6 @@ export default function AdminStakeholdersPage() {
                 <tr className="border-b border-brick-red-600">
                   <th className="px-4 py-3 text-left font-semibold text-white">Name</th>
                   <th className="px-4 py-3 text-left font-semibold text-white">Email</th>
-                  <th className="px-4 py-3 text-left font-semibold text-white">Role</th>
                   <th className="px-4 py-3 text-left font-semibold text-white">Status</th>
                   <th className="px-4 py-3 text-right font-semibold text-white">Actions</th>
                 </tr>
@@ -339,7 +330,6 @@ export default function AdminStakeholdersPage() {
                   <tr key={s.id} className="border-b border-brick-red-600/50 last:border-b-0">
                     <td className="px-4 py-3 text-white">{s.full_name}</td>
                     <td className="px-4 py-3 text-white/80 font-mono text-xs">{s.email}</td>
-                    <td className="px-4 py-3 text-white/80">{s.stakeholder_role || "—"}</td>
                     <td className="px-4 py-3">
                       {s.is_active ? (
                         <span className="rounded-full bg-emerald-600/30 border border-emerald-400/50 px-2 py-0.5 text-xs text-emerald-100">
@@ -423,16 +413,7 @@ export default function AdminStakeholdersPage() {
                         placeholder="Juan dela Cruz"
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm text-white/90 mb-1">Role</label>
-                      <input
-                        type="text"
-                        value={formData.stakeholder_role}
-                        onChange={(e) => setFormData({ ...formData, stakeholder_role: e.target.value })}
-                        className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
-                        placeholder="Speaker, Participant, etc."
-                      />
-                    </div>
+                    
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
