@@ -16,6 +16,7 @@ export default function CertificatePreviewPage() {
   const [certificateData, setCertificateData] = useState<CertificateData>({});
   const [isLoading, setIsLoading] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   useEffect(() => {
     const fetchCertificate = async () => {
@@ -28,18 +29,21 @@ export default function CertificatePreviewPage() {
         const data = (await response.json()) as CertificateData;
 
         if (!response.ok || !data.certificateUrl) {
+          setIsImageLoading(false);
           setCertificateData({
             message: data.message ?? "Unable to load certificate.",
           });
           return;
         }
 
+        setIsImageLoading(true);
         setCertificateData({
           certificateUrl: data.certificateUrl,
           stakeholderName: data.stakeholderName,
           isNewSubmission: data.isNewSubmission,
         });
       } catch {
+        setIsImageLoading(false);
         setCertificateData({
           message: "Unable to fetch certificate right now.",
         });
@@ -130,14 +134,24 @@ export default function CertificatePreviewPage() {
         ) : certificateData.certificateUrl ? (
           <>
             <div className="mt-8 rounded-lg border border-brick-red-600/60 bg-brick-red-900/50 p-4">
-              <Image
-                src={certificateData.certificateUrl}
-                alt="Your Certificate of Attendance"
-                width={1920}
-                height={1080}
-                unoptimized
-                className="mx-auto max-h-[60vh] w-auto rounded shadow-lg"
-              />
+              <div className="relative mx-auto w-full max-w-5xl aspect-video">
+                {isImageLoading ? (
+                  <div className="absolute inset-0 animate-pulse rounded bg-brick-red-700/50" />
+                ) : null}
+
+                <Image
+                  src={certificateData.certificateUrl}
+                  alt="Your Certificate of Attendance"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 960px"
+                  unoptimized
+                  onLoad={() => setIsImageLoading(false)}
+                  onError={() => setIsImageLoading(false)}
+                  className={`rounded object-contain shadow-lg transition-opacity duration-300 ${
+                    isImageLoading ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
