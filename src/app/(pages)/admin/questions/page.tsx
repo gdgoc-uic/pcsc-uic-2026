@@ -1,12 +1,18 @@
 "use client";
 
-import { Loader2, Plus, Pencil, Trash2, Eye, EyeOff, ArrowDown, ArrowUp } from "lucide-react";
+import { Eye, EyeOff, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
 import type { QuestionType } from "@/types/evaluation";
 
 type QuestionMeta =
-  | { min: number; max: number; min_label: string; max_label: string; show_numbers: boolean }
+  | {
+      min: number;
+      max: number;
+      min_label: string;
+      max_label: string;
+      show_numbers: boolean;
+    }
   | { placeholder: string; max_length: number }
   | { placeholder: string; max_length: number; rows: number }
   | { options: string[]; allow_other: boolean }
@@ -36,11 +42,21 @@ type QuestionFormData = {
 };
 
 const defaultMetaByType: Record<QuestionType, QuestionMeta> = {
-  rating: { min: 1, max: 5, min_label: "Poor", max_label: "Excellent", show_numbers: true },
+  rating: {
+    min: 1,
+    max: 5,
+    min_label: "Poor",
+    max_label: "Excellent",
+    show_numbers: true,
+  },
   text: { placeholder: "", max_length: 500 },
   textarea: { placeholder: "", max_length: 2000, rows: 5 },
   select: { options: ["Option 1", "Option 2", "Option 3"], allow_other: false },
-  multiple: { options: ["Option 1", "Option 2", "Option 3"], min_select: 0, max_select: 3 },
+  multiple: {
+    options: ["Option 1", "Option 2", "Option 3"],
+    min_select: 0,
+    max_select: 3,
+  },
 };
 
 const questionTypeLabels: Record<QuestionType, string> = {
@@ -77,13 +93,18 @@ export default function AdminEvaluationQuestionsPage() {
   });
   const [isSaving, setIsSaving] = useState(false);
 
-  const [previewAnswers, setPreviewAnswers] = useState<Record<string, unknown>>({});
+  const [previewAnswers, setPreviewAnswers] = useState<Record<string, unknown>>(
+    {},
+  );
 
   const loadQuestions = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/evaluation-questions");
-      const payload = (await response.json()) as { questions?: Question[]; message?: string };
+      const payload = (await response.json()) as {
+        questions?: Question[];
+        message?: string;
+      };
       if (!response.ok) {
         setMessage(payload.message ?? "Unable to load questions.");
         return;
@@ -146,11 +167,21 @@ export default function AdminEvaluationQuestionsPage() {
     }));
   };
 
-  const handleTextChange = (key: keyof QuestionFormData, value: string | boolean | number) => {
+  const handleTextChange = (
+    key: keyof QuestionFormData,
+    value: string | boolean | number,
+  ) => {
     if (key === "question_text" && typeof value === "string") {
       const autoKey = generateKey(value);
-      if (!formData.question_key || formData.question_key === generateKey(formData.question_text)) {
-        setFormData((prev) => ({ ...prev, question_text: value, question_key: autoKey }));
+      if (
+        !formData.question_key ||
+        formData.question_key === generateKey(formData.question_text)
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          question_text: value,
+          question_key: autoKey,
+        }));
         return;
       }
     }
@@ -231,7 +262,9 @@ export default function AdminEvaluationQuestionsPage() {
     }
 
     try {
-      const response = await fetch(`/api/evaluation-questions?id=${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/evaluation-questions?id=${id}`, {
+        method: "DELETE",
+      });
       const payload = (await response.json()) as { message?: string };
       if (!response.ok) {
         setMessage(payload.message ?? "Failed to delete question.");
@@ -263,29 +296,42 @@ export default function AdminEvaluationQuestionsPage() {
   };
 
   const activeQuestions = useMemo(
-    () => questions.filter((q) => q.is_active).sort((a, b) => a.display_order - b.display_order),
+    () =>
+      questions
+        .filter((q) => q.is_active)
+        .sort((a, b) => a.display_order - b.display_order),
     [questions],
   );
 
-  const isRatingMeta = (m: QuestionMeta): m is { min: number; max: number; min_label: string; max_label: string; show_numbers: boolean } =>
-    "min" in m && "max" in m && !("options" in m);
+  const isRatingMeta = (
+    m: QuestionMeta,
+  ): m is {
+    min: number;
+    max: number;
+    min_label: string;
+    max_label: string;
+    show_numbers: boolean;
+  } => "min" in m && "max" in m && !("options" in m);
 
-  const isSelectMeta = (m: QuestionMeta): m is { options: string[]; allow_other: boolean } =>
+  const isSelectMeta = (
+    m: QuestionMeta,
+  ): m is { options: string[]; allow_other: boolean } =>
     "options" in m && !("min_select" in m);
 
-  const isMultipleMeta = (m: QuestionMeta): m is { options: string[]; min_select: number; max_select: number } =>
+  const isMultipleMeta = (
+    m: QuestionMeta,
+  ): m is { options: string[]; min_select: number; max_select: number } =>
     "options" in m && "min_select" in m;
 
-  const isTextMeta = (m: QuestionMeta): m is { placeholder: string; max_length: number } =>
+  const isTextMeta = (
+    m: QuestionMeta,
+  ): m is { placeholder: string; max_length: number } =>
     "max_length" in m && !("rows" in m);
 
-  const isTextareaMeta = (m: QuestionMeta): m is { placeholder: string; max_length: number; rows: number } =>
+  const isTextareaMeta = (
+    m: QuestionMeta,
+  ): m is { placeholder: string; max_length: number; rows: number } =>
     "rows" in m;
-
-  const getMetaValue = <T,>(m: QuestionMeta, key: string, fallback: T): T => {
-    const val = (m as Record<string, unknown>)[key];
-    return val !== undefined ? (val as T) : fallback;
-  };
 
   return (
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
@@ -345,7 +391,9 @@ export default function AdminEvaluationQuestionsPage() {
         ) : (
           <div className="grid gap-4 lg:grid-cols-2">
             <section className="space-y-3">
-              <h3 className="text-sm font-semibold text-white/80">All Questions</h3>
+              <h3 className="text-sm font-semibold text-white/80">
+                All Questions
+              </h3>
               {questions
                 .slice()
                 .sort((a, b) => a.display_order - b.display_order)
@@ -378,13 +426,19 @@ export default function AdminEvaluationQuestionsPage() {
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-white/50 font-mono">{question.question_key}</p>
-                        <p className="text-xs text-white/40 mt-1">Order: {question.display_order}</p>
+                        <p className="text-xs text-white/50 font-mono">
+                          {question.question_key}
+                        </p>
+                        <p className="text-xs text-white/40 mt-1">
+                          Order: {question.display_order}
+                        </p>
                       </div>
                       <div className="flex shrink-0 gap-1">
                         <button
                           type="button"
-                          onClick={() => handleToggleActive(question.id, question.is_active)}
+                          onClick={() =>
+                            handleToggleActive(question.id, question.is_active)
+                          }
                           className="rounded-md p-1.5 text-white/70 hover:bg-white/10"
                           title={question.is_active ? "Deactivate" : "Activate"}
                         >
@@ -417,14 +471,19 @@ export default function AdminEvaluationQuestionsPage() {
             </section>
 
             <section className="space-y-3">
-              <h3 className="text-sm font-semibold text-white/80">Live Preview</h3>
+              <h3 className="text-sm font-semibold text-white/80">
+                Live Preview
+              </h3>
               <div className="rounded-xl border border-brick-red-600 bg-brick-red-900/40 p-5 space-y-5">
                 <p className="text-xs text-white/60 italic">
-                  This is a preview of how the evaluation form appears to participants.
+                  This is a preview of how the evaluation form appears to
+                  participants.
                 </p>
 
                 <div>
-                  <p className="text-sm text-white/90 mb-1">Full Name (for certificate)</p>
+                  <p className="text-sm text-white/90 mb-1">
+                    Full Name (for certificate)
+                  </p>
                   <input
                     type="text"
                     value="Jane Doe"
@@ -434,95 +493,150 @@ export default function AdminEvaluationQuestionsPage() {
                 </div>
 
                 {activeQuestions.length === 0 ? (
-                  <p className="text-sm text-white/50">No active questions to display.</p>
+                  <p className="text-sm text-white/50">
+                    No active questions to display.
+                  </p>
                 ) : (
                   activeQuestions.map((question) => (
                     <div key={question.id} className="space-y-2">
                       <p className="text-sm text-white">
                         {question.question_text}
-                        {question.is_required && <span className="text-rose-400 ml-1">*</span>}
+                        {question.is_required && (
+                          <span className="text-rose-400 ml-1">*</span>
+                        )}
                       </p>
 
-                      {question.question_type === "rating" && isRatingMeta(question.meta) && (
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap gap-2">
-                            {Array.from({ length: (question.meta as { max: number }).max - (question.meta as { min: number }).min + 1 }, (_, i) => i + (question.meta as { min: number }).min).map((n) => (
-                              <button
-                                key={n}
-                                type="button"
-                                onClick={() =>
-                                  setPreviewAnswers((prev) => ({ ...prev, [question.question_key]: n }))
+                      {question.question_type === "rating" &&
+                        isRatingMeta(question.meta) && (
+                          <div className="space-y-2">
+                            <div className="flex flex-wrap gap-2">
+                              {Array.from(
+                                {
+                                  length:
+                                    (question.meta as { max: number }).max -
+                                    (question.meta as { min: number }).min +
+                                    1,
+                                },
+                                (_, i) =>
+                                  i + (question.meta as { min: number }).min,
+                              ).map((n) => (
+                                <button
+                                  key={n}
+                                  type="button"
+                                  onClick={() =>
+                                    setPreviewAnswers((prev) => ({
+                                      ...prev,
+                                      [question.question_key]: n,
+                                    }))
+                                  }
+                                  className={`h-10 w-10 rounded-md border text-sm font-semibold transition-colors ${
+                                    previewAnswers[question.question_key] === n
+                                      ? "border-white bg-white text-brick-red-700"
+                                      : "border-brick-red-500 bg-brick-red-800/60 text-white hover:bg-brick-red-700"
+                                  }`}
+                                >
+                                  {(question.meta as { show_numbers: boolean })
+                                    .show_numbers
+                                    ? n
+                                    : ""}
+                                </button>
+                              ))}
+                            </div>
+                            <div className="flex justify-between text-xs text-white/60">
+                              <span>
+                                {
+                                  (question.meta as { min_label: string })
+                                    .min_label
                                 }
-                                className={`h-10 w-10 rounded-md border text-sm font-semibold transition-colors ${
-                                  previewAnswers[question.question_key] === n
-                                    ? "border-white bg-white text-brick-red-700"
-                                    : "border-brick-red-500 bg-brick-red-800/60 text-white hover:bg-brick-red-700"
-                                }`}
-                              >
-                                {(question.meta as { show_numbers: boolean }).show_numbers ? n : ""}
-                              </button>
+                              </span>
+                              <span>
+                                {
+                                  (question.meta as { max_label: string })
+                                    .max_label
+                                }
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                      {question.question_type === "text" &&
+                        isTextMeta(question.meta) && (
+                          <input
+                            type="text"
+                            placeholder={
+                              (question.meta as { placeholder: string })
+                                .placeholder || "Enter your answer..."
+                            }
+                            maxLength={
+                              (question.meta as { max_length: number })
+                                .max_length
+                            }
+                            className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white placeholder:text-white/40"
+                          />
+                        )}
+
+                      {question.question_type === "textarea" &&
+                        isTextareaMeta(question.meta) && (
+                          <textarea
+                            placeholder={
+                              (question.meta as { placeholder: string })
+                                .placeholder || "Enter your answer..."
+                            }
+                            maxLength={
+                              (question.meta as { max_length: number })
+                                .max_length
+                            }
+                            rows={(question.meta as { rows: number }).rows}
+                            className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white placeholder:text-white/40"
+                          />
+                        )}
+
+                      {question.question_type === "select" &&
+                        isSelectMeta(question.meta) && (
+                          <select className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white">
+                            <option value="">Select an option...</option>
+                            {(
+                              question.meta as { options: string[] }
+                            ).options.map((opt: string) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
                             ))}
+                          </select>
+                        )}
+
+                      {question.question_type === "multiple" &&
+                        isMultipleMeta(question.meta) && (
+                          <div className="space-y-2">
+                            {(
+                              question.meta as { options: string[] }
+                            ).options.map((opt: string) => (
+                              <label
+                                key={opt}
+                                className="flex items-center gap-2 rounded-md border border-brick-red-600 bg-brick-red-800/30 px-3 py-2 cursor-pointer hover:bg-brick-red-700/30"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
+                                />
+                                <span className="text-sm text-white">
+                                  {opt}
+                                </span>
+                              </label>
+                            ))}
+                            <p className="text-xs text-white/50">
+                              Select up to{" "}
+                              {
+                                (question.meta as { max_select: number })
+                                  .max_select
+                              }{" "}
+                              option(s)
+                            </p>
                           </div>
-                          <div className="flex justify-between text-xs text-white/60">
-                            <span>{(question.meta as { min_label: string }).min_label}</span>
-                            <span>{(question.meta as { max_label: string }).max_label}</span>
-                          </div>
-                        </div>
-                      )}
-
-                      {question.question_type === "text" && isTextMeta(question.meta) && (
-                        <input
-                          type="text"
-                          placeholder={(question.meta as { placeholder: string }).placeholder || "Enter your answer..."}
-                          maxLength={(question.meta as { max_length: number }).max_length}
-                          className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white placeholder:text-white/40"
-                        />
-                      )}
-
-                      {question.question_type === "textarea" && isTextareaMeta(question.meta) && (
-                        <textarea
-                          placeholder={(question.meta as { placeholder: string }).placeholder || "Enter your answer..."}
-                          maxLength={(question.meta as { max_length: number }).max_length}
-                          rows={(question.meta as { rows: number }).rows}
-                          className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white placeholder:text-white/40"
-                        />
-                      )}
-
-                      {question.question_type === "select" && isSelectMeta(question.meta) && (
-                        <select className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white">
-                          <option value="">Select an option...</option>
-                          {(question.meta as { options: string[] }).options.map((opt: string) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-
-                      {question.question_type === "multiple" && isMultipleMeta(question.meta) && (
-                        <div className="space-y-2">
-                          {(question.meta as { options: string[] }).options.map((opt: string) => (
-                            <label
-                              key={opt}
-                              className="flex items-center gap-2 rounded-md border border-brick-red-600 bg-brick-red-800/30 px-3 py-2 cursor-pointer hover:bg-brick-red-700/30"
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
-                              />
-                              <span className="text-sm text-white">{opt}</span>
-                            </label>
-                          ))}
-                          <p className="text-xs text-white/50">
-                            Select up to {(question.meta as { max_select: number }).max_select} option(s)
-                          </p>
-                        </div>
-                      )}
+                        )}
                     </div>
                   ))
                 )}
-
-                
               </div>
             </section>
           </div>
@@ -546,7 +660,9 @@ export default function AdminEvaluationQuestionsPage() {
                   id="q-text"
                   type="text"
                   value={formData.question_text}
-                  onChange={(e) => handleTextChange("question_text", e.target.value)}
+                  onChange={(e) =>
+                    handleTextChange("question_text", e.target.value)
+                  }
                   className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
                   placeholder="e.g., Overall conference experience"
                 />
@@ -562,14 +678,18 @@ export default function AdminEvaluationQuestionsPage() {
                 <select
                   id="q-type"
                   value={formData.question_type}
-                  onChange={(e) => handleTypeChange(e.target.value as QuestionType)}
+                  onChange={(e) =>
+                    handleTypeChange(e.target.value as QuestionType)
+                  }
                   className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
                 >
-                  {(Object.keys(questionTypeLabels) as QuestionType[]).map((type) => (
-                    <option key={type} value={type}>
-                      {questionTypeLabels[type]}
-                    </option>
-                  ))}
+                  {(Object.keys(questionTypeLabels) as QuestionType[]).map(
+                    (type) => (
+                      <option key={type} value={type}>
+                        {questionTypeLabels[type]}
+                      </option>
+                    ),
+                  )}
                 </select>
               </div>
 
@@ -584,7 +704,9 @@ export default function AdminEvaluationQuestionsPage() {
                   id="q-key"
                   type="text"
                   value={formData.question_key}
-                  onChange={(e) => handleTextChange("question_key", e.target.value)}
+                  onChange={(e) =>
+                    handleTextChange("question_key", e.target.value)
+                  }
                   className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white font-mono text-sm"
                   placeholder="e.g., overall_experience"
                 />
@@ -601,7 +723,9 @@ export default function AdminEvaluationQuestionsPage() {
                   id="q-order"
                   type="number"
                   value={formData.display_order}
-                  onChange={(e) => handleTextChange("display_order", Number(e.target.value))}
+                  onChange={(e) =>
+                    handleTextChange("display_order", Number(e.target.value))
+                  }
                   className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
                 />
               </div>
@@ -611,7 +735,9 @@ export default function AdminEvaluationQuestionsPage() {
                   <input
                     type="checkbox"
                     checked={formData.is_required}
-                    onChange={(e) => handleTextChange("is_required", e.target.checked)}
+                    onChange={(e) =>
+                      handleTextChange("is_required", e.target.checked)
+                    }
                     className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
                   />
                   <span className="text-sm text-white">Required</span>
@@ -620,7 +746,9 @@ export default function AdminEvaluationQuestionsPage() {
                   <input
                     type="checkbox"
                     checked={formData.is_active}
-                    onChange={(e) => handleTextChange("is_active", e.target.checked)}
+                    onChange={(e) =>
+                      handleTextChange("is_active", e.target.checked)
+                    }
                     className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
                   />
                   <span className="text-sm text-white">Active</span>
@@ -629,45 +757,79 @@ export default function AdminEvaluationQuestionsPage() {
             </div>
 
             <div className="rounded-lg border border-brick-red-600 bg-brick-red-900/50 p-4 space-y-4">
-              <h3 className="text-sm font-semibold text-white">Meta Configuration</h3>
+              <h3 className="text-sm font-semibold text-white">
+                Meta Configuration
+              </h3>
 
               {formData.question_type === "rating" && (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="sm:col-span-2 grid gap-3 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs text-white/70 mb-1">Min Value</label>
+                      <label
+                        htmlFor="q-meta-min"
+                        className="block text-xs text-white/70 mb-1"
+                      >
+                        Min Value
+                      </label>
                       <input
+                        id="q-meta-min"
                         type="number"
                         value={(formData.meta as { min: number }).min}
-                        onChange={(e) => handleMetaChange("min", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleMetaChange("min", Number(e.target.value))
+                        }
                         className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-white/70 mb-1">Max Value</label>
+                      <label
+                        htmlFor="q-meta-max"
+                        className="block text-xs text-white/70 mb-1"
+                      >
+                        Max Value
+                      </label>
                       <input
+                        id="q-meta-max"
                         type="number"
                         value={(formData.meta as { max: number }).max}
-                        onChange={(e) => handleMetaChange("max", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleMetaChange("max", Number(e.target.value))
+                        }
                         className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs text-white/70 mb-1">Min Label</label>
+                    <label
+                      htmlFor="q-meta-min-label"
+                      className="block text-xs text-white/70 mb-1"
+                    >
+                      Min Label
+                    </label>
                     <input
+                      id="q-meta-min-label"
                       type="text"
                       value={(formData.meta as { min_label: string }).min_label}
-                      onChange={(e) => handleMetaChange("min_label", e.target.value)}
+                      onChange={(e) =>
+                        handleMetaChange("min_label", e.target.value)
+                      }
                       className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-white/70 mb-1">Max Label</label>
+                    <label
+                      htmlFor="q-meta-max-label"
+                      className="block text-xs text-white/70 mb-1"
+                    >
+                      Max Label
+                    </label>
                     <input
+                      id="q-meta-max-label"
                       type="text"
                       value={(formData.meta as { max_label: string }).max_label}
-                      onChange={(e) => handleMetaChange("max_label", e.target.value)}
+                      onChange={(e) =>
+                        handleMetaChange("max_label", e.target.value)
+                      }
                       className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                     />
                   </div>
@@ -675,44 +837,80 @@ export default function AdminEvaluationQuestionsPage() {
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={(formData.meta as { show_numbers: boolean }).show_numbers}
-                        onChange={(e) => handleMetaChange("show_numbers", e.target.checked)}
+                        checked={
+                          (formData.meta as { show_numbers: boolean })
+                            .show_numbers
+                        }
+                        onChange={(e) =>
+                          handleMetaChange("show_numbers", e.target.checked)
+                        }
                         className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
                       />
-                      <span className="text-sm text-white">Show numbers on buttons</span>
+                      <span className="text-sm text-white">
+                        Show numbers on buttons
+                      </span>
                     </label>
                   </div>
                 </div>
               )}
 
-              {(formData.question_type === "text" || formData.question_type === "textarea") && (
+              {(formData.question_type === "text" ||
+                formData.question_type === "textarea") && (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs text-white/70 mb-1">Placeholder</label>
+                    <label
+                      htmlFor="q-meta-placeholder"
+                      className="block text-xs text-white/70 mb-1"
+                    >
+                      Placeholder
+                    </label>
                     <input
+                      id="q-meta-placeholder"
                       type="text"
-                      value={(formData.meta as { placeholder: string }).placeholder}
-                      onChange={(e) => handleMetaChange("placeholder", e.target.value)}
+                      value={
+                        (formData.meta as { placeholder: string }).placeholder
+                      }
+                      onChange={(e) =>
+                        handleMetaChange("placeholder", e.target.value)
+                      }
                       className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                       placeholder="Enter placeholder text..."
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-white/70 mb-1">Max Length</label>
+                    <label
+                      htmlFor="q-meta-max-length"
+                      className="block text-xs text-white/70 mb-1"
+                    >
+                      Max Length
+                    </label>
                     <input
+                      id="q-meta-max-length"
                       type="number"
-                      value={(formData.meta as { max_length: number }).max_length}
-                      onChange={(e) => handleMetaChange("max_length", Number(e.target.value))}
+                      value={
+                        (formData.meta as { max_length: number }).max_length
+                      }
+                      onChange={(e) =>
+                        handleMetaChange("max_length", Number(e.target.value))
+                      }
                       className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                     />
                   </div>
                   {formData.question_type === "textarea" && (
                     <div>
-                      <label className="block text-xs text-white/70 mb-1">Rows</label>
+                      <label
+                        htmlFor="q-meta-rows"
+                        className="block text-xs text-white/70 mb-1"
+                      >
+                        Rows
+                      </label>
                       <input
+                        id="q-meta-rows"
                         type="number"
                         value={(formData.meta as { rows: number }).rows}
-                        onChange={(e) => handleMetaChange("rows", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleMetaChange("rows", Number(e.target.value))
+                        }
                         className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                       />
                     </div>
@@ -720,16 +918,27 @@ export default function AdminEvaluationQuestionsPage() {
                 </div>
               )}
 
-              {(formData.question_type === "select" || formData.question_type === "multiple") && (
+              {(formData.question_type === "select" ||
+                formData.question_type === "multiple") && (
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs text-white/70 mb-1">Options (one per line)</label>
+                    <label
+                      htmlFor="q-meta-options"
+                      className="block text-xs text-white/70 mb-1"
+                    >
+                      Options (one per line)
+                    </label>
                     <textarea
-                      value={(formData.meta as { options: string[] }).options.join("\n")}
+                      id="q-meta-options"
+                      value={(
+                        formData.meta as { options: string[] }
+                      ).options.join("\n")}
                       onChange={(e) =>
                         handleMetaChange(
                           "options",
-                          e.target.value.split("\n").filter((line) => line.trim()),
+                          e.target.value
+                            .split("\n")
+                            .filter((line) => line.trim()),
                         )
                       }
                       rows={4}
@@ -741,30 +950,63 @@ export default function AdminEvaluationQuestionsPage() {
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
-                        checked={(formData.meta as { allow_other: boolean }).allow_other}
-                        onChange={(e) => handleMetaChange("allow_other", e.target.checked)}
+                        checked={
+                          (formData.meta as { allow_other: boolean })
+                            .allow_other
+                        }
+                        onChange={(e) =>
+                          handleMetaChange("allow_other", e.target.checked)
+                        }
                         className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
                       />
-                      <span className="text-sm text-white">Allow "Other" option</span>
+                      <span className="text-sm text-white">
+                        Allow "Other" option
+                      </span>
                     </label>
                   )}
                   {formData.question_type === "multiple" && (
                     <div className="grid gap-3 sm:grid-cols-2">
                       <div>
-                        <label className="block text-xs text-white/70 mb-1">Min Select</label>
+                        <label
+                          htmlFor="q-meta-min-select"
+                          className="block text-xs text-white/70 mb-1"
+                        >
+                          Min Select
+                        </label>
                         <input
+                          id="q-meta-min-select"
                           type="number"
-                          value={(formData.meta as { min_select: number }).min_select}
-                          onChange={(e) => handleMetaChange("min_select", Number(e.target.value))}
+                          value={
+                            (formData.meta as { min_select: number }).min_select
+                          }
+                          onChange={(e) =>
+                            handleMetaChange(
+                              "min_select",
+                              Number(e.target.value),
+                            )
+                          }
                           className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-white/70 mb-1">Max Select</label>
+                        <label
+                          htmlFor="q-meta-max-select"
+                          className="block text-xs text-white/70 mb-1"
+                        >
+                          Max Select
+                        </label>
                         <input
+                          id="q-meta-max-select"
                           type="number"
-                          value={(formData.meta as { max_select: number }).max_select}
-                          onChange={(e) => handleMetaChange("max_select", Number(e.target.value))}
+                          value={
+                            (formData.meta as { max_select: number }).max_select
+                          }
+                          onChange={(e) =>
+                            handleMetaChange(
+                              "max_select",
+                              Number(e.target.value),
+                            )
+                          }
                           className="w-full rounded-md border border-brick-red-500 bg-brick-red-900/70 px-2.5 py-1.5 text-sm text-white"
                         />
                       </div>

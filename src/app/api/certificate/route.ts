@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 import sharp from "sharp";
+import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 
@@ -63,7 +63,7 @@ export async function GET(request: Request) {
         );
       }
 
-      const adminClient = createAdminSupabaseClient() as any;
+      const adminClient = createAdminSupabaseClient();
       const { data, error } = await adminClient
         .from("certificate_templates")
         .select(
@@ -102,7 +102,7 @@ export async function GET(request: Request) {
     });
 
     const normalizedEmail = query.email.trim().toLowerCase();
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
 
     const { data: stakeholder, error: stakeholderError } = await adminClient
       .from("stakeholders")
@@ -203,7 +203,7 @@ export async function POST(request: Request) {
     const safeName = sanitizeFileName(file.name.replace(`.${fileExt}`, ""));
     const filePath = `${Date.now()}-${safeName || "template"}.${fileExt}`;
 
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
     const fileBuffer = Buffer.from(await file.arrayBuffer());
 
     let templateWidth = 1920;
@@ -291,7 +291,7 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
     const payload = patchPayloadSchema.parse(body);
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
 
     if (payload.action === "setActive") {
       const { error: deactivateError } = await adminClient

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
+import type { Database } from "@/lib/supabase/database.types";
 
 const createStakeholderSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -31,7 +32,7 @@ export async function GET() {
       );
     }
 
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
     const { data, error } = await adminClient
       .from("stakeholders")
       .select("id, email, full_name, is_active, created_at, updated_at")
@@ -69,7 +70,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const payload = createStakeholderSchema.parse(body);
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
 
     const { data: existing, error: checkError } = await adminClient
       .from("stakeholders")
@@ -140,7 +141,7 @@ export async function PATCH(request: Request) {
   try {
     const body = await request.json();
     const payload = updateStakeholderSchema.parse(body);
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
 
     const { data: existing, error: checkError } = await adminClient
       .from("stakeholders")
@@ -155,7 +156,10 @@ export async function PATCH(request: Request) {
       );
     }
 
-    if (payload.email && payload.email.toLowerCase().trim() !== existing.email) {
+    if (
+      payload.email &&
+      payload.email.toLowerCase().trim() !== existing.email
+    ) {
       const { data: conflict, error: conflictError } = await adminClient
         .from("stakeholders")
         .select("id")
@@ -178,7 +182,8 @@ export async function PATCH(request: Request) {
       }
     }
 
-    const updateData: Record<string, unknown> = {};
+    const updateData: Database["public"]["Tables"]["stakeholders"]["Update"] =
+      {};
     if (payload.email !== undefined) {
       updateData.email = payload.email.toLowerCase().trim();
     }
@@ -251,7 +256,7 @@ export async function DELETE(request: Request) {
     }
 
     const payload = deleteStakeholderSchema.parse({ id });
-    const adminClient = createAdminSupabaseClient() as any;
+    const adminClient = createAdminSupabaseClient();
 
     const { data: existing, error: checkError } = await adminClient
       .from("stakeholders")
@@ -271,9 +276,9 @@ export async function DELETE(request: Request) {
       .select("id")
       .eq("stakeholder_id", payload.id)
       .limit(1)
-      .maybe();
+      .maybeSingle();
 
-    if (!submissionsError && submissions && submissions.length > 0) {
+    if (!submissionsError && submissions) {
       const { error: deactivateError } = await adminClient
         .from("stakeholders")
         .update({ is_active: false })
@@ -287,7 +292,8 @@ export async function DELETE(request: Request) {
       }
 
       return NextResponse.json({
-        message: "Participant has existing submissions. Deactivated instead of deleted.",
+        message:
+          "Participant has existing submissions. Deactivated instead of deleted.",
       });
     }
 

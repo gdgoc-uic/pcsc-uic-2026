@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { generateCertificateForSubmission } from "@/lib/certificate/generate";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
-import { requireAdmin } from "@/lib/auth/requireAdmin";
 import type { Json } from "@/lib/supabase/database.types";
 
 const validatePayloadSchema = z.object({
@@ -25,13 +25,39 @@ const payloadSchema = z.discriminatedUnion("intent", [
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
+type SubmissionWithStakeholderRow = {
+  id: string;
+  submitted_name: string;
+  email: string;
+  answers: Record<string, unknown> | null;
+  comment: string | null;
+  certificate_path: string | null;
+  certificate_download_url: string | null;
+  created_at: string;
+  stakeholder: { full_name: string | null } | null;
+};
+
+type StakeholderStatusRow = {
+  is_active: boolean;
+};
+
+type QuestionStatsRow = {
+  question_key: string;
+  question_type: string;
+  question_text: string;
+};
+
+type SubmissionStatsRow = {
+  answers: Record<string, unknown> | null;
+};
+
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const scope = url.searchParams.get("scope");
 
     if (scope === "questions") {
-      const adminClient = createAdminSupabaseClient() as any;
+      const adminClient = createAdminSupabaseClient();
       const { data, error } = await adminClient
         .from("evaluation_questions")
         .select(
@@ -59,7 +85,7 @@ export async function GET(request: Request) {
         );
       }
 
-      const adminClient = createAdminSupabaseClient() as any;
+      const adminClient = createAdminSupabaseClient();
       const { data, error } = await adminClient
         .from("evaluation_submissions")
         .select(`
@@ -82,17 +108,19 @@ export async function GET(request: Request) {
         );
       }
 
-      const submissions = (data ?? []).map((row: any) => ({
-        id: row.id,
-        submitted_name: row.submitted_name,
-        email: row.email,
-        answers: row.answers,
-        comment: row.comment,
-        certificate_path: row.certificate_path,
-        certificate_download_url: row.certificate_download_url,
-        created_at: row.created_at,
-        stakeholder_name: row.stakeholder?.full_name,
-      }));
+      const submissions = ((data ?? []) as SubmissionWithStakeholderRow[]).map(
+        (row) => ({
+          id: row.id,
+          submitted_name: row.submitted_name,
+          email: row.email,
+          answers: row.answers,
+          comment: row.comment,
+          certificate_path: row.certificate_path,
+          certificate_download_url: row.certificate_download_url,
+          created_at: row.created_at,
+          stakeholder_name: row.stakeholder?.full_name,
+        }),
+      );
 
       return NextResponse.json({ submissions });
     }
@@ -106,24 +134,40 @@ export async function GET(request: Request) {
         );
       }
 
-      const adminClient = createAdminSupabaseClient() as any;
+      const adminClient = createAdminSupabaseClient();
 
-      const [submissionsRes, questionsRes, stakeholdersRes] = await Promise.all([
-        adminClient.from("evaluation_submissions").select("id, answers").order("created_at", { ascending: false }),
-        adminClient.from("evaluation_questions").select("question_key, question_type, question_text").eq("is_active", true).order("display_order"),
-        adminClient.from("stakeholders").select("id, is_active"),
-      ]);
+      const [submissionsRes, questionsRes, stakeholdersRes] = await Promise.all(
+        [
+          adminClient
+            .from("evaluation_submissions")
+            .select("id, answers")
+            .order("created_at", { ascending: false }),
+          adminClient
+            .from("evaluation_questions")
+            .select("question_key, question_type, question_text")
+            .eq("is_active", true)
+            .order("display_order"),
+          adminClient.from("stakeholders").select("id, is_active"),
+        ],
+      );
 
-      const submissions = submissionsRes.data ?? [];
-      const questions = questionsRes.data ?? [];
-      const stakeholders = stakeholdersRes.data ?? [];
+      const submissions = (submissionsRes.data ?? []) as SubmissionStatsRow[];
+      const questions = (questionsRes.data ?? []) as QuestionStatsRow[];
+      const stakeholders = (stakeholdersRes.data ??
+        []) as StakeholderStatusRow[];
 
       const totalStakeholders = stakeholders.length;
-      const activeStakeholders = stakeholders.filter((s: any) => s.is_active).length;
+      const activeStakeholders = stakeholders.filter((s) => s.is_active).length;
       const totalSubmissions = submissions.length;
-      const participationRate = totalStakeholders > 0 ? (totalSubmissions / activeStakeholders) * 100 : 0;
+      const participationRate =
+        totalStakeholders > 0
+          ? (totalSubmissions / activeStakeholders) * 100
+          : 0;
 
-      const questionStats: Record<string, { count: number; sum: number; avg: number; min: number; max: number }> = {};
+      const questionStats: Record<
+        string,
+        { count: number; sum: number; avg: number; min: number; max: number }
+      > = {};
 
       for (const q of questions) {
         const key = q.question_key;
@@ -158,7 +202,7 @@ export async function GET(request: Request) {
           total_submissions: totalSubmissions,
           participation_rate: Math.round(participationRate * 10) / 10,
           question_stats: questionStats,
-          questions: questions.map((q: any) => ({
+          questions: questions.map((q) => ({
             key: q.question_key,
             type: q.question_type,
             text: q.question_text,

@@ -2,8 +2,8 @@
 
 import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import PageHero from "@/app/components/sections/PageHero";
 import { TemplateBuilder } from "@/app/components/admin/TemplateBuilder";
+import PageHero from "@/app/components/sections/PageHero";
 import { normalizeHexColor } from "@/lib/utils/color";
 
 type Template = {
@@ -61,7 +61,6 @@ export default function AdminCertificatesPage() {
   const [updatingTemplateId, setUpdatingTemplateId] = useState<string | null>(
     null,
   );
-  const [builderKey, setBuilderKey] = useState(0);
 
   const hasTemplates = useMemo(() => templates.length > 0, [templates]);
 
@@ -404,6 +403,7 @@ export default function AdminCertificatesPage() {
                 </div>
 
                 {template.preview_url ? (
+                  // biome-ignore lint/performance/noImgElement: Signed external preview URLs are displayed as-is in admin.
                   <img
                     src={template.preview_url}
                     alt="Certificate template preview"

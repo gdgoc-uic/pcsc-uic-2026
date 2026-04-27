@@ -1,6 +1,17 @@
 "use client";
 
-import { Loader2, Plus, Pencil, Trash2, Upload, Eye, EyeOff, X, Users, AlertCircle } from "lucide-react";
+import {
+  AlertCircle,
+  Eye,
+  EyeOff,
+  Loader2,
+  Pencil,
+  Plus,
+  Trash2,
+  Upload,
+  Users,
+  X,
+} from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
 
@@ -53,7 +64,10 @@ export default function AdminStakeholdersPage() {
     setIsLoading(true);
     try {
       const response = await fetch("/api/stakeholders");
-      const payload = (await response.json()) as { stakeholders?: Stakeholder[]; message?: string };
+      const payload = (await response.json()) as {
+        stakeholders?: Stakeholder[];
+        message?: string;
+      };
       if (!response.ok) {
         setMessage(payload.message ?? "Unable to load participants.");
         return;
@@ -158,7 +172,9 @@ export default function AdminStakeholdersPage() {
     }
 
     try {
-      const response = await fetch(`/api/stakeholders?id=${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/stakeholders?id=${id}`, {
+        method: "DELETE",
+      });
       const payload = (await response.json()) as { message?: string };
       if (!response.ok) {
         setMessage(payload.message ?? "Failed to delete participant.");
@@ -191,7 +207,11 @@ export default function AdminStakeholdersPage() {
 
   const handleImport = async () => {
     const lines = importText.split("\n").filter((l) => l.trim());
-    const parsed = lines.map(parseCSVLine).filter(Boolean) as { email: string; name: string; role: string }[];
+    const parsed = lines.map(parseCSVLine).filter(Boolean) as {
+      email: string;
+      name: string;
+      role: string;
+    }[];
 
     if (parsed.length === 0) {
       setImportError("No valid rows found. Use format: email, name, role");
@@ -230,7 +250,9 @@ export default function AdminStakeholdersPage() {
     }
 
     setImportError("");
-    setMessage(`Imported ${created} participant(s). Skipped ${skipped}. Failed ${failed}.`);
+    setMessage(
+      `Imported ${created} participant(s). Skipped ${skipped}. Failed ${failed}.`,
+    );
     setImportText("");
     setShowImport(false);
     await loadStakeholders();
@@ -312,24 +334,39 @@ export default function AdminStakeholdersPage() {
           <div className="rounded-xl border border-brick-red-600 bg-brick-red-800/30 p-8 text-center text-white/90">
             <Users className="h-8 w-8 mx-auto mb-2 text-white/50" />
             <p>No participants configured yet.</p>
-            <p className="text-sm text-white/60 mt-1">Click "Add Participant" to create one.</p>
+            <p className="text-sm text-white/60 mt-1">
+              Click "Add Participant" to create one.
+            </p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-xl border border-brick-red-600 bg-brick-red-800/30">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-brick-red-600">
-                  <th className="px-4 py-3 text-left font-semibold text-white">Name</th>
-                  <th className="px-4 py-3 text-left font-semibold text-white">Email</th>
-                  <th className="px-4 py-3 text-left font-semibold text-white">Status</th>
-                  <th className="px-4 py-3 text-right font-semibold text-white">Actions</th>
+                  <th className="px-4 py-3 text-left font-semibold text-white">
+                    Name
+                  </th>
+                  <th className="px-4 py-3 text-left font-semibold text-white">
+                    Email
+                  </th>
+                  <th className="px-4 py-3 text-left font-semibold text-white">
+                    Status
+                  </th>
+                  <th className="px-4 py-3 text-right font-semibold text-white">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {stakeholders.map((s) => (
-                  <tr key={s.id} className="border-b border-brick-red-600/50 last:border-b-0">
+                  <tr
+                    key={s.id}
+                    className="border-b border-brick-red-600/50 last:border-b-0"
+                  >
                     <td className="px-4 py-3 text-white">{s.full_name}</td>
-                    <td className="px-4 py-3 text-white/80 font-mono text-xs">{s.email}</td>
+                    <td className="px-4 py-3 text-white/80 font-mono text-xs">
+                      {s.email}
+                    </td>
                     <td className="px-4 py-3">
                       {s.is_active ? (
                         <span className="rounded-full bg-emerald-600/30 border border-emerald-400/50 px-2 py-0.5 text-xs text-emerald-100">
@@ -390,35 +427,55 @@ export default function AdminStakeholdersPage() {
                   </h3>
                   <div className="space-y-3">
                     <div>
-                      <label className="block text-sm text-white/90 mb-1">
+                      <label
+                        htmlFor="stakeholder-email"
+                        className="block text-sm text-white/90 mb-1"
+                      >
                         Email <span className="text-rose-400">*</span>
                       </label>
                       <input
+                        id="stakeholder-email"
                         type="email"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
                         placeholder="name@example.com"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm text-white/90 mb-1">
+                      <label
+                        htmlFor="stakeholder-full-name"
+                        className="block text-sm text-white/90 mb-1"
+                      >
                         Full Name <span className="text-rose-400">*</span>
                       </label>
                       <input
+                        id="stakeholder-full-name"
                         type="text"
                         value={formData.full_name}
-                        onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            full_name: e.target.value,
+                          })
+                        }
                         className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
                         placeholder="Juan dela Cruz"
                       />
                     </div>
-                    
+
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={formData.is_active}
-                        onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            is_active: e.target.checked,
+                          })
+                        }
                         className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white"
                       />
                       <span className="text-sm text-white">Active</span>
@@ -431,7 +488,9 @@ export default function AdminStakeholdersPage() {
                       disabled={isSaving}
                       className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100 disabled:opacity-60"
                     >
-                      {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+                      {isSaving ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : null}
                       {editingId ? "Save Changes" : "Add Participant"}
                     </button>
                     <button
@@ -449,7 +508,9 @@ export default function AdminStakeholdersPage() {
               {showImport && (
                 <>
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-white">Import Participants</h3>
+                    <h3 className="text-lg font-bold text-white">
+                      Import Participants
+                    </h3>
                     <button
                       type="button"
                       onClick={() => setShowImport(false)}
@@ -460,7 +521,9 @@ export default function AdminStakeholdersPage() {
                   </div>
                   <div className="rounded-lg border border-brick-red-600 bg-brick-red-900/50 p-3">
                     <p className="text-xs text-white/70 mb-2">
-                      Paste CSV data below. Format: <code className="text-rose-300">email, name, role</code> (one per line)
+                      Paste CSV data below. Format:{" "}
+                      <code className="text-rose-300">email, name, role</code>{" "}
+                      (one per line)
                     </p>
                     <textarea
                       value={importText}
@@ -483,7 +546,11 @@ export default function AdminStakeholdersPage() {
                       disabled={isImporting || !importText.trim()}
                       className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100 disabled:opacity-60"
                     >
-                      {isImporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                      {isImporting ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Upload className="h-4 w-4" />
+                      )}
                       Import Participants
                     </button>
                     <button

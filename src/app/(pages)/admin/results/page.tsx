@@ -1,7 +1,16 @@
 "use client";
 
-import { Loader2, Download, ChevronDown, ChevronUp, Users, CheckCircle, BarChart3, FileSpreadsheet } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  BarChart3,
+  CheckCircle,
+  ChevronDown,
+  ChevronUp,
+  Download,
+  FileSpreadsheet,
+  Loader2,
+  Users,
+} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
 
 type Submission = {
@@ -26,7 +35,10 @@ type Stats = {
   active_stakeholders: number;
   total_submissions: number;
   participation_rate: number;
-  question_stats: Record<string, { count: number; sum: number; avg: number; min: number; max: number }>;
+  question_stats: Record<
+    string,
+    { count: number; sum: number; avg: number; min: number; max: number }
+  >;
   questions: Question[];
 };
 
@@ -46,7 +58,9 @@ export default function AdminResultsPage() {
         fetch("/api/evaluation?scope=stats"),
       ]);
 
-      const subsPayload = (await subsRes.json()) as { submissions?: Submission[] };
+      const subsPayload = (await subsRes.json()) as {
+        submissions?: Submission[];
+      };
       const statsPayload = (await statsRes.json()) as { stats?: Stats };
 
       if (subsPayload.submissions) {
@@ -67,7 +81,7 @@ export default function AdminResultsPage() {
     void loadData();
   }, [loadData]);
 
-  const getAnswerDisplay = (answer: unknown, qType: string): string => {
+  const getAnswerDisplay = (answer: unknown): string => {
     if (answer === undefined || answer === null || answer === "") {
       return "—";
     }
@@ -81,17 +95,25 @@ export default function AdminResultsPage() {
   };
 
   const handleExportCSV = () => {
-    const headers = ["Name", "Email", ...questions.map((q) => q.text), "Comment", "Submitted At"];
+    const headers = [
+      "Name",
+      "Email",
+      ...questions.map((q) => q.text),
+      "Comment",
+      "Submitted At",
+    ];
     const rows = submissions.map((sub) => [
       sub.submitted_name,
       sub.email,
-      ...questions.map((q) => getAnswerDisplay(sub.answers[q.key], q.type)),
+      ...questions.map((q) => getAnswerDisplay(sub.answers[q.key])),
       sub.comment || "",
       sub.created_at,
     ]);
 
     const csvContent = [headers, ...rows]
-      .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, "\"\"")}"`).join(","))
+      .map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","),
+      )
       .join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -188,15 +210,22 @@ export default function AdminResultsPage() {
               </section>
             )}
 
-            {stats && stats.question_stats && questions.length > 0 && (
+            {stats?.question_stats && questions.length > 0 && (
               <section className="rounded-xl border border-brick-red-600 bg-brick-red-800/30 p-5">
-                <h2 className="text-lg font-bold text-white mb-4">Rating Averages</h2>
+                <h2 className="text-lg font-bold text-white mb-4">
+                  Rating Averages
+                </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {questions.map((q) => {
                     const qStat = stats.question_stats[q.key];
                     return (
-                      <div key={q.key} className="rounded-lg border border-brick-red-600 bg-brick-red-900/40 p-3">
-                        <p className="text-sm text-white/80 mb-1 line-clamp-2">{q.text}</p>
+                      <div
+                        key={q.key}
+                        className="rounded-lg border border-brick-red-600 bg-brick-red-900/40 p-3"
+                      >
+                        <p className="text-sm text-white/80 mb-1 line-clamp-2">
+                          {q.text}
+                        </p>
                         <div className="flex items-baseline gap-2">
                           <span className="text-2xl font-bold text-white">
                             {qStat?.avg ? qStat.avg.toFixed(1) : "—"}
@@ -244,12 +273,18 @@ export default function AdminResultsPage() {
                     >
                       <button
                         type="button"
-                        onClick={() => setExpandedId(expandedId === sub.id ? null : sub.id)}
+                        onClick={() =>
+                          setExpandedId(expandedId === sub.id ? null : sub.id)
+                        }
                         className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-brick-red-700/20"
                       >
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium text-white truncate">{sub.submitted_name}</p>
-                          <p className="text-xs text-white/60 truncate">{sub.email}</p>
+                          <p className="font-medium text-white truncate">
+                            {sub.submitted_name}
+                          </p>
+                          <p className="text-xs text-white/60 truncate">
+                            {sub.email}
+                          </p>
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="text-xs text-white/50 hidden sm:block">
@@ -268,7 +303,9 @@ export default function AdminResultsPage() {
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
                               <p className="text-xs text-white/50">Email</p>
-                              <p className="text-sm text-white font-mono">{sub.email}</p>
+                              <p className="text-sm text-white font-mono">
+                                {sub.email}
+                              </p>
                             </div>
                             <div>
                               <p className="text-xs text-white/50">Submitted</p>
@@ -279,13 +316,20 @@ export default function AdminResultsPage() {
                           </div>
 
                           <div>
-                            <p className="text-xs text-white/50 mb-2">Answers</p>
+                            <p className="text-xs text-white/50 mb-2">
+                              Answers
+                            </p>
                             <div className="space-y-2">
                               {questions.map((q) => (
-                                <div key={q.key} className="flex justify-between gap-4 rounded-md border border-brick-red-600 bg-brick-red-900/40 px-3 py-2">
-                                  <span className="text-sm text-white/80 truncate">{q.text}</span>
+                                <div
+                                  key={q.key}
+                                  className="flex justify-between gap-4 rounded-md border border-brick-red-600 bg-brick-red-900/40 px-3 py-2"
+                                >
+                                  <span className="text-sm text-white/80 truncate">
+                                    {q.text}
+                                  </span>
                                   <span className="text-sm font-medium text-white">
-                                    {getAnswerDisplay(sub.answers[q.key], q.type)}
+                                    {getAnswerDisplay(sub.answers[q.key])}
                                   </span>
                                 </div>
                               ))}
@@ -294,7 +338,9 @@ export default function AdminResultsPage() {
 
                           {sub.comment && (
                             <div>
-                              <p className="text-xs text-white/50 mb-1">Comment</p>
+                              <p className="text-xs text-white/50 mb-1">
+                                Comment
+                              </p>
                               <p className="text-sm text-white rounded-md border border-brick-red-600 bg-brick-red-900/40 px-3 py-2">
                                 {sub.comment}
                               </p>
