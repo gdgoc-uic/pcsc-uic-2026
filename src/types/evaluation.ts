@@ -56,3 +56,21 @@ export interface FormSubmission {
   answers: Record<string, unknown>;
   comment?: string;
 }
+
+export interface EvaluationStakeholder {
+  fullName: string;
+}
+
+export interface EvaluationValidationResponse {
+  allowed: boolean;
+  alreadySubmitted: boolean;
+  message?: string;
+  stakeholder?: EvaluationStakeholder;
+}
+
+export interface EvaluationSubmissionResponse {
+  success?: boolean;
+  submissionId?: string;
+  message?: string;
+  detail?: string;
+}

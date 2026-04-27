@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { createHmac, timingSafeEqual } from "node:crypto";
+import { type NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
@@ -6,6 +7,7 @@ import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 
 const TEMPLATE_BUCKET = "certificate-templates";
 const GENERATED_BUCKET = "generated-certificates";
+const PREVIEW_COOKIE_NAME = "pcsc_certificate_preview";
 
 const templateConfigSchema = z.object({
   templateId: z.uuid(),
@@ -42,13 +44,92 @@ const downloadQuerySchema = z.object({
   email: z.email(),
 });
 
+const previewSessionSchema = z.object({
+  submissionId: z.uuid(),
+  stakeholderId: z.uuid(),
+  stakeholderName: z.string().min(1).max(120),
+  isNewSubmission: z.boolean(),
+  exp: z.number().int().positive(),
+  nonce: z.string().min(16),
+});
+
+const getPreviewSessionSecret = () => {
+  const value =
+    process.env.CERTIFICATE_PREVIEW_SECRET ||
+    process.env.NEXTAUTH_SECRET ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!value) {
+    throw new Error(
+      "Missing preview session secret. Set CERTIFICATE_PREVIEW_SECRET or NEXTAUTH_SECRET.",
+    );
+  }
+
+  return value;
+};
+
+const clearPreviewCookie = (response: NextResponse) => {
+  response.cookies.set({
+    name: PREVIEW_COOKIE_NAME,
+    value: "",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+};
+
+const verifyPreviewSessionToken = (token: string) => {
+  const [encodedPayload, signature] = token.split(".");
+
+  if (!encodedPayload || !signature) {
+    return { ok: false as const, reason: "invalid" as const };
+  }
+
+  const expectedSignature = createHmac("sha256", getPreviewSessionSecret())
+    .update(encodedPayload)
+    .digest("base64url");
+
+  const expectedBuffer = Buffer.from(expectedSignature);
+  const receivedBuffer = Buffer.from(signature);
+
+  if (
+    expectedBuffer.length !== receivedBuffer.length ||
+    !timingSafeEqual(expectedBuffer, receivedBuffer)
+  ) {
+    return { ok: false as const, reason: "invalid" as const };
+  }
+
+  let parsed: unknown;
+
+  try {
+    parsed = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
+  } catch {
+    return { ok: false as const, reason: "invalid" as const };
+  }
+
+  const payloadResult = previewSessionSchema.safeParse(parsed);
+
+  if (!payloadResult.success) {
+    return { ok: false as const, reason: "invalid" as const };
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  if (payloadResult.data.exp <= now) {
+    return { ok: false as const, reason: "expired" as const };
+  }
+
+  return { ok: true as const, payload: payloadResult.data };
+};
+
 const sanitizeFileName = (fileName: string) =>
   fileName
     .toLowerCase()
     .replaceAll(/[^a-z0-9.-]+/g, "-")
     .replaceAll(/^-+|-+$/g, "");
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const scope = url.searchParams.get("scope");
@@ -94,6 +175,88 @@ export async function GET(request: Request) {
       );
 
       return NextResponse.json({ templates: templatesWithPreview });
+    }
+
+    if (scope === "preview") {
+      const token = request.cookies.get(PREVIEW_COOKIE_NAME)?.value;
+
+      if (!token) {
+        return NextResponse.json(
+          {
+            message:
+              "Your certificate preview session is missing. Please return to the evaluation page.",
+          },
+          { status: 401, headers: { "Cache-Control": "no-store" } },
+        );
+      }
+
+      const verificationResult = verifyPreviewSessionToken(token);
+
+      if (!verificationResult.ok) {
+        const response = NextResponse.json(
+          {
+            message:
+              verificationResult.reason === "expired"
+                ? "Your certificate preview session has expired. Please validate your email again."
+                : "Your certificate preview session is invalid. Please validate your email again.",
+          },
+          { status: 401, headers: { "Cache-Control": "no-store" } },
+        );
+
+        clearPreviewCookie(response);
+        return response;
+      }
+
+      const adminClient = createAdminSupabaseClient();
+
+      const { data: submission, error: submissionError } = await adminClient
+        .from("evaluation_submissions")
+        .select("certificate_path")
+        .eq("id", verificationResult.payload.submissionId)
+        .eq("stakeholder_id", verificationResult.payload.stakeholderId)
+        .maybeSingle();
+
+      if (submissionError || !submission) {
+        const response = NextResponse.json(
+          { message: "Unable to find your certificate submission." },
+          { status: 404, headers: { "Cache-Control": "no-store" } },
+        );
+
+        clearPreviewCookie(response);
+        return response;
+      }
+
+      if (!submission.certificate_path) {
+        return NextResponse.json(
+          {
+            message:
+              "Your certificate is not ready yet. Please try again in a few moments.",
+          },
+          { status: 404, headers: { "Cache-Control": "no-store" } },
+        );
+      }
+
+      const expiresIn = 60 * 60 * 24 * 7;
+      const { data: signedUrlData, error: signedUrlError } =
+        await adminClient.storage
+          .from(GENERATED_BUCKET)
+          .createSignedUrl(submission.certificate_path, expiresIn);
+
+      if (signedUrlError || !signedUrlData?.signedUrl) {
+        return NextResponse.json(
+          { message: "Unable to issue certificate download link." },
+          { status: 500, headers: { "Cache-Control": "no-store" } },
+        );
+      }
+
+      return NextResponse.json(
+        {
+          certificateUrl: signedUrlData.signedUrl,
+          stakeholderName: verificationResult.payload.stakeholderName,
+          isNewSubmission: verificationResult.payload.isNewSubmission,
+        },
+        { headers: { "Cache-Control": "no-store" } },
+      );
     }
 
     const query = downloadQuerySchema.parse({

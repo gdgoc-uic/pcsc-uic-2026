@@ -4,7 +4,11 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
-import type { QuestionType } from "@/types/evaluation";
+import type {
+  EvaluationSubmissionResponse,
+  EvaluationValidationResponse,
+  QuestionType,
+} from "@/types/evaluation";
 
 type QuestionMeta =
   | { min: number; max: number; min_label: string; max_label: string; show_numbers: boolean }
@@ -22,25 +26,6 @@ type Question = {
   display_order: number;
   meta: QuestionMeta;
   is_active: boolean;
-};
-
-type ValidationResult = {
-  allowed: boolean;
-  alreadySubmitted: boolean;
-  existingSubmissionId?: string | null;
-  existingCertificateUrl?: string | null;
-  message?: string;
-  stakeholder?: {
-    fullName: string;
-  };
-};
-
-type SubmissionResult = {
-  success?: boolean;
-  submissionId?: string;
-  certificateUrl?: string;
-  message?: string;
-  detail?: string;
 };
 
 type FormAnswers = Record<string, unknown>;
@@ -73,9 +58,9 @@ export default function EvaluationPage() {
   const [answers, setAnswers] = useState<FormAnswers>({});
 
   const [validationResult, setValidationResult] =
-    useState<ValidationResult | null>(null);
+    useState<EvaluationValidationResponse | null>(null);
   const [submissionResult, setSubmissionResult] =
-    useState<SubmissionResult | null>(null);
+    useState<EvaluationSubmissionResponse | null>(null);
   const [statusMessage, setStatusMessage] = useState("");
   const [isValidating, setIsValidating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -141,7 +126,7 @@ export default function EvaluationPage() {
         body: JSON.stringify({ intent: "validate", email: trimmedEmail }),
       });
 
-      const result = (await response.json()) as ValidationResult;
+      const result = (await response.json()) as EvaluationValidationResponse;
       setValidationResult(result);
 
       if (result.allowed && result.stakeholder?.fullName) {
@@ -157,14 +142,7 @@ export default function EvaluationPage() {
 
       if (result.alreadySubmitted) {
         setStakeholderName(result.stakeholder?.fullName ?? "");
-        const params = new URLSearchParams({
-          email: trimmedEmail,
-          name: result.stakeholder?.fullName ?? "",
-        });
-        if (result.existingCertificateUrl) {
-          params.set("certificateUrl", result.existingCertificateUrl);
-        }
-        router.push(`/evaluation/certificate-preview?${params.toString()}`);
+        router.push("/evaluation/certificate-preview");
         return;
       }
 
@@ -201,7 +179,7 @@ export default function EvaluationPage() {
         }),
       });
 
-      const result = (await response.json()) as SubmissionResult;
+      const result = (await response.json()) as EvaluationSubmissionResponse;
 
       if (!response.ok && response.status !== 202) {
         setStatusMessage(
@@ -211,17 +189,7 @@ export default function EvaluationPage() {
       }
 
       setSubmissionResult(result);
-
-      const params = new URLSearchParams({
-        submissionId: result.submissionId ?? "",
-        email: email.trim().toLowerCase(),
-        name: stakeholderName,
-        new: "true",
-      });
-      if (result.certificateUrl) {
-        params.set("certificateUrl", result.certificateUrl);
-      }
-      router.push(`/evaluation/certificate-preview?${params.toString()}`);
+      router.push("/evaluation/certificate-preview");
     } catch {
       setStatusMessage("Network issue detected. Please check your connection and submit again.");
     } finally {

@@ -1,9 +1,65 @@
 import { NextResponse } from "next/server";
+import { createHmac, randomBytes } from "node:crypto";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { generateCertificateForSubmission } from "@/lib/certificate/generate";
 import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 import type { Json } from "@/lib/supabase/database.types";
+
+const PREVIEW_COOKIE_NAME = "pcsc_certificate_preview";
+const PREVIEW_COOKIE_MAX_AGE_SECONDS = 60 * 20;
+
+type PreviewSessionPayload = {
+  submissionId: string;
+  stakeholderId: string;
+  stakeholderName: string;
+  isNewSubmission: boolean;
+  exp: number;
+  nonce: string;
+};
+
+const getPreviewSessionSecret = () => {
+  const value =
+    process.env.CERTIFICATE_PREVIEW_SECRET ||
+    process.env.NEXTAUTH_SECRET ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!value) {
+    throw new Error(
+      "Missing preview session secret. Set CERTIFICATE_PREVIEW_SECRET or NEXTAUTH_SECRET.",
+    );
+  }
+
+  return value;
+};
+
+const createPreviewSessionToken = (payload: Omit<PreviewSessionPayload, "exp" | "nonce">) => {
+  const now = Math.floor(Date.now() / 1000);
+  const fullPayload: PreviewSessionPayload = {
+    ...payload,
+    exp: now + PREVIEW_COOKIE_MAX_AGE_SECONDS,
+    nonce: randomBytes(16).toString("base64url"),
+  };
+
+  const encodedPayload = Buffer.from(JSON.stringify(fullPayload)).toString("base64url");
+  const signature = createHmac("sha256", getPreviewSessionSecret())
+    .update(encodedPayload)
+    .digest("base64url");
+
+  return `${encodedPayload}.${signature}`;
+};
+
+const attachPreviewSessionCookie = (response: NextResponse, token: string) => {
+  response.cookies.set({
+    name: PREVIEW_COOKIE_NAME,
+    value: token,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: PREVIEW_COOKIE_MAX_AGE_SECONDS,
+  });
+};
 
 const validatePayloadSchema = z.object({
   intent: z.literal("validate"),
@@ -108,7 +164,7 @@ export async function GET(request: Request) {
         );
       }
 
-      const submissions = ((data ?? []) as SubmissionWithStakeholderRow[]).map(
+      const submissions = ((data ?? []) as unknown as SubmissionWithStakeholderRow[]).map(
         (row) => ({
           id: row.id,
           submitted_name: row.submitted_name,
@@ -266,7 +322,7 @@ export async function POST(request: Request) {
       const { data: existingSubmission, error: submissionError } =
         await adminClient
           .from("evaluation_submissions")
-          .select("id, certificate_download_url")
+          .select("id")
           .eq("stakeholder_id", stakeholder.id)
           .maybeSingle();
 
@@ -277,12 +333,30 @@ export async function POST(request: Request) {
         );
       }
 
+      if (existingSubmission) {
+        const previewToken = createPreviewSessionToken({
+          submissionId: existingSubmission.id,
+          stakeholderId: stakeholder.id,
+          stakeholderName: stakeholder.full_name ?? "Participant",
+          isNewSubmission: false,
+        });
+
+        const response = NextResponse.json({
+          allowed: true,
+          alreadySubmitted: true,
+          stakeholder: {
+            fullName: stakeholder.full_name,
+          },
+        });
+
+        attachPreviewSessionCookie(response, previewToken);
+
+        return response;
+      }
+
       return NextResponse.json({
         allowed: true,
-        alreadySubmitted: Boolean(existingSubmission),
-        existingSubmissionId: existingSubmission?.id ?? null,
-        existingCertificateUrl:
-          existingSubmission?.certificate_download_url ?? null,
+        alreadySubmitted: false,
         stakeholder: {
           fullName: stakeholder.full_name,
         },
@@ -338,7 +412,7 @@ export async function POST(request: Request) {
 
     const { data: existingSubmission } = await adminClient
       .from("evaluation_submissions")
-      .select("id, certificate_download_url")
+      .select("id")
       .eq("stakeholder_id", stakeholder.id)
       .maybeSingle();
 
@@ -346,8 +420,6 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message: "This participant has already submitted an evaluation.",
-          existingSubmissionId: existingSubmission.id,
-          existingCertificateUrl: existingSubmission.certificate_download_url,
         },
         { status: 409 },
       );
@@ -388,24 +460,51 @@ export async function POST(request: Request) {
         .eq("id", createdSubmission.id);
 
       if (updateError) {
-        return NextResponse.json(
+        const previewToken = createPreviewSessionToken({
+          submissionId: createdSubmission.id,
+          stakeholderId: stakeholder.id,
+          stakeholderName: payload.fullName.trim(),
+          isNewSubmission: true,
+        });
+
+        const response = NextResponse.json(
           {
             message:
               "Evaluation saved, but certificate metadata could not be finalized.",
             submissionId: createdSubmission.id,
-            certificateUrl: certificate.certificateUrl,
           },
           { status: 202 },
         );
+
+        attachPreviewSessionCookie(response, previewToken);
+
+        return response;
       }
 
-      return NextResponse.json({
+      const previewToken = createPreviewSessionToken({
+        submissionId: createdSubmission.id,
+        stakeholderId: stakeholder.id,
+        stakeholderName: payload.fullName.trim(),
+        isNewSubmission: true,
+      });
+
+      const response = NextResponse.json({
         success: true,
         submissionId: createdSubmission.id,
-        certificateUrl: certificate.certificateUrl,
       });
+
+      attachPreviewSessionCookie(response, previewToken);
+
+      return response;
     } catch (error) {
-      return NextResponse.json(
+      const previewToken = createPreviewSessionToken({
+        submissionId: createdSubmission.id,
+        stakeholderId: stakeholder.id,
+        stakeholderName: payload.fullName.trim(),
+        isNewSubmission: true,
+      });
+
+      const response = NextResponse.json(
         {
           message:
             "Evaluation was saved, but certificate generation failed. Please contact an administrator.",
@@ -414,6 +513,10 @@ export async function POST(request: Request) {
         },
         { status: 202 },
       );
+
+      attachPreviewSessionCookie(response, previewToken);
+
+      return response;
     }
   } catch (error) {
     if (error instanceof z.ZodError) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import PageHero from "@/app/components/sections/PageHero";
 
@@ -10,6 +11,7 @@ export default function EvaluationCertificatePage() {
   const [certificateUrl, setCertificateUrl] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   const handleLookup = async () => {
     if (!email.trim() || !submissionId.trim()) {
@@ -18,6 +20,8 @@ export default function EvaluationCertificatePage() {
     }
 
     setIsLoading(true);
+    setCertificateUrl("");
+    setIsImageLoading(false);
     setMessage("");
 
     try {
@@ -34,14 +38,17 @@ export default function EvaluationCertificatePage() {
 
       if (!response.ok || !payload.certificateUrl) {
         setCertificateUrl("");
+        setIsImageLoading(false);
         setMessage(payload.message ?? "Certificate was not found.");
         return;
       }
 
+      setIsImageLoading(true);
       setCertificateUrl(payload.certificateUrl);
       setMessage("Certificate download link is ready.");
     } catch {
       setCertificateUrl("");
+      setIsImageLoading(false);
       setMessage("Unable to fetch certificate right now.");
     } finally {
       setIsLoading(false);
@@ -102,14 +109,36 @@ export default function EvaluationCertificatePage() {
           </button>
 
           {certificateUrl ? (
-            <a
-              href={certificateUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex rounded-md bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100"
-            >
-              Download Certificate (PNG)
-            </a>
+            <div className="space-y-3">
+              <div className="relative overflow-hidden rounded-lg border border-brick-red-500/60 bg-brick-red-900/50 p-2">
+                {isImageLoading ? (
+                  <div className="absolute inset-2 animate-pulse rounded-md bg-brick-red-700/50" />
+                ) : null}
+
+                <Image
+                  src={certificateUrl}
+                  alt="Certificate preview"
+                  width={1920}
+                  height={1080}
+                  unoptimized
+                  onLoad={() => setIsImageLoading(false)}
+                  onError={() => {
+                    setIsImageLoading(false);
+                    setMessage("Preview failed to load, but you can still download the certificate.");
+                  }}
+                  className={`h-auto w-full rounded-md transition-opacity duration-300 ${isImageLoading ? "opacity-0" : "opacity-100"}`}
+                />
+              </div>
+
+              <a
+                href={certificateUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex rounded-md bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100"
+              >
+                Download Certificate (PNG)
+              </a>
+            </div>
           ) : null}
 
           {message ? <p className="text-sm text-white/85">{message}</p> : null}
