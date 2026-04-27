@@ -206,7 +206,7 @@ export async function POST(request: Request) {
 
       if (stakeholderError) {
         return NextResponse.json(
-          { message: "Unable to validate stakeholder email." },
+          { message: "Unable to validate participant email." },
           { status: 500 },
         );
       }
@@ -215,7 +215,7 @@ export async function POST(request: Request) {
         return NextResponse.json({
           allowed: false,
           alreadySubmitted: false,
-          message: "This email is not in the stakeholder list.",
+          message: "This email is not in the participant list.",
         });
       }
 
@@ -280,7 +280,7 @@ export async function POST(request: Request) {
 
     if (stakeholderError) {
       return NextResponse.json(
-        { message: "Unable to load stakeholder record." },
+        { message: "Unable to load participant record." },
         { status: 500 },
       );
     }
@@ -301,7 +301,7 @@ export async function POST(request: Request) {
     if (existingSubmission) {
       return NextResponse.json(
         {
-          message: "This stakeholder has already submitted an evaluation.",
+          message: "This participant has already submitted an evaluation.",
           existingSubmissionId: existingSubmission.id,
           existingCertificateUrl: existingSubmission.certificate_download_url,
         },

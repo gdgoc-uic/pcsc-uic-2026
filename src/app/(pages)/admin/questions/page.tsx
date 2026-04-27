@@ -291,7 +291,7 @@ export default function AdminEvaluationQuestionsPage() {
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
       <PageHero
         title="Evaluation Questions"
-        description="Manage the feedback form questions. Configure types, required fields, and preview how they appear to stakeholders."
+        description="Manage the feedback form questions. Configure types, required fields, and preview how they appear to participants."
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6">
@@ -312,7 +312,7 @@ export default function AdminEvaluationQuestionsPage() {
             href="/admin/stakeholders"
             className="rounded-lg border border-brick-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brick-red-800"
           >
-            Stakeholders
+            Participants
           </a>
           <a
             href="/admin/results"
@@ -420,7 +420,7 @@ export default function AdminEvaluationQuestionsPage() {
               <h3 className="text-sm font-semibold text-white/80">Live Preview</h3>
               <div className="rounded-xl border border-brick-red-600 bg-brick-red-900/40 p-5 space-y-5">
                 <p className="text-xs text-white/60 italic">
-                  This is a preview of how the evaluation form appears to stakeholders.
+                  This is a preview of how the evaluation form appears to participants.
                 </p>
 
                 <div>

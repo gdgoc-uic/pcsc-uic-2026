@@ -55,12 +55,12 @@ export default function AdminStakeholdersPage() {
       const response = await fetch("/api/stakeholders");
       const payload = (await response.json()) as { stakeholders?: Stakeholder[]; message?: string };
       if (!response.ok) {
-        setMessage(payload.message ?? "Unable to load stakeholders.");
+        setMessage(payload.message ?? "Unable to load participants.");
         return;
       }
       setStakeholders(payload.stakeholders ?? []);
     } catch {
-      setMessage("Unable to load stakeholders right now.");
+      setMessage("Unable to load participants right now.");
     } finally {
       setIsLoading(false);
     }
@@ -122,11 +122,11 @@ export default function AdminStakeholdersPage() {
         });
         const payload = (await response.json()) as { message?: string };
         if (!response.ok) {
-          setMessage(payload.message ?? "Failed to update stakeholder.");
+          setMessage(payload.message ?? "Failed to update participant.");
           setIsSaving(false);
           return;
         }
-        setMessage("Stakeholder updated.");
+        setMessage("Participant updated.");
       } else {
         const response = await fetch("/api/stakeholders", {
           method: "POST",
@@ -135,25 +135,25 @@ export default function AdminStakeholdersPage() {
         });
         const payload = (await response.json()) as { message?: string };
         if (!response.ok) {
-          setMessage(payload.message ?? "Failed to create stakeholder.");
+          setMessage(payload.message ?? "Failed to create participant.");
           setIsSaving(false);
           return;
         }
-        setMessage("Stakeholder created.");
+        setMessage("Participant created.");
       }
 
       setIsEditing(false);
       setEditingId(null);
       await loadStakeholders();
     } catch {
-      setMessage("Failed to save stakeholder due to network error.");
+      setMessage("Failed to save participant due to network error.");
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this stakeholder?")) {
+    if (!confirm("Are you sure you want to delete this participant?")) {
       return;
     }
 
@@ -161,13 +161,13 @@ export default function AdminStakeholdersPage() {
       const response = await fetch(`/api/stakeholders?id=${id}`, { method: "DELETE" });
       const payload = (await response.json()) as { message?: string };
       if (!response.ok) {
-        setMessage(payload.message ?? "Failed to delete stakeholder.");
+        setMessage(payload.message ?? "Failed to delete participant.");
         return;
       }
-      setMessage(payload.message ?? "Stakeholder deleted.");
+      setMessage(payload.message ?? "Participant deleted.");
       await loadStakeholders();
     } catch {
-      setMessage("Failed to delete stakeholder.");
+      setMessage("Failed to delete participant.");
     }
   };
 
@@ -230,7 +230,7 @@ export default function AdminStakeholdersPage() {
     }
 
     setImportError("");
-    setMessage(`Imported ${created} stakeholder(s). Skipped ${skipped}. Failed ${failed}.`);
+    setMessage(`Imported ${created} participant(s). Skipped ${skipped}. Failed ${failed}.`);
     setImportText("");
     setShowImport(false);
     await loadStakeholders();
@@ -243,8 +243,8 @@ export default function AdminStakeholdersPage() {
   return (
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
       <PageHero
-        title="Stakeholders"
-        description="Manage stakeholder invitations. Add participants who can submit evaluations and receive certificates."
+        title="Participants"
+        description="Manage participant invitations. Add participants who can submit evaluations and receive certificates."
       />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-6">
@@ -265,7 +265,7 @@ export default function AdminStakeholdersPage() {
             href="/admin/stakeholders"
             className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700"
           >
-            Stakeholders
+            Participants
           </a>
           <a
             href="/admin/results"
@@ -277,7 +277,7 @@ export default function AdminStakeholdersPage() {
 
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-4">
-            <h2 className="text-xl font-bold text-white">Stakeholders</h2>
+            <h2 className="text-xl font-bold text-white">Participants</h2>
             <div className="flex gap-3 text-sm">
               <span className="text-emerald-400">{activeCount} active</span>
               {inactiveCount > 0 && (
@@ -298,7 +298,7 @@ export default function AdminStakeholdersPage() {
               onClick={handleAddNew}
               className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100"
             >
-              <Plus className="h-4 w-4" /> Add Stakeholder
+              <Plus className="h-4 w-4" /> Add Participant
             </button>
           </div>
         </div>
@@ -306,13 +306,13 @@ export default function AdminStakeholdersPage() {
         {isLoading ? (
           <div className="rounded-xl border border-brick-red-600 bg-brick-red-800/30 p-8 text-center text-white/90">
             <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2" />
-            Loading stakeholders...
+            Loading participants...
           </div>
         ) : stakeholders.length === 0 ? (
           <div className="rounded-xl border border-brick-red-600 bg-brick-red-800/30 p-8 text-center text-white/90">
             <Users className="h-8 w-8 mx-auto mb-2 text-white/50" />
-            <p>No stakeholders configured yet.</p>
-            <p className="text-sm text-white/60 mt-1">Click "Add Stakeholder" to create one.</p>
+            <p>No participants configured yet.</p>
+            <p className="text-sm text-white/60 mt-1">Click "Add Participant" to create one.</p>
           </div>
         ) : (
           <div className="overflow-x-auto rounded-xl border border-brick-red-600 bg-brick-red-800/30">
@@ -386,7 +386,7 @@ export default function AdminStakeholdersPage() {
               {isEditing && (
                 <>
                   <h3 className="text-lg font-bold text-white">
-                    {editingId ? "Edit Stakeholder" : "Add Stakeholder"}
+                    {editingId ? "Edit Participant" : "Add Participant"}
                   </h3>
                   <div className="space-y-3">
                     <div>
@@ -432,7 +432,7 @@ export default function AdminStakeholdersPage() {
                       className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100 disabled:opacity-60"
                     >
                       {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
-                      {editingId ? "Save Changes" : "Add Stakeholder"}
+                      {editingId ? "Save Changes" : "Add Participant"}
                     </button>
                     <button
                       type="button"
@@ -449,7 +449,7 @@ export default function AdminStakeholdersPage() {
               {showImport && (
                 <>
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-white">Import Stakeholders</h3>
+                    <h3 className="text-lg font-bold text-white">Import Participants</h3>
                     <button
                       type="button"
                       onClick={() => setShowImport(false)}
@@ -484,7 +484,7 @@ export default function AdminStakeholdersPage() {
                       className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-brick-red-700 hover:bg-rose-100 disabled:opacity-60"
                     >
                       {isImporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-                      Import Stakeholders
+                      Import Participants
                     </button>
                     <button
                       type="button"

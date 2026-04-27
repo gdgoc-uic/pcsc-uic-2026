@@ -128,7 +128,7 @@ export default function AdminResultsPage() {
             href="/admin/stakeholders"
             className="rounded-lg border border-brick-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brick-red-800"
           >
-            Stakeholders
+            Participants
           </a>
           <a
             href="/admin/results"
@@ -150,7 +150,7 @@ export default function AdminResultsPage() {
                 <div className="rounded-xl border border-brick-red-600 bg-brick-red-800/40 p-5">
                   <div className="flex items-center gap-2 text-white/70 mb-2">
                     <Users className="h-5 w-5" />
-                    <span className="text-sm">Active Stakeholders</span>
+                    <span className="text-sm">Active Participants</span>
                   </div>
                   <p className="text-3xl font-bold text-white">
                     {stats.active_stakeholders}

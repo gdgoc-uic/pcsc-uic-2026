@@ -89,7 +89,9 @@ export default function EvaluationPage() {
           setQuestions(payload.questions);
         }
       } catch {
-        setStatusMessage("Unable to load evaluation questions.");
+        setStatusMessage(
+          "We could not load the evaluation form right now. Please refresh and try again.",
+        );
       } finally {
         setIsLoadingQuestions(false);
       }
@@ -122,7 +124,7 @@ export default function EvaluationPage() {
     const trimmedEmail = email.trim().toLowerCase();
 
     if (!isValidEmail(trimmedEmail)) {
-      setStatusMessage("Please provide a valid stakeholder email address.");
+      setStatusMessage("Please enter a valid participant email address.");
       return;
     }
 
@@ -148,7 +150,7 @@ export default function EvaluationPage() {
 
       if (!result.allowed) {
         setStatusMessage(
-          result.message ?? "This email is not in the stakeholder list.",
+          result.message ?? "We could not find this email in the registered participant list.",
         );
         return;
       }
@@ -166,9 +168,9 @@ export default function EvaluationPage() {
         return;
       }
 
-      setStatusMessage("Email validated. You may now submit your feedback.");
+      setStatusMessage("Email verified. You can now complete and submit the evaluation form.");
     } catch {
-      setStatusMessage("Unable to validate this email right now.");
+      setStatusMessage("We could not verify this email right now. Please try again.");
     } finally {
       setIsValidating(false);
     }
@@ -177,7 +179,7 @@ export default function EvaluationPage() {
   const handleSubmitEvaluation = async () => {
     if (!canSubmit) {
       setStatusMessage(
-        "Please complete the required fields before submitting.",
+        "Please answer all required questions before submitting.",
       );
       return;
     }
@@ -202,7 +204,9 @@ export default function EvaluationPage() {
       const result = (await response.json()) as SubmissionResult;
 
       if (!response.ok && response.status !== 202) {
-        setStatusMessage(result.message ?? "Unable to submit your evaluation.");
+        setStatusMessage(
+          result.message ?? "We could not submit your evaluation. Please try again.",
+        );
         return;
       }
 
@@ -219,7 +223,7 @@ export default function EvaluationPage() {
       }
       router.push(`/evaluation/certificate-preview?${params.toString()}`);
     } catch {
-      setStatusMessage("Submission failed due to a network error.");
+      setStatusMessage("Network issue detected. Please check your connection and submit again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -240,7 +244,7 @@ export default function EvaluationPage() {
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
       <PageHero
         title="PSCS 2026 Post-Event Evaluation"
-        description="Submit your conference feedback. After successful submission, your certificate will be generated automatically."
+        description="Share your conference feedback. Once submitted, your certificate will be generated automatically."
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-8">
@@ -249,7 +253,7 @@ export default function EvaluationPage() {
             Step 1: Validate participant email
           </h2>
           <p className="text-sm text-white/80">
-            Only registered participants emails are allowed to submit.
+            Submissions are only accepted from registered participants using their registered email addresses.
           </p>
           <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
@@ -278,7 +282,7 @@ export default function EvaluationPage() {
               {isValidating ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : null}
-              Validate
+              Verify Email
             </button>
           </div>
 
@@ -296,11 +300,11 @@ export default function EvaluationPage() {
             {isLoadingQuestions ? (
               <div className="py-8 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2 text-white/60" />
-                <p className="text-sm text-white/60">Loading questions...</p>
+                <p className="text-sm text-white/60">Loading the evaluation form...</p>
               </div>
             ) : questions.length === 0 ? (
               <div className="rounded-lg border border-brick-red-600 bg-brick-red-900/40 p-4 text-white/80">
-                No evaluation questions configured. Please contact an administrator.
+                The evaluation form is currently unavailable. Please try again later or contact an administrator.
               </div>
             ) : (
               <div className="space-y-5">

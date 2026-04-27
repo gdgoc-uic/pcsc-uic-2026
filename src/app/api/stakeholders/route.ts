@@ -39,7 +39,7 @@ export async function GET() {
 
     if (error) {
       return NextResponse.json(
-        { message: "Unable to load stakeholders." },
+        { message: "Unable to load participants." },
         { status: 500 },
       );
     }
@@ -48,7 +48,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json(
       {
-        message: "Unexpected stakeholders API failure.",
+        message: "Unexpected participants API failure.",
         detail: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },
@@ -79,14 +79,14 @@ export async function POST(request: Request) {
 
     if (checkError) {
       return NextResponse.json(
-        { message: "Unable to check stakeholder uniqueness." },
+        { message: "Unable to check participant uniqueness." },
         { status: 500 },
       );
     }
 
     if (existing) {
       return NextResponse.json(
-        { message: "A stakeholder with this email already exists." },
+        { message: "A participant with this email already exists." },
         { status: 409 },
       );
     }
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
 
     if (insertError || !inserted) {
       return NextResponse.json(
-        { message: "Unable to create stakeholder." },
+        { message: "Unable to create participant." },
         { status: 500 },
       );
     }
@@ -119,7 +119,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        message: "Unexpected stakeholder creation failure.",
+        message: "Unexpected participant creation failure.",
         detail: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },
@@ -150,7 +150,7 @@ export async function PATCH(request: Request) {
 
     if (checkError || !existing) {
       return NextResponse.json(
-        { message: "Stakeholder not found." },
+        { message: "Participant not found." },
         { status: 404 },
       );
     }
@@ -165,14 +165,14 @@ export async function PATCH(request: Request) {
 
       if (conflictError) {
         return NextResponse.json(
-          { message: "Unable to verify stakeholder email uniqueness." },
+          { message: "Unable to verify participant email uniqueness." },
           { status: 500 },
         );
       }
 
       if (conflict) {
         return NextResponse.json(
-          { message: "A stakeholder with this email already exists." },
+          { message: "A participant with this email already exists." },
           { status: 409 },
         );
       }
@@ -205,7 +205,7 @@ export async function PATCH(request: Request) {
 
     if (updateError || !updated) {
       return NextResponse.json(
-        { message: "Unable to update stakeholder." },
+        { message: "Unable to update participant." },
         { status: 500 },
       );
     }
@@ -221,7 +221,7 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json(
       {
-        message: "Unexpected stakeholder update failure.",
+        message: "Unexpected participant update failure.",
         detail: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },
@@ -245,7 +245,7 @@ export async function DELETE(request: Request) {
 
     if (!id) {
       return NextResponse.json(
-        { message: "Stakeholder ID is required." },
+        { message: "Participant ID is required." },
         { status: 400 },
       );
     }
@@ -261,7 +261,7 @@ export async function DELETE(request: Request) {
 
     if (checkError || !existing) {
       return NextResponse.json(
-        { message: "Stakeholder not found." },
+        { message: "Participant not found." },
         { status: 404 },
       );
     }
@@ -281,13 +281,13 @@ export async function DELETE(request: Request) {
 
       if (deactivateError) {
         return NextResponse.json(
-          { message: "Unable to deactivate stakeholder (has submissions)." },
+          { message: "Unable to deactivate participant (has submissions)." },
           { status: 500 },
         );
       }
 
       return NextResponse.json({
-        message: "Stakeholder has existing submissions. Deactivated instead of deleted.",
+        message: "Participant has existing submissions. Deactivated instead of deleted.",
       });
     }
 
@@ -298,7 +298,7 @@ export async function DELETE(request: Request) {
 
     if (deleteError) {
       return NextResponse.json(
-        { message: "Unable to delete stakeholder." },
+        { message: "Unable to delete participant." },
         { status: 500 },
       );
     }
@@ -314,7 +314,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json(
       {
-        message: "Unexpected stakeholder deletion failure.",
+        message: "Unexpected participant deletion failure.",
         detail: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 },

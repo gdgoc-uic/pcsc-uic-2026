@@ -113,7 +113,7 @@ export async function GET(request: Request) {
 
     if (stakeholderError || !stakeholder) {
       return NextResponse.json(
-        { message: "Unable to verify stakeholder email." },
+        { message: "Unable to verify participant email." },
         { status: 404 },
       );
     }

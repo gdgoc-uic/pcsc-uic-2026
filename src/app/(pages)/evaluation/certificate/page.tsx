@@ -52,7 +52,7 @@ export default function EvaluationCertificatePage() {
     <main className="pt-29 min-h-screen bg-brick-red-950 text-white">
       <PageHero
         title="Certificate Lookup"
-        description="Enter your stakeholder email and submission ID to generate a new certificate download link."
+        description="Enter your participant email and submission ID to generate a new certificate download link."
       />
 
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -62,7 +62,7 @@ export default function EvaluationCertificatePage() {
               htmlFor="certificate-email"
               className="block text-sm text-white/90 mb-1"
             >
-              Stakeholder Email
+              Participant Email
             </label>
             <input
               id="certificate-email"
