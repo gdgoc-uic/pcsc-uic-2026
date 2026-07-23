@@ -5,7 +5,6 @@ interface MarqueeProps {
   marqueeText: string;
 }
 
-
 export const Marquee = ({ marqueeText }: MarqueeProps) => {
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-stone-900 via-stone-800 to-stone-900">

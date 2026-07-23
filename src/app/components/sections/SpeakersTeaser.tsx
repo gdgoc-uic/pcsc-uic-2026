@@ -17,27 +17,32 @@ const speakers: Speaker[] = [
   {
     name: "Katey Black",
     title: "CREATIVE DESIGNER",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=600&fit=crop",
   },
   {
     name: "Christian Grant",
     title: "DESIGN DIRECTOR",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop",
   },
   {
     name: "Michelle Larson",
     title: "SENIOR PRODUCT DESIGNER",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=600&fit=crop",
   },
   {
     name: "Mark Petterson",
     title: "DESIGN GUILD LEAD",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop",
   },
   {
     name: "Marry Conor",
     title: "SENIOR UI/UX DESIGNER",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=600&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=600&fit=crop",
   },
 ];
 
@@ -48,37 +53,43 @@ export const SpeakersTeaser = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Unified scroll-triggered entrance animation
-      gsap.fromTo(cardsRef.current?.children || [],
+      gsap.fromTo(
+        cardsRef.current?.children || [],
         { y: 60, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.8, 
-          stagger: 0.12, 
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.12,
           ease: "power2.out",
           scrollTrigger: {
             trigger: cardsRef.current,
             start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
+            toggleActions: "play none none reverse",
+          },
+        },
       );
 
       // Unified hover animations for each card
       const cards = Array.from(cardsRef.current?.children || []);
       cards.forEach((card: Element) => {
-        const img = card.querySelector('img');
-        const arrow = card.querySelector('svg');
-        
+        const img = card.querySelector("img");
+        const arrow = card.querySelector("svg");
+
         gsap.set(card, { transformOrigin: "center center" });
-        
-        card.addEventListener('mouseenter', () => {
-          gsap.to(card, { scale: 1.03, y: -4, duration: 0.3, ease: "power2.out" });
+
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            scale: 1.03,
+            y: -4,
+            duration: 0.3,
+            ease: "power2.out",
+          });
           gsap.to(img, { scale: 1.08, duration: 0.5, ease: "power2.out" });
           gsap.to(arrow, { x: 4, y: -4, duration: 0.3, ease: "power2.out" });
         });
-        
-        card.addEventListener('mouseleave', () => {
+
+        card.addEventListener("mouseleave", () => {
           gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: "power2.out" });
           gsap.to(img, { scale: 1, duration: 0.5, ease: "power2.out" });
           gsap.to(arrow, { x: 0, y: 0, duration: 0.3, ease: "power2.out" });
@@ -90,9 +101,16 @@ export const SpeakersTeaser = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="speakers" className="bg-rose-900 text-white py-16 sm:py-20">
+    <section
+      ref={sectionRef}
+      id="speakers"
+      className="bg-rose-900 text-white py-16 sm:py-20"
+    >
       <div className="mx-auto max-w-7xl px-6">
-        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div
+          ref={cardsRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"
+        >
           {speakers.map((speaker, index) => (
             <Link
               key={index}
@@ -137,5 +155,3 @@ export const SpeakersTeaser = () => {
 };
 
 export default SpeakersTeaser;
-
-

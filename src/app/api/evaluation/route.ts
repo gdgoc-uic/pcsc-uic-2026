@@ -33,7 +33,9 @@ const getPreviewSessionSecret = () => {
   return value;
 };
 
-const createPreviewSessionToken = (payload: Omit<PreviewSessionPayload, "exp" | "nonce">) => {
+const createPreviewSessionToken = (
+  payload: Omit<PreviewSessionPayload, "exp" | "nonce">,
+) => {
   const now = Math.floor(Date.now() / 1000);
   const fullPayload: PreviewSessionPayload = {
     ...payload,
@@ -41,7 +43,9 @@ const createPreviewSessionToken = (payload: Omit<PreviewSessionPayload, "exp" | 
     nonce: randomBytes(16).toString("base64url"),
   };
 
-  const encodedPayload = Buffer.from(JSON.stringify(fullPayload)).toString("base64url");
+  const encodedPayload = Buffer.from(JSON.stringify(fullPayload)).toString(
+    "base64url",
+  );
   const signature = createHmac("sha256", getPreviewSessionSecret())
     .update(encodedPayload)
     .digest("base64url");
@@ -164,19 +168,19 @@ export async function GET(request: Request) {
         );
       }
 
-      const submissions = ((data ?? []) as unknown as SubmissionWithStakeholderRow[]).map(
-        (row) => ({
-          id: row.id,
-          submitted_name: row.submitted_name,
-          email: row.email,
-          answers: row.answers,
-          comment: row.comment,
-          certificate_path: row.certificate_path,
-          certificate_download_url: row.certificate_download_url,
-          created_at: row.created_at,
-          stakeholder_name: row.stakeholder?.full_name,
-        }),
-      );
+      const submissions = (
+        (data ?? []) as unknown as SubmissionWithStakeholderRow[]
+      ).map((row) => ({
+        id: row.id,
+        submitted_name: row.submitted_name,
+        email: row.email,
+        answers: row.answers,
+        comment: row.comment,
+        certificate_path: row.certificate_path,
+        certificate_download_url: row.certificate_download_url,
+        created_at: row.created_at,
+        stakeholder_name: row.stakeholder?.full_name,
+      }));
 
       return NextResponse.json({ submissions });
     }

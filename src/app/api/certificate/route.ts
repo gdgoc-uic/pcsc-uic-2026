@@ -104,7 +104,9 @@ const verifyPreviewSessionToken = (token: string) => {
   let parsed: unknown;
 
   try {
-    parsed = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
+    parsed = JSON.parse(
+      Buffer.from(encodedPayload, "base64url").toString("utf8"),
+    );
   } catch {
     return { ok: false as const, reason: "invalid" as const };
   }

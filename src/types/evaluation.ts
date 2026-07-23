@@ -1,4 +1,9 @@
-export type QuestionType = "rating" | "text" | "textarea" | "select" | "multiple";
+export type QuestionType =
+  | "rating"
+  | "text"
+  | "textarea"
+  | "select"
+  | "multiple";
 
 export interface RatingMeta {
   min: number;

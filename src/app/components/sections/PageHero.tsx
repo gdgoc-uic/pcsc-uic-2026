@@ -11,12 +11,16 @@ const PageHero = ({ title, description }: Props) => {
           <TribalPattern />
         </div>
       </div>
-      
+
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">        
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight break-words">{title}</h1>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight break-words">
+          {title}
+        </h1>
         {description ? (
-          <p className="mt-4 max-w-3xl text-base sm:text-lg text-rose-100/90">{description}</p>
+          <p className="mt-4 max-w-3xl text-base sm:text-lg text-rose-100/90">
+            {description}
+          </p>
         ) : null}
       </div>
     </section>
@@ -24,5 +28,3 @@ const PageHero = ({ title, description }: Props) => {
 };
 
 export default PageHero;
-
-

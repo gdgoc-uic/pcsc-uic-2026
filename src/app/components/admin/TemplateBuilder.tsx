@@ -53,12 +53,21 @@ export function TemplateBuilder({
   onConfigChange,
   previewSample = "Juan dela Cruz",
 }: TemplateBuilderProps) {
-  const configRef = useRef<TemplateConfig>({ ...DEFAULT_CONFIG, ...initialConfig });
-  const [config, setConfig] = useState<TemplateConfig>({ ...DEFAULT_CONFIG, ...initialConfig });
+  const configRef = useRef<TemplateConfig>({
+    ...DEFAULT_CONFIG,
+    ...initialConfig,
+  });
+  const [config, setConfig] = useState<TemplateConfig>({
+    ...DEFAULT_CONFIG,
+    ...initialConfig,
+  });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerSize, setContainerSize] = useState({ width: 600, height: 338 });
+  const [containerSize, setContainerSize] = useState({
+    width: 600,
+    height: 338,
+  });
 
   useEffect(() => {
     if (initialConfig) {
@@ -88,7 +97,7 @@ export function TemplateBuilder({
     [],
   );
 
-const handleConfigChange = useCallback(
+  const handleConfigChange = useCallback(
     (updates: Partial<TemplateConfig>) => {
       const processedUpdates: Partial<TemplateConfig> = {};
 
@@ -119,14 +128,11 @@ const handleConfigChange = useCallback(
     [config, onConfigChange],
   );
 
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      e.preventDefault();
-      setIsDragging(true);
-      setDragStart({ x: e.clientX, y: e.clientY });
-    },
-    [],
-  );
+  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  }, []);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -138,17 +144,11 @@ const handleConfigChange = useCallback(
 
       const newX = Math.max(
         0,
-        Math.min(
-          config.templateWidth,
-          config.textX + deltaX,
-        ),
+        Math.min(config.templateWidth, config.textX + deltaX),
       );
       const newY = Math.max(
         0,
-        Math.min(
-          config.templateHeight,
-          config.textY + deltaY,
-        ),
+        Math.min(config.templateHeight, config.textY + deltaY),
       );
 
       setDragStart({ x: e.clientX, y: e.clientY });
@@ -180,7 +180,11 @@ const handleConfigChange = useCallback(
         const newX = Math.max(0, Math.min(config.templateWidth, mouseX));
         const newY = Math.max(0, Math.min(config.templateHeight, mouseY));
 
-        setConfig((prev) => ({ ...prev, textX: Math.round(newX), textY: Math.round(newY) }));
+        setConfig((prev) => ({
+          ...prev,
+          textX: Math.round(newX),
+          textY: Math.round(newY),
+        }));
       };
 
       const handleGlobalUp = () => {
@@ -198,7 +202,12 @@ const handleConfigChange = useCallback(
     }
   }, [isDragging, config.templateWidth, config.templateHeight, onConfigChange]);
 
-  const textAnchor = config.textAlign === "left" ? "start" : config.textAlign === "right" ? "end" : "middle";
+  const textAnchor =
+    config.textAlign === "left"
+      ? "start"
+      : config.textAlign === "right"
+        ? "end"
+        : "middle";
 
   return (
     <div className="space-y-4">
@@ -212,8 +221,8 @@ const handleConfigChange = useCallback(
                 width: actualWidth,
                 height: actualHeight,
                 cursor: isDragging ? "grabbing" : "grab",
-                backgroundImage: config.previewUrl 
-                  ? `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${config.previewUrl})` 
+                backgroundImage: config.previewUrl
+                  ? `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${config.previewUrl})`
                   : "none",
                 backgroundSize: "contain",
                 backgroundPosition: "center",
@@ -262,18 +271,23 @@ const handleConfigChange = useCallback(
             </div>
 
             <p className="text-xs text-white/50 mt-2 text-center">
-              Drag the red marker to position text • Template: {config.templateWidth}×{config.templateHeight}px
+              Drag the red marker to position text • Template:{" "}
+              {config.templateWidth}×{config.templateHeight}px
             </p>
           </div>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-white/90 mb-1">Preview Text</label>
+            <label className="block text-sm text-white/90 mb-1">
+              Preview Text
+            </label>
             <input
               type="text"
               value={previewSample}
-              onChange={(e) => previewSample !== e.target.value ? previewSample : undefined}
+              onChange={(e) =>
+                previewSample !== e.target.value ? previewSample : undefined
+              }
               className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
               placeholder="Enter sample name"
             />
@@ -286,7 +300,9 @@ const handleConfigChange = useCallback(
             </label>
             <select
               value={config.fontFamily}
-              onChange={(e) => handleConfigChange({ fontFamily: e.target.value })}
+              onChange={(e) =>
+                handleConfigChange({ fontFamily: e.target.value })
+              }
               className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
             >
               {FONT_FAMILIES.map((font) => (
@@ -299,11 +315,20 @@ const handleConfigChange = useCallback(
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-sm text-white/90 mb-1">Font Size</label>
+              <label className="block text-sm text-white/90 mb-1">
+                Font Size
+              </label>
               <input
                 type="number"
                 value={config.fontSize}
-                onChange={(e) => handleConfigChange({ fontSize: Math.max(10, Math.min(200, Number(e.target.value))) })}
+                onChange={(e) =>
+                  handleConfigChange({
+                    fontSize: Math.max(
+                      10,
+                      Math.min(200, Number(e.target.value)),
+                    ),
+                  })
+                }
                 min={10}
                 max={200}
                 className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
@@ -311,7 +336,9 @@ const handleConfigChange = useCallback(
               <input
                 type="range"
                 value={config.fontSize}
-                onChange={(e) => handleConfigChange({ fontSize: Number(e.target.value) })}
+                onChange={(e) =>
+                  handleConfigChange({ fontSize: Number(e.target.value) })
+                }
                 min={10}
                 max={200}
                 className="w-full mt-1"
@@ -326,7 +353,14 @@ const handleConfigChange = useCallback(
               <input
                 type="number"
                 value={config.rotation}
-                onChange={(e) => handleConfigChange({ rotation: Math.max(-180, Math.min(180, Number(e.target.value))) })}
+                onChange={(e) =>
+                  handleConfigChange({
+                    rotation: Math.max(
+                      -180,
+                      Math.min(180, Number(e.target.value)),
+                    ),
+                  })
+                }
                 min={-180}
                 max={180}
                 className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
@@ -334,7 +368,9 @@ const handleConfigChange = useCallback(
               <input
                 type="range"
                 value={config.rotation}
-                onChange={(e) => handleConfigChange({ rotation: Number(e.target.value) })}
+                onChange={(e) =>
+                  handleConfigChange({ rotation: Number(e.target.value) })
+                }
                 min={-180}
                 max={180}
                 className="w-full mt-1"
@@ -351,13 +387,17 @@ const handleConfigChange = useCallback(
               <input
                 type="color"
                 value={config.fontColor}
-                onChange={(e) => handleConfigChange({ fontColor: e.target.value })}
+                onChange={(e) =>
+                  handleConfigChange({ fontColor: e.target.value })
+                }
                 className="h-10 w-10 rounded border border-brick-red-500 cursor-pointer"
               />
               <input
                 type="text"
                 value={config.fontColor}
-                onChange={(e) => handleConfigChange({ fontColor: e.target.value })}
+                onChange={(e) =>
+                  handleConfigChange({ fontColor: e.target.value })
+                }
                 className="flex-1 rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white font-mono text-sm"
                 placeholder="#ffffff"
               />
@@ -365,7 +405,9 @@ const handleConfigChange = useCallback(
           </div>
 
           <div>
-            <label className="block text-sm text-white/90 mb-1">Text Align</label>
+            <label className="block text-sm text-white/90 mb-1">
+              Text Align
+            </label>
             <div className="flex gap-1">
               {(["left", "center", "right"] as const).map((align) => (
                 <button
@@ -386,20 +428,32 @@ const handleConfigChange = useCallback(
 
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-sm text-white/90 mb-1">Position X</label>
+              <label className="block text-sm text-white/90 mb-1">
+                Position X
+              </label>
               <input
                 type="number"
                 value={config.textX}
-                onChange={(e) => handleConfigChange({ textX: Math.max(0, Number(e.target.value)) })}
+                onChange={(e) =>
+                  handleConfigChange({
+                    textX: Math.max(0, Number(e.target.value)),
+                  })
+                }
                 className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
               />
             </div>
             <div>
-              <label className="block text-sm text-white/90 mb-1">Position Y</label>
+              <label className="block text-sm text-white/90 mb-1">
+                Position Y
+              </label>
               <input
                 type="number"
                 value={config.textY}
-                onChange={(e) => handleConfigChange({ textY: Math.max(0, Number(e.target.value)) })}
+                onChange={(e) =>
+                  handleConfigChange({
+                    textY: Math.max(0, Number(e.target.value)),
+                  })
+                }
                 className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white"
               />
             </div>
