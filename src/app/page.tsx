@@ -15,7 +15,7 @@ export default function Home() {
       {/* <SpeakersTeaser /> */}
       <Marquee marqueeText="PROGRAMS" />
       <Programs />
-      <Marquee marqueeText="CALL FOR PAPERS" />
+      <Marquee marqueeText="PROCEEDINGS & PAPERS" />
       <CallforPapers />
       <Marquee marqueeText="IMPORTANT DATES" />
       <ImportantDates />

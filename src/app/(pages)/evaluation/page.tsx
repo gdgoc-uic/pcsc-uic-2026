@@ -11,7 +11,13 @@ import type {
 } from "@/types/evaluation";
 
 type QuestionMeta =
-  | { min: number; max: number; min_label: string; max_label: string; show_numbers: boolean }
+  | {
+      min: number;
+      max: number;
+      min_label: string;
+      max_label: string;
+      show_numbers: boolean;
+    }
   | { placeholder: string; max_length: number }
   | { placeholder: string; max_length: number; rows: number }
   | { options: string[]; allow_other: boolean }
@@ -33,19 +39,34 @@ type FormAnswers = Record<string, unknown>;
 const isValidEmail = (value: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
-const ratingMeta = (m: QuestionMeta): m is { min: number; max: number; min_label: string; max_label: string; show_numbers: boolean } =>
-  "min" in m && "max" in m && !("options" in m);
+const ratingMeta = (
+  m: QuestionMeta,
+): m is {
+  min: number;
+  max: number;
+  min_label: string;
+  max_label: string;
+  show_numbers: boolean;
+} => "min" in m && "max" in m && !("options" in m);
 
-const textMeta = (m: QuestionMeta): m is { placeholder: string; max_length: number } =>
+const textMeta = (
+  m: QuestionMeta,
+): m is { placeholder: string; max_length: number } =>
   "max_length" in m && !("rows" in m);
 
-const textareaMeta = (m: QuestionMeta): m is { placeholder: string; max_length: number; rows: number } =>
+const textareaMeta = (
+  m: QuestionMeta,
+): m is { placeholder: string; max_length: number; rows: number } =>
   "rows" in m;
 
-const selectMeta = (m: QuestionMeta): m is { options: string[]; allow_other: boolean } =>
+const selectMeta = (
+  m: QuestionMeta,
+): m is { options: string[]; allow_other: boolean } =>
   "options" in m && !("min_select" in m);
 
-const multipleMeta = (m: QuestionMeta): m is { options: string[]; min_select: number; max_select: number } =>
+const multipleMeta = (
+  m: QuestionMeta,
+): m is { options: string[]; min_select: number; max_select: number } =>
   "options" in m && "min_select" in m;
 
 export default function EvaluationPage() {
@@ -135,7 +156,8 @@ export default function EvaluationPage() {
 
       if (!result.allowed) {
         setStatusMessage(
-          result.message ?? "We could not find this email in the registered participant list.",
+          result.message ??
+            "We could not find this email in the registered participant list.",
         );
         return;
       }
@@ -146,9 +168,13 @@ export default function EvaluationPage() {
         return;
       }
 
-      setStatusMessage("Email verified. You can now complete and submit the evaluation form.");
+      setStatusMessage(
+        "Email verified. You can now complete and submit the evaluation form.",
+      );
     } catch {
-      setStatusMessage("We could not verify this email right now. Please try again.");
+      setStatusMessage(
+        "We could not verify this email right now. Please try again.",
+      );
     } finally {
       setIsValidating(false);
     }
@@ -183,7 +209,8 @@ export default function EvaluationPage() {
 
       if (!response.ok && response.status !== 202) {
         setStatusMessage(
-          result.message ?? "We could not submit your evaluation. Please try again.",
+          result.message ??
+            "We could not submit your evaluation. Please try again.",
         );
         return;
       }
@@ -191,7 +218,9 @@ export default function EvaluationPage() {
       setSubmissionResult(result);
       router.push("/evaluation/certificate-preview");
     } catch {
-      setStatusMessage("Network issue detected. Please check your connection and submit again.");
+      setStatusMessage(
+        "Network issue detected. Please check your connection and submit again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -221,7 +250,8 @@ export default function EvaluationPage() {
             Step 1: Validate participant email
           </h2>
           <p className="text-sm text-white/80">
-            Submissions are only accepted from registered participants using their registered email addresses.
+            Submissions are only accepted from registered participants using
+            their registered email addresses.
           </p>
           <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
@@ -253,8 +283,6 @@ export default function EvaluationPage() {
               Verify Email
             </button>
           </div>
-
-          
         </section>
 
         {validationResult?.allowed && !validationResult.alreadySubmitted ? (
@@ -263,16 +291,17 @@ export default function EvaluationPage() {
               Step 2: Submit feedback
             </h2>
 
-            
-
             {isLoadingQuestions ? (
               <div className="py-8 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto mb-2 text-white/60" />
-                <p className="text-sm text-white/60">Loading the evaluation form...</p>
+                <p className="text-sm text-white/60">
+                  Loading the evaluation form...
+                </p>
               </div>
             ) : questions.length === 0 ? (
               <div className="rounded-lg border border-brick-red-600 bg-brick-red-900/40 p-4 text-white/80">
-                The evaluation form is currently unavailable. Please try again later or contact an administrator.
+                The evaluation form is currently unavailable. Please try again
+                later or contact an administrator.
               </div>
             ) : (
               <div className="space-y-5">
@@ -292,9 +321,12 @@ export default function EvaluationPage() {
                             {Array.from(
                               {
                                 length:
-                                  (question.meta as { max: number }).max - (question.meta as { min: number }).min + 1,
+                                  (question.meta as { max: number }).max -
+                                  (question.meta as { min: number }).min +
+                                  1,
                               },
-                              (_, i) => i + (question.meta as { min: number }).min,
+                              (_, i) =>
+                                i + (question.meta as { min: number }).min,
                             ).map((n) => (
                               <button
                                 key={n}
@@ -309,13 +341,26 @@ export default function EvaluationPage() {
                                 }`}
                                 aria-label={`Rate ${n} for ${question.question_text}`}
                               >
-                                {(question.meta as { show_numbers: boolean }).show_numbers ? n : ""}
+                                {(question.meta as { show_numbers: boolean })
+                                  .show_numbers
+                                  ? n
+                                  : ""}
                               </button>
                             ))}
                           </div>
                           <div className="flex justify-between text-xs text-white/60">
-                            <span>{(question.meta as { min_label: string }).min_label}</span>
-                            <span>{(question.meta as { max_label: string }).max_label}</span>
+                            <span>
+                              {
+                                (question.meta as { min_label: string })
+                                  .min_label
+                              }
+                            </span>
+                            <span>
+                              {
+                                (question.meta as { max_label: string })
+                                  .max_label
+                              }
+                            </span>
                           </div>
                         </div>
                       )}
@@ -334,10 +379,12 @@ export default function EvaluationPage() {
                             )
                           }
                           placeholder={
-                            (question.meta as { placeholder: string }).placeholder ||
-                            "Enter your answer..."
+                            (question.meta as { placeholder: string })
+                              .placeholder || "Enter your answer..."
                           }
-                          maxLength={(question.meta as { max_length: number }).max_length}
+                          maxLength={
+                            (question.meta as { max_length: number }).max_length
+                          }
                           className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300 placeholder:text-white/40"
                         />
                       )}
@@ -355,10 +402,12 @@ export default function EvaluationPage() {
                             )
                           }
                           placeholder={
-                            (question.meta as { placeholder: string }).placeholder ||
-                            "Enter your answer..."
+                            (question.meta as { placeholder: string })
+                              .placeholder || "Enter your answer..."
                           }
-                          maxLength={(question.meta as { max_length: number }).max_length}
+                          maxLength={
+                            (question.meta as { max_length: number }).max_length
+                          }
                           rows={(question.meta as { rows: number }).rows}
                           className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300 placeholder:text-white/40"
                         />
@@ -379,12 +428,15 @@ export default function EvaluationPage() {
                           className="w-full rounded-lg border border-brick-red-500 bg-brick-red-900/70 px-3 py-2 text-white outline-none focus:ring-2 focus:ring-rose-300"
                         >
                           <option value="">Select an option...</option>
-                          {(question.meta as { options: string[] }).options.map((opt: string) => (
-                            <option key={opt} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                          {(question.meta as { allow_other: boolean }).allow_other && (
+                          {(question.meta as { options: string[] }).options.map(
+                            (opt: string) => (
+                              <option key={opt} value={opt}>
+                                {opt}
+                              </option>
+                            ),
+                          )}
+                          {(question.meta as { allow_other: boolean })
+                            .allow_other && (
                             <option value="__other__">Other</option>
                           )}
                         </select>
@@ -393,57 +445,76 @@ export default function EvaluationPage() {
                     {question.question_type === "multiple" &&
                       multipleMeta(question.meta) && (
                         <div className="space-y-2">
-                          {(question.meta as { options: string[] }).options.map((opt: string) => {
-                            const current = getAnswerValue(
-                              question.question_key,
-                            ) as string[];
-                            const isChecked =
-                              Array.isArray(current) &&
-                              current.includes(opt);
-                            return (
-                              <label
-                                key={opt}
-                                className="flex items-center gap-3 rounded-md border border-brick-red-600 bg-brick-red-800/30 px-3 py-2.5 cursor-pointer hover:bg-brick-red-700/30"
-                              >
-                                <input
-                                  type="checkbox"
-                                  checked={isChecked}
-                                  onChange={(e) => {
-                                    const newValue = Array.isArray(current)
-                                      ? [...current]
-                                      : [];
-                                    if (e.target.checked) {
-                                      if (
-                                        newValue.length <
-                                        (question.meta as { max_select: number }).max_select
-                                      ) {
-                                        newValue.push(opt);
+                          {(question.meta as { options: string[] }).options.map(
+                            (opt: string) => {
+                              const current = getAnswerValue(
+                                question.question_key,
+                              ) as string[];
+                              const isChecked =
+                                Array.isArray(current) && current.includes(opt);
+                              return (
+                                <label
+                                  key={opt}
+                                  className="flex items-center gap-3 rounded-md border border-brick-red-600 bg-brick-red-800/30 px-3 py-2.5 cursor-pointer hover:bg-brick-red-700/30"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    onChange={(e) => {
+                                      const newValue = Array.isArray(current)
+                                        ? [...current]
+                                        : [];
+                                      if (e.target.checked) {
+                                        if (
+                                          newValue.length <
+                                          (
+                                            question.meta as {
+                                              max_select: number;
+                                            }
+                                          ).max_select
+                                        ) {
+                                          newValue.push(opt);
+                                        }
+                                      } else {
+                                        const idx = newValue.indexOf(opt);
+                                        if (idx > -1) {
+                                          newValue.splice(idx, 1);
+                                        }
                                       }
-                                    } else {
-                                      const idx = newValue.indexOf(opt);
-                                      if (idx > -1) {
-                                        newValue.splice(idx, 1);
-                                      }
+                                      handleAnswerChange(
+                                        question.question_key,
+                                        newValue,
+                                      );
+                                    }}
+                                    disabled={
+                                      !isChecked &&
+                                      (
+                                        getAnswerValue(
+                                          question.question_key,
+                                        ) as string[]
+                                      )?.length >=
+                                        (
+                                          question.meta as {
+                                            max_select: number;
+                                          }
+                                        ).max_select
                                     }
-                                    handleAnswerChange(
-                                      question.question_key,
-                                      newValue,
-                                    );
-                                  }}
-                                  disabled={
-                                    !isChecked &&
-                                    (getAnswerValue(question.question_key) as string[])
-                                      ?.length >=
-                                      (question.meta as { max_select: number }).max_select
-                                  }
-                                  className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white disabled:opacity-50"
-                                />
-                                <span className="text-sm text-white">{opt}</span>
-                              </label>
-                            );
-                          })}
+                                    className="h-4 w-4 rounded border-brick-red-500 bg-brick-red-900 text-white disabled:opacity-50"
+                                  />
+                                  <span className="text-sm text-white">
+                                    {opt}
+                                  </span>
+                                </label>
+                              );
+                            },
+                          )}
                           <p className="text-xs text-white/50">
-                            Select 1-{(question.meta as { max_select: number }).max_select} option(s)
+                            Select 1-
+                            {
+                              (question.meta as { max_select: number })
+                                .max_select
+                            }{" "}
+                            option(s)
                           </p>
                         </div>
                       )}
@@ -469,7 +540,8 @@ export default function EvaluationPage() {
         {submissionResult?.submissionId ? (
           <section className="rounded-xl border border-emerald-500/40 bg-emerald-600/20 p-5 sm:p-6">
             <p className="text-sm text-emerald-100/90">
-              Your evaluation has been submitted successfully. Redirecting you to your certificate...
+              Your evaluation has been submitted successfully. Redirecting you
+              to your certificate...
             </p>
           </section>
         ) : null}

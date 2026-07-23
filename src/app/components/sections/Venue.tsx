@@ -318,55 +318,55 @@ export const Venue = () => {
               onMouseLeave={() => setIsHovered(false)}
             >
               <div className="relative h-[320px] md:h-[380px] lg:h-[460px] w-full">
-                  {/* Images */}
-                  {campusImages.map((image, index) => (
-                    <div
-                      key={index}
-                      ref={(el) => {
-                        imageRefs.current[index] = el;
-                      }}
-                      className="absolute top-0 left-0 w-full h-full"
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.title}
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 z-10">
-                        <h3 className="text-white font-semibold text-lg mb-1 drop-shadow-lg">
-                          {image.title}
-                        </h3>
-                        <p className="text-white/95 text-sm drop-shadow-md">
-                          {image.description}
-                        </p>
-                      </div>
+                {/* Images */}
+                {campusImages.map((image, index) => (
+                  <div
+                    key={index}
+                    ref={(el) => {
+                      imageRefs.current[index] = el;
+                    }}
+                    className="absolute top-0 left-0 w-full h-full"
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.title}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 z-10">
+                      <h3 className="text-white font-semibold text-lg mb-1 drop-shadow-lg">
+                        {image.title}
+                      </h3>
+                      <p className="text-white/95 text-sm drop-shadow-md">
+                        {image.description}
+                      </p>
                     </div>
-                  ))}
-
-                  {/* Navigation Controls */}
-                  <div className="absolute inset-y-0 left-0 flex items-center p-2 z-20">
-                    <button
-                      onClick={handlePrevImage}
-                      className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
-                      aria-label="Previous image"
-                    >
-                      <ChevronLeft className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
-                    </button>
                   </div>
+                ))}
 
-                  <div className="absolute inset-y-0 right-0 flex items-center p-2 z-10">
-                    <button
-                      onClick={handleNextImage}
-                      className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
-                      aria-label="Next image"
-                    >
-                      <ChevronRight className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
-                    </button>
-                  </div>
+                {/* Navigation Controls */}
+                <div className="absolute inset-y-0 left-0 flex items-center p-2 z-20">
+                  <button
+                    onClick={handlePrevImage}
+                    className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                    aria-label="Previous image"
+                  >
+                    <ChevronLeft className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
+                  </button>
                 </div>
+
+                <div className="absolute inset-y-0 right-0 flex items-center p-2 z-10">
+                  <button
+                    onClick={handleNextImage}
+                    className="w-11 h-11 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                    aria-label="Next image"
+                  >
+                    <ChevronRight className="w-6 h-6 text-white group-hover/btn:scale-110 transition-transform" />
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Map */}

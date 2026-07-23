@@ -83,7 +83,10 @@ const downloadArialFontToTmp = async () => {
       }
 
       const fontArrayBuffer = await response.arrayBuffer();
-      await fs.promises.writeFile(TMP_ARIAL_FONT_PATH, Buffer.from(fontArrayBuffer));
+      await fs.promises.writeFile(
+        TMP_ARIAL_FONT_PATH,
+        Buffer.from(fontArrayBuffer),
+      );
 
       return TMP_ARIAL_FONT_PATH;
     } catch {
@@ -126,7 +129,10 @@ const resolveArialFontPath = async () => {
   }
 };
 
-const getTextAnchorOffsetX = (width: number, textAlign: ActiveTemplate["text_align"]) => {
+const getTextAnchorOffsetX = (
+  width: number,
+  textAlign: ActiveTemplate["text_align"],
+) => {
   if (textAlign === "center") {
     return width / 2;
   }
@@ -167,10 +173,10 @@ const cropOverlayToBounds = async (params: {
   }
 
   if (
-    extractLeft === 0
-    && extractTop === 0
-    && extractWidth === params.inputWidth
-    && extractHeight === params.inputHeight
+    extractLeft === 0 &&
+    extractTop === 0 &&
+    extractWidth === params.inputWidth &&
+    extractHeight === params.inputHeight
   ) {
     return {
       input: params.input,
@@ -236,9 +242,7 @@ const createOverlay = async (params: {
   const escapedName = escapeXml(params.name);
   const fontColor = params.template.font_color?.trim() || "#000000";
 
-  const fontFamily = params.arialFontPath
-    ? "Arial"
-    : "sans";
+  const fontFamily = params.arialFontPath ? "Arial" : "sans";
 
   const textOptions: sharp.CreateText = {
     text: `<span foreground="${escapeXml(fontColor)}">${escapedName}</span>`,
@@ -252,7 +256,9 @@ const createOverlay = async (params: {
     textOptions.fontfile = params.arialFontPath;
   }
 
-  const { data: textBuffer, info: textInfo } = await sharp({ text: textOptions })
+  const { data: textBuffer, info: textInfo } = await sharp({
+    text: textOptions,
+  })
     .png()
     .toBuffer({ resolveWithObject: true });
 
@@ -286,18 +292,19 @@ const createOverlay = async (params: {
     },
   ]);
 
-  const rotatedOverlay = rotation !== 0
-    ? baseOverlay.rotate(rotation, {
-      background: { r: 0, g: 0, b: 0, alpha: 0 },
-    })
-    : baseOverlay;
+  const rotatedOverlay =
+    rotation !== 0
+      ? baseOverlay.rotate(rotation, {
+          background: { r: 0, g: 0, b: 0, alpha: 0 },
+        })
+      : baseOverlay;
 
   const { data: overlayBuffer, info: overlayInfo } = await rotatedOverlay
     .png()
     .toBuffer({ resolveWithObject: true });
 
-  const overlayLeft = Math.round(x - (overlayInfo.width / 2));
-  const overlayTop = Math.round(y - (overlayInfo.height / 2));
+  const overlayLeft = Math.round(x - overlayInfo.width / 2);
+  const overlayTop = Math.round(y - overlayInfo.height / 2);
 
   const croppedOverlay = await cropOverlayToBounds({
     input: overlayBuffer,

@@ -1,9 +1,17 @@
 "use client";
+
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { FileText, BookOpen, GraduationCap, ExternalLink, Download, Award } from "lucide-react";
+import {
+  FileText,
+  Award,
+  ArrowRight,
+  Download,
+  BookOpen,
+} from "lucide-react";
+import ProceedingsPdfCards from "@/app/components/papers/ProceedingsPdfCards";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,15 +25,14 @@ export const CallforPapers = () => {
       );
       if (items.length === 0) return;
 
-      // Unified scroll-triggered entrance animation
       gsap.fromTo(
         items,
-        { y: 60, opacity: 0 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.8,
-          stagger: 0.12,
+          stagger: 0.14,
           ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -45,174 +52,93 @@ export const CallforPapers = () => {
       id="call-for-papers"
       className="bg-brick-red-950 text-white py-16 sm:py-20"
     >
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <div className="mb-10 sm:mb-12" data-animate="item">
-          <p className="max-w-4xl text-white text-base sm:text-lg text-center mx-auto">
-            The 26th Philippine Computing Science Congress is organized by the
-            Computing Society of the Philippines to enable local and neighboring
-            computing educators, researchers, ICT professionals, and students to
-            interact and share their work.
+      <div className="mx-auto max-w-7xl px-6 space-y-12">
+        {/* Intro Header */}
+        <div
+          className="text-center max-w-3xl mx-auto space-y-3"
+          data-animate="item"
+        >
+          <p className="text-white/85 text-base sm:text-lg leading-relaxed">
+            The 26th Philippine Computing Science Congress presents its official
+            digital proceedings. Explore accepted full and short research papers
+            contributed by computing educators, researchers, and ICT professionals.
           </p>
         </div>
 
-        {/* Content Sections */}
-        <div className="space-y-6">
-          {/* Accepted Papers CTA */}
-          <div
-            className="rounded-lg border border-white/20 bg-white/10 p-6 ring-1 ring-inset ring-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            data-animate="item"
-          >
-            <div className="flex items-start gap-3">
-              <Award className="h-6 w-6 text-white flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <div>
-                <h3 className="text-lg font-semibold text-white">
-                  Accepted Papers
-                </h3>
-                <p className="text-white/80 text-sm mt-1">
-                  View the list of papers accepted for PCSC 2026.
-                </p>
-              </div>
-            </div>
-            <Link
-              href="/papers"
-              className="inline-flex items-center gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-brick-red-900 transition hover:bg-rose-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white flex-shrink-0"
-              aria-label="View accepted papers for PCSC 2026"
-            >
-              <FileText className="h-4 w-4" aria-hidden="true" />
-              View Accepted Papers
-            </Link>
-          </div>
+        {/* Digital Proceedings PDF Cards (Volume 1 & Volume 2) */}
+        <div data-animate="item">
+          <ProceedingsPdfCards />
+        </div>
 
-          {/* Submission Portal */}
-          <div
-            className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-            data-animate="item"
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <ExternalLink className="h-5 w-5 text-white" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-white">
-                Submission Portal
+        {/* Accepted Papers Directory CTA */}
+        <div
+          className="group relative rounded-xl border border-white/10 bg-brick-red-800/60 p-6 sm:p-8 ring-1 ring-inset ring-white/5 backdrop-blur-sm flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300 hover:border-rose-500/40 hover:bg-brick-red-800/80 hover:shadow-2xl hover:shadow-rose-950/50"
+          data-animate="item"
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-rose-500/20 border border-rose-400/30 text-rose-300 shrink-0 mt-0.5 group-hover:scale-105 transition-transform">
+              <Award className="h-6 w-6" aria-hidden="true" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-medium text-rose-300/80 uppercase tracking-widest">
+                Searchable Directory
+              </span>
+              <h3 className="text-xl font-bold text-white leading-snug">
+                Accepted Papers Index
               </h3>
-            </div>
-            <p className="text-white">
-              <a
-                href="
-                https://cmt3.research.microsoft.com/PCSC2026"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white underline underline-offset-4 hover:text-rose-100 transition-colors"
-                aria-label="Open CMT submission portal in a new tab"
-              >
-                Submit Now
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </p>
-          </div>
-
-          {/* Paper Template and Length */}
-          <div
-            className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-            data-animate="item"
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-white">
-                Paper Template & Length
-              </h3>
-            </div>
-            <p className="text-white">
-              Papers should use the prescribed PCSC 2026 template and have a
-              minimum of 6 pages and maximum of 8 pages, including references.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <a
-                href="/PCSC2026%20Paper%20Template.docx"
-                download
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Download PCSC 2026 Word template as DOCX"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                MS Word Template
-              </a>
-              <a
-                href="/PCSC2026%20LaTeX%20Template.zip"
-                download
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Download PCSC 2026 LaTeX template as ZIP"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                LaTeX Template (ZIP)
-              </a>
-              <a
-                href="/PCSC2026%20Paper%20Template.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-700/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Open PCSC 2026 template PDF preview in a new tab"
-              >
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                Preview PDF
-              </a>
-            </div>
-          </div>
-
-          {/* Double-Blind Peer Review Guidelines */}
-          <div
-            className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-            data-animate="item"
-          >
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Double-Blind Peer Review Guidelines
-            </h3>
-            <ul className="space-y-3 text-white">
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  1
-                </span>
-                <span>
-                  Name and affiliation of the Authors must be removed from the
-                  submitted manuscript.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  2
-                </span>
-                <span>
-                  Remove any citation and references that contain the Authors.
-                  Use [Anonymous, 2008] and blind the reference list.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  3
-                </span>
-                <span>Do not include acknowledgment and funding sources.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  4
-                </span>
-                <span>
-                  Submitted papers must be original, and not submitted
-                  concurrently to a journal or another conference/symposium.
-                  Each submitted paper will be peer-reviewed by at least two
-                  reviewers and must get an average positive rating for
-                  inclusion in the conference program and proceedings.
-                </span>
-              </li>
-            </ul>
-
-            <div className="bg-brick-red-600 border-l-4 border-brick-red-400 p-4 text-sm text-white mt-6 rounded-md shadow-sm">
-              <p>
-                The Microsoft CMT service was used for managing the
-                peer-reviewing process for this conference. This service was
-                provided for free by Microsoft and they bore all expenses,
-                including costs for Azure cloud services as well as for software
-                development and support.
+              <p className="text-sm text-white/75 leading-relaxed max-w-2xl">
+                Browse the complete directory of accepted full and short research papers presented at PCSC 2026, searchable by title, author, or paper ID.
               </p>
             </div>
+          </div>
+
+          <Link
+            href="/papers"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-sm font-semibold shadow-lg shadow-rose-950/40 hover:shadow-rose-600/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:ring-offset-2 focus:ring-offset-brick-red-950 active:scale-[0.98] shrink-0"
+            aria-label="View accepted papers directory"
+          >
+            <FileText className="h-4 w-4" aria-hidden="true" />
+            <span>Browse Directory</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+
+        {/* Paper Templates & Resources */}
+        <div
+          className="rounded-xl border border-white/10 bg-brick-red-900/40 p-6 sm:p-8 backdrop-blur-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6"
+          data-animate="item"
+        >
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <BookOpen className="h-4 w-4 text-rose-300" aria-hidden="true" />
+              <h4 className="text-base font-semibold text-white">
+                Paper Templates & Formatting Resources
+              </h4>
+            </div>
+            <p className="text-xs sm:text-sm text-white/70">
+              Download the official PCSC 2026 camera-ready templates for publication reference.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="/PCSC2026%20Paper%20Template.docx"
+              download
+              className="inline-flex items-center gap-2 rounded-lg bg-brick-red-800/80 hover:bg-brick-red-700 text-white border border-white/10 px-4 py-2.5 text-xs font-semibold transition-all hover:border-white/20"
+              aria-label="Download Word template"
+            >
+              <Download className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>MS Word Template</span>
+            </a>
+            <a
+              href="/PCSC2026%20LaTeX%20Template.zip"
+              download
+              className="inline-flex items-center gap-2 rounded-lg bg-brick-red-800/80 hover:bg-brick-red-700 text-white border border-white/10 px-4 py-2.5 text-xs font-semibold transition-all hover:border-white/20"
+              aria-label="Download LaTeX template"
+            >
+              <Download className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>LaTeX Template</span>
+            </a>
           </div>
         </div>
       </div>

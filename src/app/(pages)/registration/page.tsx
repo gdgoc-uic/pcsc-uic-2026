@@ -64,7 +64,10 @@ const FeeTable = ({ rows }: { rows: FeeRow[] }) => (
 const InclusionList = ({ items }: { items: string[] }) => (
   <ul className="space-y-2">
     {items.map((item) => (
-      <li key={item} className="flex items-center gap-2.5 text-white/90 text-sm sm:text-base">
+      <li
+        key={item}
+        className="flex items-center gap-2.5 text-white/90 text-sm sm:text-base"
+      >
         <CheckCircle className="w-4 h-4 text-rose-300 shrink-0" />
         {item}
       </li>
@@ -94,6 +97,32 @@ export default function RegistrationPage() {
       />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-14">
+        {/* Post-Event Concluded Banner */}
+        <div className="bg-rose-900/60 border border-rose-400/30 backdrop-blur-md p-6 rounded-xl space-y-3 shadow-xl">
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded-lg bg-rose-500/20 text-rose-300 shrink-0 mt-0.5">
+              <Info className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold text-white">
+                Registration for PCSC 2026 is Concluded
+              </h2>
+              <p className="text-sm text-white/85 leading-relaxed">
+                PCSC 2026 took place on April 23–25, 2026 at the University of
+                the Immaculate Conception, Davao City. Online registration is
+                now closed. Thank you to all authors, delegates, and attendees!
+              </p>
+            </div>
+          </div>
+          <div className="pt-2 flex flex-wrap gap-4 items-center">
+            <Link
+              href="/papers"
+              className="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition shadow-md"
+            >
+              Explore Official Proceedings →
+            </Link>
+          </div>
+        </div>
 
         {/* Option 1 */}
         <section aria-labelledby="option1-heading">
@@ -196,13 +225,21 @@ export default function RegistrationPage() {
           </p>
         </div>
 
-        {/* CTA */}
-        <div className="text-center pt-2">
-          <p className="text-white/85 text-sm mb-5">
-            Click the button below to complete your registration via Google
-            Forms.
+        {/* Concluded Status CTA */}
+        <div className="text-center pt-2 space-y-4">
+          <p className="text-white/80 text-sm max-w-lg mx-auto leading-relaxed">
+            Online registration for PCSC 2026 is officially closed as the event has concluded. You can access all conference publications online.
           </p>
-          <RegisterButton />
+          <div>
+            <Link
+              href="/papers"
+              aria-label="View PCSC 2026 Proceedings"
+              className="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white px-7 py-3.5 rounded-lg font-bold text-base sm:text-lg transition-all shadow-lg shadow-rose-950/40 hover:shadow-rose-600/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+            >
+              View Official Proceedings
+              <ArrowUpRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </div>
     </main>

@@ -1,20 +1,12 @@
 "use client";
 import PageHero from "@/app/components/sections/PageHero";
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  FileText,
-  BookOpen,
-  ExternalLink,
-  Calendar,
-  Award,
-  Download,
-  CheckCircle,
-  AlertCircle,
-  Search,
-  X,
-} from "lucide-react";
+import { FileText, BookOpen, Award, Search, X } from "lucide-react";
+
+import ProceedingsPdfCards from "@/app/components/papers/ProceedingsPdfCards";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -570,7 +562,7 @@ const PaperTable = ({ papers, query }: PaperTableProps) => {
 
 const PapersPage = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeTab, setActiveTab] = useState("accepted-papers");
+  const [activeTab, setActiveTab] = useState("proceedings");
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -602,598 +594,46 @@ const PapersPage = () => {
   }, []);
 
   const tabs = [
+    { id: "proceedings", label: "Proceedings", icon: BookOpen },
     { id: "accepted-papers", label: "Accepted Papers", icon: Award },
-    { id: "call-for-papers", label: "Call for Papers", icon: FileText },
-    { id: "author-guidelines", label: "Author Guidelines", icon: BookOpen },
-    { id: "proceedings", label: "Proceedings", icon: FileText },
   ];
 
   const heroMeta: Record<string, { title: string; description: string }> = {
+    proceedings: {
+      title: "Conference Proceedings",
+      description:
+        "Explore the official PCSC 2026 conference proceedings. View Volume 1 (Full Papers) and Volume 2 (Short Papers) directly in your browser or download them for offline reading.",
+    },
     "accepted-papers": {
       title: "Accepted Papers",
       description:
-        "Congratulations to all authors whose papers have been accepted for PCSC 2026. Below are the full and short papers selected through our double-blind peer review process.",
-    },
-    "call-for-papers": {
-      title: "Call for Papers",
-      description:
-        "The 26th Philippine Computing Science Congress invites original research contributions in computing, computer science, computational science, and ICT.",
-    },
-    "author-guidelines": {
-      title: "Author Guidelines",
-      description:
-        "Everything you need to format, prepare, and submit your paper for PCSC 2026 — templates, formatting requirements, and step-by-step submission instructions.",
-    },
-    proceedings: {
-      title: "Proceedings",
-      description:
-        "The official conference proceedings for PCSC 2026, including all accepted full and short papers presented at the conference.",
+        "Congratulations to all authors whose papers were accepted for PCSC 2026. Browse the searchable directory of full and short papers.",
     },
   };
 
-  const renderCallForPapers = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="mb-10 sm:mb-12" data-animate="item">
-        <p className="max-w-4xl text-white text-base sm:text-lg text-center mx-auto">
-          The 26th Philippine Computing Science Congress is organized by the
-          Computing Society of the Philippines to enable local and neighboring
-          computing educators, researchers, ICT professionals, and students to
-          interact and share their work in computing, computer science,
-          computational science, and ICT.
-        </p>
-      </div>
-
-      {/* Content Sections */}
-      <div className="space-y-6">
-        {/* Submission Portal */}
-        <div
-          className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-          data-animate="item"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <ExternalLink className="h-5 w-5 text-white" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-white">
-              Submission Portal
-            </h3>
-          </div>
-          <p className="text-white">
-            <a
-              href="
-              https://cmt3.research.microsoft.com/PCSC2026"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-rose-200 underline underline-offset-4 hover:text-rose-100 transition-colors"
-              aria-label="Open CMT submission portal in a new tab"
-            >
-              Submit Now
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </p>
-        </div>
-
-        {/* Paper Template and Length */}
-        <div
-          className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-          data-animate="item"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-white">
-              Paper Template & Length
-            </h3>
-          </div>
-          <p className="text-white">
-            Papers should use the prescribed PCSC 2026 template and have a
-            minimum of 6 pages and maximum of 8 pages, including references.
-          </p>
-        </div>
-
-        {/* Double-Blind Peer Review Guidelines */}
-        <div
-          className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-          data-animate="item"
-        >
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Double-Blind Peer Review Guidelines
-          </h3>
-          <ul className="space-y-3 text-white">
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                1
-              </span>
-              <span>
-                Name and affiliation of the Authors must be removed from the
-                submitted manuscript.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                2
-              </span>
-              <span>
-                Remove any citation and references that contain the Authors. Use
-                [Anonymous, 2008] and blind the reference list.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                3
-              </span>
-              <span>Do not include acknowledgment and funding sources.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                4
-              </span>
-              <span>
-                Submitted papers must be original, and not submitted
-                concurrently to a journal or another conference/symposium. Each
-                submitted paper will be peer-reviewed by at least two reviewers
-                and must get an average positive rating for inclusion in the
-                conference program and proceedings.
-              </span>
-            </li>
-          </ul>
-
-          <div className="bg-brick-red-50 border-l-4 border-brick-red-400 p-4 text-sm text-black mt-6 rounded-md shadow-sm">
-            <p>
-              The Microsoft CMT service was used for managing the peer-reviewing
-              process for this conference. This service was provided for free by
-              Microsoft and they bore all expenses, including costs for Azure
-              cloud services as well as for software development and support.
-            </p>
-          </div>
-        </div>
-
-        {/* Important Dates */}
-        <div
-          className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5"
-          data-animate="item"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <Calendar className="h-5 w-5 text-white" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-white">
-              Important Dates
-            </h3>
-          </div>
-          <div className="space-y-3 text-white">
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span>Paper Submission Deadline</span>
-              <span className="font-semibold text-white">
-                January 31, 2026
-              </span>
-            </div>
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span>Author Notification</span>
-              <span className="font-semibold text-white">March 9, 2026</span>
-            </div>
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span>Camera-Ready Submission</span>
-              <span className="font-semibold text-white">March 23, 2026</span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span>Conference Dates</span>
-              <span className="font-semibold text-white">
-                April 23-25, 2026
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderAuthorGuidelines = () => (
-    <div className="space-y-12">
-      {/* Paper Template */}
-      <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          Paper Template
-        </h2>
-
-        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-8 ring-1 ring-inset ring-white/5">
-          <div className="flex items-center gap-3 mb-4">
-            <FileText className="h-6 w-6 text-white" aria-hidden="true" />
-            <h3 className="text-xl font-semibold text-white">
-              PCSC 2026 Template
-            </h3>
-          </div>
-
-          <div className="space-y-4">
-            <p className="text-white">
-              All papers must be formatted according to the official PCSC 2026
-              template. The template ensures consistency and proper formatting
-              for publication.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="/PCSC2026%20Paper%20Template.docx"
-                download
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Download PCSC 2026 Word template as DOCX"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                MS Word Template
-              </a>
-              <a
-                href="/PCSC2026%20LaTeX%20Template.zip"
-                download
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Download PCSC 2026 LaTeX template as ZIP"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                LaTeX Template (ZIP)
-              </a>
-              <a
-                href="/PCSC2026%20Paper%20Template.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md bg-brick-red-700/40 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brick-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-200"
-                aria-label="Open PCSC 2026 template PDF preview in a new tab"
-              >
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                Preview PDF
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Paper Formatting Requirements */}
-      <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          Formatting Requirements
-        </h2>
-
-        <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Page Length & Structure
-            </h3>
-            <ul className="space-y-3 text-white">
-              <li className="flex items-start gap-3">
-                <CheckCircle
-                  className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <span>
-                  <strong>Length:</strong> Minimum 6 pages, maximum 8 pages
-                  (including references)
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle
-                  className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <span>
-                  <strong>Format:</strong> Use the official PCSC 2026 template
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle
-                  className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <span>
-                  <strong>Language:</strong> English only
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle
-                  className="h-5 w-5 text-brick-red-400 mt-0.5 flex-shrink-0"
-                  aria-hidden="true"
-                />
-                <span>
-                  <strong>File Format:</strong> PDF only
-                </span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Content Structure
-            </h3>
-            <ul className="space-y-3 text-white">
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  1
-                </span>
-                <span>
-                  <strong>Abstract:</strong> 150-250 words summarizing the paper
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  2
-                </span>
-                <span>
-                  <strong>Keywords:</strong> 3-5 relevant keywords
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  3
-                </span>
-                <span>
-                  <strong>Introduction:</strong> Problem statement and
-                  motivation
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  4
-                </span>
-                <span>
-                  <strong>Methodology:</strong> Research approach and methods
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  5
-                </span>
-                <span>
-                  <strong>Results:</strong> Findings and analysis
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  6
-                </span>
-                <span>
-                  <strong>Conclusion:</strong> Summary and future work
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  7
-                </span>
-                <span>
-                  <strong>References:</strong> Properly formatted citations
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Double-Blind Review Guidelines */}
-      <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          Double-Blind Review Guidelines
-        </h2>
-
-        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-          <div className="flex items-center gap-2 mb-4">
-            <AlertCircle className="h-5 w-5 text-white" aria-hidden="true" />
-            <h3 className="text-lg font-semibold text-white">
-              Important: Double-Blind Review Process
-            </h3>
-          </div>
-
-          <ul className="space-y-4 text-white">
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                1
-              </span>
-              <span>
-                <strong>Remove Author Information:</strong> Names, affiliations,
-                and contact information must be completely removed from the
-                manuscript.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                2
-              </span>
-              <span>
-                <strong>Blind References:</strong> Remove any citations to your
-                own work. Use [Anonymous, 2008] format and blind the reference
-                list.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                3
-              </span>
-              <span>
-                <strong>No Acknowledgments:</strong> Do not include
-                acknowledgment sections or funding sources during the review
-                process.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                4
-              </span>
-              <span>
-                <strong>Original Work:</strong> Papers must be original and not
-                submitted concurrently to other venues.
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Submission Process */}
-      <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          Submission Process
-        </h2>
-
-        <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Step-by-Step Submission
-            </h3>
-            <ol className="space-y-4 text-white">
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  1
-                </span>
-                <span>
-                  Download and format your paper using the PCSC 2026 template
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  2
-                </span>
-                <span>
-                  Ensure your paper follows double-blind review guidelines
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  3
-                </span>
-                <span>
-                  Submit your paper through the CMT submission portal (to be
-                  announced)
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  4
-                </span>
-                <span>Wait for notification of acceptance/rejection</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  5
-                </span>
-                <span>
-                  If accepted, submit camera-ready version with author
-                  information
-                </span>
-              </li>
-            </ol>
-          </div>
-
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Review Process
-            </h3>
-            <div className="space-y-3 text-white">
-              <p>
-                <strong>Peer Review:</strong> Each paper will be reviewed by at
-                least two independent reviewers.
-              </p>
-              <p>
-                <strong>Review Criteria:</strong> Papers are evaluated based on
-                originality, technical quality, relevance, and presentation.
-              </p>
-              <p>
-                <strong>Decision:</strong> Papers must receive an average
-                positive rating for inclusion in the conference program.
-              </p>
-              <p>
-                <strong>Feedback:</strong> Authors will receive detailed
-                feedback from reviewers to improve their work.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   const renderProceedings = () => (
     <div className="space-y-12">
-      {/* Current Proceedings */}
+      {/* Conference Proceedings PDF Volume Cards */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          PCSC 2026 Proceedings
-        </h2>
-
-        <div className="rounded-lg border border-white/10 bg-brick-red-800 p-8 ring-1 ring-inset ring-white/5">
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="h-6 w-6 text-white" aria-hidden="true" />
-            <h3 className="text-xl font-semibold text-white">
-              Conference Proceedings
-            </h3>
-          </div>
-
-          <div className="space-y-4">
-            <p className="text-white">
-              The proceedings for PCSC 2026 will be published and made available
-              after the conference. All accepted papers will be included in the
-              official conference proceedings.
-            </p>
-
-            <div className="bg-brick-red-100 border-l-4 border-brick-red-400 p-4 text-sm text-black rounded-md shadow-sm">
-              <p>
-                <strong>Note:</strong> Proceedings will be available for
-                download after the conference concludes. Registered participants
-                will receive access to the digital proceedings.
-              </p>
-            </div>
-          </div>
-        </div>
+        <ProceedingsPdfCards />
       </div>
-
-      {/* Previous Proceedings */}
-      {/* <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">Previous Proceedings</h2>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-white" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-white">PCSC 2025</h3>
-            </div>
-            <p className="text-white mb-4">
-              Proceedings from the 25th Philippine Computing Science Congress.
-            </p>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-brick-red-400 hover:text-brick-red-300 transition-colors underline underline-offset-4"
-            >
-              View Proceedings
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="h-5 w-5 text-white" aria-hidden="true" />
-              <h3 className="text-lg font-semibold text-white">PCSC 2024</h3>
-            </div>
-            <p className="text-white mb-4">
-              Proceedings from the 24th Philippine Computing Science Congress.
-            </p>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 text-brick-red-400 hover:text-brick-red-300 transition-colors underline underline-offset-4"
-            >
-              View Proceedings
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </div> */}
 
       {/* Publication Information */}
       <div data-animate="item">
-        <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
-          Publication Information
+        <h2 className="text-2xl font-bold tracking-tight text-white mb-6">
+          Publication Details & Copyright
         </h2>
 
         <div className="space-y-6">
-          <div className="rounded-lg border border-white/10 bg-brick-red-800 p-6 ring-1 ring-inset ring-white/5">
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Publication Details
-            </h3>
-            <ul className="space-y-3 text-white">
+          <div className="rounded-lg border border-white/10 bg-brick-red-800/80 p-6 ring-1 ring-inset ring-white/5">
+            <ul className="space-y-3 text-white text-sm sm:text-base">
               <li className="flex items-start gap-3">
                 <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
                   1
                 </span>
                 <span>
-                  All accepted papers will be published in the conference
-                  proceedings
+                  All accepted full and short research papers presented at PCSC
+                  2026 are published in the official conference proceedings.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -1201,8 +641,10 @@ const PapersPage = () => {
                   2
                 </span>
                 <span>
-                  Proceedings will be available in digital format for registered
-                  participants
+                  Digital proceedings are formatted into{" "}
+                  <strong>Volume 1 (Full Papers)</strong> and{" "}
+                  <strong>Volume 2 (Short Papers)</strong> for open reading and
+                  download.
                 </span>
               </li>
               <li className="flex items-start gap-3">
@@ -1210,17 +652,8 @@ const PapersPage = () => {
                   3
                 </span>
                 <span>
-                  Selected papers may be invited for publication in special
-                  issues of journals
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-brick-red-600 text-white text-xs font-semibold flex-shrink-0 mt-0.5">
-                  4
-                </span>
-                <span>
-                  Authors retain copyright of their work while granting
-                  conference publication rights
+                  Authors retain copyright of their research while granting
+                  computing conference publication and indexing rights to CSP.
                 </span>
               </li>
             </ul>
@@ -1263,12 +696,14 @@ const PapersPage = () => {
       {/* Full Papers */}
       <div data-animate="item" className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-brick-red-800 border border-white/10 flex-shrink-0">
+          <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-brick-red-800 border border-white/10 shrink-0">
             <FileText className="h-5 w-5 text-white" aria-hidden="true" />
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">Full Papers</h2>
-            <p className="text-white/70 text-sm">{fullPapers.length} accepted</p>
+            <p className="text-white/70 text-sm">
+              {fullPapers.length} accepted
+            </p>
           </div>
         </div>
         <PaperTable papers={fullPapers} query={query} />
@@ -1277,12 +712,14 @@ const PapersPage = () => {
       {/* Short Papers */}
       <div data-animate="item" className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-brick-red-800 border border-white/10 flex-shrink-0">
+          <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-brick-red-800 border border-white/10 shrink-0">
             <BookOpen className="h-5 w-5 text-white" aria-hidden="true" />
           </div>
           <div>
             <h2 className="text-2xl font-bold text-white">Short Papers</h2>
-            <p className="text-white/70 text-sm">{shortPapers.length} accepted</p>
+            <p className="text-white/70 text-sm">
+              {shortPapers.length} accepted
+            </p>
           </div>
         </div>
         <PaperTable papers={shortPapers} query={query} />
@@ -1292,16 +729,12 @@ const PapersPage = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "accepted-papers":
-        return renderAcceptedPapers();
-      case "call-for-papers":
-        return renderCallForPapers();
-      case "author-guidelines":
-        return renderAuthorGuidelines();
       case "proceedings":
         return renderProceedings();
-      default:
+      case "accepted-papers":
         return renderAcceptedPapers();
+      default:
+        return renderProceedings();
     }
   };
 
@@ -1312,7 +745,7 @@ const PapersPage = () => {
         description={heroMeta[activeTab].description}
       />
 
-      <main className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+      <main className="mx-auto max-w-[1440px] px-4 sm:px-8 py-12 sm:py-16">
         <section ref={sectionRef} className="text-white">
           {/* Tab Navigation */}
           <div className="mb-12" data-animate="item">

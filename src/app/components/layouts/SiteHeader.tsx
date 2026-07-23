@@ -2,6 +2,7 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -190,14 +191,14 @@ export const SiteHeader = () => {
       {/* Announcement banner */}
       <div className="bg-rose-700/90 backdrop-blur-sm border-b border-white/20 text-white text-xs sm:text-sm py-2 px-4 flex items-center justify-center gap-x-2 gap-y-0 overflow-hidden">
         <span className="font-semibold text-rose-100 whitespace-nowrap">
-          ACCEPTED PAPERS FOR PCSC 2026 ARE OUT!
+          OFFICIAL PROCEEDINGS FOR PCSC 2026 ARE NOW OUT!
         </span>
         <Link
           href="/papers"
           className="underline underline-offset-2 font-semibold text-rose-50 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/60 rounded whitespace-nowrap"
-          aria-label="View the list of accepted full and short papers for PCSC 2026"
+          aria-label="View the official proceedings for PCSC 2026"
         >
-          View Papers →
+          Explore Proceedings →
         </Link>
       </div>
       <div className="mx-auto w-full px-6 h-20 flex items-center justify-between">
@@ -208,14 +209,12 @@ export const SiteHeader = () => {
           aria-label="PCSC 2026 Home"
         >
           <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center shrink-0">
-            <img
+            <Image
               src="/icon.png"
               alt="PCSC 2026 Logo"
               width={64}
               height={64}
               className="block w-full h-full object-contain"
-              aria-label="PCSC 2026 Logo"
-              tabIndex={-1}
               draggable={false}
             />
           </div>
@@ -240,12 +239,12 @@ export const SiteHeader = () => {
         <div className="flex items-center gap-2 sm:gap-4">
           <Link
             ref={ctaRef}
-            href="/registration"
+            href="/papers"
             className="hidden sm:inline-flex items-center px-4 md:px-5 py-2 text-sm md:text-base text-white rounded bg-brick-red-600 font-semibold hover:bg-brick-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brick-red-300 focus:ring-offset-2 whitespace-nowrap"
-            aria-label="Register Now"
+            aria-label="Check Proceedings"
             tabIndex={0}
           >
-            REGISTER NOW
+            CHECK PROCEEDINGS
           </Link>
           <button
             type="button"

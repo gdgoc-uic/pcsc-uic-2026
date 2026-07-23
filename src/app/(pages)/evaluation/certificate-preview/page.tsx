@@ -162,7 +162,9 @@ export default function CertificatePreviewPage() {
                 className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brick-red-700 hover:bg-rose-100 disabled:opacity-60"
               >
                 <Download className="h-4 w-4" />
-                {isDownloading ? "Downloading..." : "Download Certificate (PNG)"}
+                {isDownloading
+                  ? "Downloading..."
+                  : "Download Certificate (PNG)"}
               </button>
             </div>
           </>

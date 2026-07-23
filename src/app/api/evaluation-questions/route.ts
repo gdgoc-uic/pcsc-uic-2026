@@ -97,7 +97,10 @@ const createQuestionSchema = z.object({
     .string()
     .min(1)
     .max(100)
-    .regex(/^[a-z_][a-z0-9_]*$/, "Must be lowercase alphanumeric with underscores"),
+    .regex(
+      /^[a-z_][a-z0-9_]*$/,
+      "Must be lowercase alphanumeric with underscores",
+    ),
   is_required: z.boolean().default(false),
   display_order: z.number().int().default(0),
   meta: z.any().default({}),
@@ -112,7 +115,10 @@ const updateQuestionSchema = z.object({
     .string()
     .min(1)
     .max(100)
-    .regex(/^[a-z_][a-z0-9_]*$/, "Must be lowercase alphanumeric with underscores")
+    .regex(
+      /^[a-z_][a-z0-9_]*$/,
+      "Must be lowercase alphanumeric with underscores",
+    )
     .optional(),
   is_required: z.boolean().optional(),
   display_order: z.number().int().optional(),
@@ -275,7 +281,10 @@ export async function PATCH(request: Request) {
       );
     }
 
-    if (payload.question_key && payload.question_key !== existing.question_key) {
+    if (
+      payload.question_key &&
+      payload.question_key !== existing.question_key
+    ) {
       const { data: conflict, error: conflictError } = await adminClient
         .from("evaluation_questions")
         .select("id")
@@ -420,7 +429,8 @@ export async function DELETE(request: Request) {
       }
 
       return NextResponse.json({
-        message: "Question has existing submissions. Deactivated instead of deleted.",
+        message:
+          "Question has existing submissions. Deactivated instead of deleted.",
       });
     }
 

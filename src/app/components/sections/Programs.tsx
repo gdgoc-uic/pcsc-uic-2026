@@ -40,8 +40,10 @@ const eventTypeBadgeClass: Record<EventType, string> = {
 };
 
 const eventTypeCardClass: Record<EventType, string> = {
-  featured: "border-l-2 border-l-amber-400 bg-brick-red-800/80 border border-white/10",
-  parallel: "border-l-2 border-l-sky-400 bg-brick-red-800/60 border border-white/10",
+  featured:
+    "border-l-2 border-l-amber-400 bg-brick-red-800/80 border border-white/10",
+  parallel:
+    "border-l-2 border-l-sky-400 bg-brick-red-800/60 border border-white/10",
   break: "bg-transparent border border-dashed border-white/15",
   default: "bg-brick-red-800/60 border border-white/10",
 };
@@ -53,7 +55,11 @@ const programSchedule: DayProgram[] = [
     weekday: "Thursday",
     totalEvents: 8,
     schedule: [
-      { time: "8:00AM onwards", activity: "Registration", eventType: "default" },
+      {
+        time: "8:00AM onwards",
+        activity: "Registration",
+        eventType: "default",
+      },
       {
         time: "8:00AM – 12:00NN",
         activity: "Parallel Workshops",
@@ -84,31 +90,34 @@ const programSchedule: DayProgram[] = [
       },
       {
         time: "9:15AM – 10:00AM",
-        activity: "\"Quality Education in Resource-challenged Schools with the help of Technology\"",
+        activity:
+          '"Quality Education in Resource-challenged Schools with the help of Technology"',
         badge: "Plenary Talk 1",
         eventType: "featured",
         speakerName: "Prof. Raymund Sison",
       },
       {
         time: "10:15AM – 11:00AM",
-        activity: "\"Computer Vision Applications Across Disciplines\"",
+        activity: '"Computer Vision Applications Across Disciplines"',
         badge: "Plenary Talk 2",
         eventType: "featured",
         speakerName: "Dr. John Jethro Virtusio",
       },
       {
         time: "1:30PM – 2:15PM",
-        activity: "\"Embodied AI for All: Bringing Intelligence to the Physical Edge\"",
+        activity:
+          '"Embodied AI for All: Bringing Intelligence to the Physical Edge"',
         badge: "Plenary Talk 3",
         eventType: "featured",
         speakerName: "Dr. Vladimir Mariano",
       },
       {
         time: "4:00PM – 5:30PM",
-        activity: "Oldies but Goldies — \"Advances and Challenges in Computing Research in the Age of AI\"",
+        activity:
+          'Oldies but Goldies — "Advances and Challenges in Computing Research in the Age of AI"',
         badge: "Fireside Chat",
         eventType: "featured",
-      }
+      },
     ],
   },
   {
@@ -130,7 +139,7 @@ const programSchedule: DayProgram[] = [
         badge: "Closing",
         eventType: "featured",
         speakerName: "Election Results · Special Awards",
-      }
+      },
     ],
   },
 ];
@@ -155,16 +164,19 @@ export const Programs = () => {
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
-
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="programs" className="bg-brick-red-950 text-rose-50 py-16 sm:py-20">
+    <section
+      ref={sectionRef}
+      id="programs"
+      className="bg-brick-red-950 text-rose-50 py-16 sm:py-20"
+    >
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-10 sm:mb-12">
           <p className="text-white text-base sm:text-lg max-w-3xl text-center mx-auto">
@@ -177,15 +189,17 @@ export const Programs = () => {
             >
               Computing Society of the Philippines
             </a>{" "}
-            to enable local and neighboring computing educators, researchers, ICT professionals, and students to interact
-            and share their work in computing, computer science, computational science, and ICT.
+            to enable local and neighboring computing educators, researchers,
+            ICT professionals, and students to interact and share their work in
+            computing, computer science, computational science, and ICT.
           </p>
         </div>
 
         {/* 3-Day Program Cards */}
         <div ref={cardsRef} className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {programSchedule.map((dayProgram) => {
-            const hiddenCount = dayProgram.totalEvents - dayProgram.schedule.length;
+            const hiddenCount =
+              dayProgram.totalEvents - dayProgram.schedule.length;
 
             return (
               <div
@@ -227,7 +241,9 @@ export const Programs = () => {
                             className="rounded-lg px-3 py-2 flex items-center gap-2 bg-transparent border border-dashed border-white/15"
                           >
                             <Coffee className="h-3 w-3 shrink-0 text-white/30" />
-                            <span className="text-sm text-white/40">{slot.activity}</span>
+                            <span className="text-sm text-white/40">
+                              {slot.activity}
+                            </span>
                           </div>
                         );
 
@@ -244,10 +260,16 @@ export const Programs = () => {
                               {slot.badge}
                             </span>
                           )}
-                          <p className="text-xs font-mono text-white/40 leading-none mb-1">{slot.time}</p>
-                          <p className="text-sm font-medium text-white leading-snug">{slot.activity}</p>
+                          <p className="text-xs font-mono text-white/40 leading-none mb-1">
+                            {slot.time}
+                          </p>
+                          <p className="text-sm font-medium text-white leading-snug">
+                            {slot.activity}
+                          </p>
                           {slot.speakerName && (
-                            <p className="mt-1 text-xs text-white/50 italic leading-snug">{slot.speakerName}</p>
+                            <p className="mt-1 text-xs text-white/50 italic leading-snug">
+                              {slot.speakerName}
+                            </p>
                           )}
                         </div>
                       );
@@ -262,11 +284,17 @@ export const Programs = () => {
         {/* Venue Info & CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-lg border border-white/10 bg-brick-red-800 p-6">
           <div className="flex items-start gap-3">
-            <MapPin className="h-5 w-5 text-white mt-0.5 shrink-0" aria-hidden="true" />
+            <MapPin
+              className="h-5 w-5 text-white mt-0.5 shrink-0"
+              aria-hidden="true"
+            />
             <div>
-              <h4 className="text-sm font-semibold text-white">Conference Venue</h4>
+              <h4 className="text-sm font-semibold text-white">
+                Conference Venue
+              </h4>
               <p className="text-sm text-white mt-1">
-                University of the Immaculate Conception (Bajada Campus), Davao City
+                University of the Immaculate Conception (Bajada Campus), Davao
+                City
               </p>
             </div>
           </div>

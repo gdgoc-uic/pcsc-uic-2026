@@ -124,7 +124,9 @@ export default function EvaluationCertificatePage() {
                   onLoad={() => setIsImageLoading(false)}
                   onError={() => {
                     setIsImageLoading(false);
-                    setMessage("Preview failed to load, but you can still download the certificate.");
+                    setMessage(
+                      "Preview failed to load, but you can still download the certificate.",
+                    );
                   }}
                   className={`h-auto w-full rounded-md transition-opacity duration-300 ${isImageLoading ? "opacity-0" : "opacity-100"}`}
                 />

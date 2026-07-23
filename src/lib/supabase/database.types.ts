@@ -210,7 +210,12 @@ export type Database = {
         Update: {
           id?: string;
           question_text?: string;
-          question_type?: "rating" | "text" | "textarea" | "select" | "multiple";
+          question_type?:
+            | "rating"
+            | "text"
+            | "textarea"
+            | "select"
+            | "multiple";
           question_key?: string;
           is_required?: boolean;
           display_order?: number;

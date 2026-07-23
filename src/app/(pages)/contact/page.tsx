@@ -11,12 +11,14 @@ const ContactPage = () => {
           <h2 className="text-3xl font-bold tracking-tight text-white mb-8">
             Get in Touch
           </h2>
-          
+
           <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2">
             {/* CSP Leadership */}
             <div className="rounded-lg border border-brick-red-600 bg-brick-red-800 p-8 sm:p-10 ring-1 ring-white/5">
-              <h3 className="text-2xl font-semibold text-white mb-6">CSP Leadership</h3>
-              
+              <h3 className="text-2xl font-semibold text-white mb-6">
+                CSP Leadership
+              </h3>
+
               <div className="space-y-6 sm:space-y-8">
                 {/* Dr. Cherry Lyn Sta. Romana */}
                 <div className="flex gap-4 sm:gap-6 items-start">
@@ -27,9 +29,11 @@ const ContactPage = () => {
                     <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 break-words">
                       Dr. Cherry Lyn Sta. Romana
                     </h4>
-                    <p className="text-sm sm:text-base text-white mb-2">CSP President</p>
-                    <a 
-                      href="mailto:cstaromana@gmail.com" 
+                    <p className="text-sm sm:text-base text-white mb-2">
+                      CSP President
+                    </p>
+                    <a
+                      href="mailto:cstaromana@gmail.com"
                       className="text-sm sm:text-base text-white hover:text-white transition-colors duration-200 underline underline-offset-4 break-all"
                     >
                       cstaromana@gmail.com
@@ -46,23 +50,29 @@ const ContactPage = () => {
                     <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 break-words">
                       Dr. Judith J. Azcarraga
                     </h4>
-                    <p className="text-sm sm:text-base text-white mb-1">CSP Vice President</p>
-                    <p className="text-sm sm:text-base text-rose-100/90 mb-2">PCSC 2026 Conference Chair</p>
-                    <a 
-                      href="mailto:judith.azcarraga@dlsu.edu.ph" 
+                    <p className="text-sm sm:text-base text-white mb-1">
+                      CSP Vice President
+                    </p>
+                    <p className="text-sm sm:text-base text-rose-100/90 mb-2">
+                      PCSC 2026 Conference Chair
+                    </p>
+                    <a
+                      href="mailto:judith.azcarraga@dlsu.edu.ph"
                       className="text-sm sm:text-base text-white hover:text-white transition-colors duration-200 underline underline-offset-4 break-all"
                     >
                       judith.azcarraga@dlsu.edu.ph
                     </a>
                   </div>
-                </div>  
+                </div>
               </div>
             </div>
 
             {/* PCSC 2026 Organizing Team */}
             <div className="rounded-lg border border-brick-red-600 bg-brick-red-800 p-8 sm:p-10 ring-1 ring-white/5">
-              <h3 className="text-2xl font-semibold text-white mb-6">PCSC 2026 Organizing Team</h3>
-              
+              <h3 className="text-2xl font-semibold text-white mb-6">
+                PCSC 2026 Organizing Team
+              </h3>
+
               <div className="space-y-6 sm:space-y-8">
                 {/* Ms. Kristine Mae M. Adlaon */}
                 <div className="flex gap-4 sm:gap-6 items-start">
@@ -73,10 +83,14 @@ const ContactPage = () => {
                     <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 break-words">
                       Ms. Kristine Mae M. Adlaon
                     </h4>
-                    <p className="text-sm sm:text-base text-white mb-1">CSP Board Secretary</p>
-                    <p className="text-sm sm:text-base text-white mb-2">PCSC 2026 Local-Conference Chair</p>
-                    <a 
-                      href="mailto:kadlaon@uic.edu.ph" 
+                    <p className="text-sm sm:text-base text-white mb-1">
+                      CSP Board Secretary
+                    </p>
+                    <p className="text-sm sm:text-base text-white mb-2">
+                      PCSC 2026 Local-Conference Chair
+                    </p>
+                    <a
+                      href="mailto:kadlaon@uic.edu.ph"
                       className="text-sm sm:text-base text-white hover:text-white transition-colors duration-200 underline underline-offset-4 break-all"
                     >
                       kadlaon@uic.edu.ph
@@ -84,7 +98,7 @@ const ContactPage = () => {
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
         </section>
       </main>
@@ -93,5 +107,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-
-

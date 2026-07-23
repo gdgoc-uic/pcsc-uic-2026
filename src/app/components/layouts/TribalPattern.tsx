@@ -16,11 +16,7 @@ const TribalPattern = () => (
         height="80"
         patternUnits="userSpaceOnUse"
       >
-        <path
-          d="M40 0L60 20L40 40L20 20L40 0Z"
-          fill="#7c2d12"
-          opacity="0.8"
-        />
+        <path d="M40 0L60 20L40 40L20 20L40 0Z" fill="#7c2d12" opacity="0.8" />
         <path
           d="M40 10L50 20L40 30L30 20L40 10Z"
           fill="#991b1b"
@@ -63,26 +59,10 @@ const TribalPattern = () => (
         height="100"
         patternUnits="userSpaceOnUse"
       >
-        <path
-          d="M50 0 L75 43.3 L25 43.3 Z"
-          fill="#7c2d12"
-          opacity="0.7"
-        />
-        <path
-          d="M50 56.7 L75 100 L25 100 Z"
-          fill="#991b1b"
-          opacity="0.7"
-        />
-        <path
-          d="M0 50 L25 75 L0 100 Z"
-          fill="#b91c1c"
-          opacity="0.6"
-        />
-        <path
-          d="M100 50 L75 75 L100 100 Z"
-          fill="#b91c1c"
-          opacity="0.6"
-        />
+        <path d="M50 0 L75 43.3 L25 43.3 Z" fill="#7c2d12" opacity="0.7" />
+        <path d="M50 56.7 L75 100 L25 100 Z" fill="#991b1b" opacity="0.7" />
+        <path d="M0 50 L25 75 L0 100 Z" fill="#b91c1c" opacity="0.6" />
+        <path d="M100 50 L75 75 L100 100 Z" fill="#b91c1c" opacity="0.6" />
       </pattern>
 
       {/* Okir-inspired Curves */}

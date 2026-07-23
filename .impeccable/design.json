@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-23T16:07:30.000Z",
+  "title": "Design System: PCSC-UIC 2026 Conference Website",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Saturated Brick Red",
+        "canonical": "#c70036",
+        "tonalRamp": [
+          "#4d0218",
+          "#8b0836",
+          "#a50036",
+          "#c70036",
+          "#ec003f",
+          "#ff2056",
+          "#ffa1ad",
+          "#fff1f2"
+        ]
+      },
+      "primary-deep": {
+        "role": "primary",
+        "displayName": "Deep Indigenous Crimson",
+        "canonical": "#8b0836",
+        "tonalRamp": [
+          "#2d010d",
+          "#4d0218",
+          "#7e1d35",
+          "#8b0836",
+          "#a50036",
+          "#c70036",
+          "#ff637e",
+          "#ffe4e6"
+        ]
+      },
+      "accent-rose": {
+        "role": "tertiary",
+        "displayName": "Radiant Rose Highlight",
+        "canonical": "#ff2056",
+        "tonalRamp": [
+          "#4d0218",
+          "#8b0836",
+          "#c70036",
+          "#ec003f",
+          "#ff2056",
+          "#ff637e",
+          "#ffccd3",
+          "#fff1f2"
+        ]
+      },
+      "brick-red": {
+        "role": "secondary",
+        "displayName": "Crimson Brick Accent",
+        "canonical": "#d2334c",
+        "tonalRamp": [
+          "#460b18",
+          "#7e1d35",
+          "#931e37",
+          "#af213b",
+          "#d2334c",
+          "#e44f5f",
+          "#f5acb0",
+          "#fef2f2"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Obsidian Canvas",
+        "canonical": "#0a0a0a",
+        "tonalRamp": [
+          "#000000",
+          "#0a0a0a",
+          "#121212",
+          "#18181b",
+          "#27272a",
+          "#3f3f46",
+          "#a1a1aa",
+          "#ededed"
+        ]
+      },
+      "neutral-text": {
+        "role": "neutral",
+        "displayName": "Bright Text Off-White",
+        "canonical": "#ededed",
+        "tonalRamp": [
+          "#18181b",
+          "#27272a",
+          "#52525b",
+          "#a1a1aa",
+          "#d4d4d8",
+          "#e4e4e7",
+          "#ededed",
+          "#ffffff"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Headline",
+        "purpose": "Hero section headlines and major page titles."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Primary section subheadings."
+      },
+      "title": {
+        "displayName": "Card Title",
+        "purpose": "Card titles and feature headings."
+      },
+      "body": {
+        "displayName": "Body Copy",
+        "purpose": "Paragraphs and descriptive text."
+      },
+      "label": {
+        "displayName": "Monospace Label",
+        "purpose": "Dates, tracks, categories, and code badges."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-glow",
+        "value": "0 0 20px rgba(255, 32, 86, 0.2)",
+        "purpose": "Radiant rose focus ring and border glow on hover."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-power2-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Smooth GSAP entrance and card scale animations."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call-to-action button for registration and submission.",
+      "html": "<button class=\"ds-btn-primary\">REGISTER NOW</button>",
+      "css": ".ds-btn-primary { background-color: #d2334c; color: #ffffff; padding: 10px 20px; font-family: system-ui, sans-serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.2s ease, outline 0.2s ease; } .ds-btn-primary:hover { background-color: #af213b; } .ds-btn-primary:focus-visible { outline: 2px solid #ff2056; outline-offset: 2px; }"
+    },
+    {
+      "name": "Urgent Category Badge",
+      "kind": "chip",
+      "refersTo": "chip-category",
+      "description": "Pill-shaped badge for urgent deadlines and paper submission tracks.",
+      "html": "<div class=\"ds-badge-urgent\"><span class=\"ds-badge-dot\"></span>JAN 31, 2026</div>",
+      "css": ".ds-badge-urgent { display: inline-flex; align-items: center; gap: 6px; background-color: #ff2056; color: #ffffff; padding: 4px 10px; border-radius: 9999px; font-family: monospace; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; } .ds-badge-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #ffffff; }"
+    },
+    {
+      "name": "Calendar Card",
+      "kind": "card",
+      "refersTo": "card-calendar",
+      "description": "Container card for conference dates and program schedule blocks.",
+      "html": "<div class=\"ds-card-calendar\"><div class=\"ds-card-header\"><span class=\"ds-badge-urgent\">JAN 31, 2026</span><span class=\"ds-card-category\">DEADLINE</span></div><h4 class=\"ds-card-title\">Paper Submission Deadline</h4><p class=\"ds-card-desc\">Final deadline for full and short research paper submissions.</p></div>",
+      "css": ".ds-card-calendar { background-color: #460b18; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 16px; transition: transform 0.3s ease, border-color 0.3s ease; } .ds-card-calendar:hover { transform: translateY(-4px); border-color: rgba(255, 32, 86, 0.5); } .ds-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; } .ds-card-category { font-family: monospace; font-size: 11px; font-weight: 600; color: #ffa1ad; text-transform: uppercase; } .ds-card-title { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 600; color: #ffffff; margin: 0 0 8px 0; } .ds-card-desc { font-family: system-ui, sans-serif; font-size: 13px; color: #ffe4e6; margin: 0; line-height: 1.5; }"
+    },
+    {
+      "name": "Announcement Banner",
+      "kind": "custom",
+      "refersTo": "banner-announcement",
+      "description": "Top highlight bar for urgent conference announcements.",
+      "html": "<div class=\"ds-announcement\"><span class=\"ds-announcement-text\">ACCEPTED PAPERS FOR PCSC 2026 ARE OUT!</span><a href=\"#\" class=\"ds-announcement-link\">View Papers &rarr;</a></div>",
+      "css": ".ds-announcement { background-color: rgba(199, 0, 54, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 16px; display: flex; items-center; justify-content: center; gap: 8px; font-family: system-ui, sans-serif; font-size: 13px; color: #ffffff; } .ds-announcement-text { font-weight: 600; color: #fff1f2; } .ds-announcement-link { color: #ffffff; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; } .ds-announcement-link:hover { color: #ffe4e6; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Mindanao Tapestry & Academic Citadel",
+    "overview": "The PCSC-UIC 2026 visual system fuses modern, high-contrast academic congress aesthetics with rich Mindanao and Davao tribal geometric heritage. Built on a deep obsidian foundation (#0a0a0a), the interface uses saturated crimson tones (#8b0836, #c70036) and radiant rose accents (#ff2056) to establish authoritative presence while honoring local cultural identity.",
+    "keyCharacteristics": [
+      "Culture-Infused Dark Mode: Deep obsidian canvas with vibrant crimson containers.",
+      "Mindanao Geometric Motifs: Authentic SVG tribal patterns as framing accents.",
+      "Technical Typography: Geist Sans headings paired with Geist Mono for dates and codes.",
+      "Tonal Glass Architecture: Backdrop blur overlays with light border highlights."
+    ],
+    "rules": [
+      {
+        "name": "The Mindanao Heritage Rule",
+        "body": "SVG tribal patterns and crimson accents frame major section headers and hero banners, but must never sit directly behind dense paragraph text or data tables.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Hierarchy Rule",
+        "body": "Solid brick-red (#c70036) fill is reserved strictly for primary CTA actions. Secondary CTAs use outline treatments.",
+        "section": "colors"
+      },
+      {
+        "name": "The Monospace Context Rule",
+        "body": "Any string representing a calendar date, time window, room number, paper ID, or deadline category must be typeset in Geist Mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-Glass Rule",
+        "body": "Surfaces are flat at rest. Depth is expressed through background tone and backdrop blur; elevation on hover is indicated by subtle micro-scaling (y: -4px) and border highlight.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do maintain high contrast between body text (#ededed) and dark background containers (#0a0a0a / #460b18).",
+      "Do use Geist Mono for all dates, times, room numbers, and paper submission IDs.",
+      "Do incorporate the TribalPattern component as a visual divider above or below key section headings.",
+      "Do use GSAP ScrollTrigger for smooth, accessible entrance animations."
+    ],
+    "donts": [
+      "Don't apply light or white background canvases; the application design system is strictly dark-mode-first.",
+      "Don't place heavy SVG tribal pattern overlays directly behind body text blocks.",
+      "Don't use generic blue or green accent colors for primary CTAs; adhere strictly to the brick-red/rose color family.",
+      "Don't hardcode heavy drop shadows; rely on tonal layering and luminous borders for depth."
+    ]
+  }
+}
